@@ -9,6 +9,7 @@ public class FinishManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI wrongText;
     [SerializeField] private TextMeshProUGUI notAnsweredText;
     
+    public DatabaseHandler databaseHandler;
     private int correct;
     private int wrong;
     private int blank;
@@ -20,6 +21,7 @@ public class FinishManager : MonoBehaviour
         wrong = results[1];
         blank = results[2];
         SetTexts();
+        FirebaseSender.SendData(databaseHandler, correct, wrong, blank);
     }
 
     private void SetTexts()

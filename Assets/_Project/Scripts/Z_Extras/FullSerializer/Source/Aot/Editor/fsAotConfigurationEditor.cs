@@ -1,4 +1,4 @@
-﻿#if !NO_UNITY
+﻿#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +7,7 @@ using System.Reflection;
 using FullSerializer.Internal;
 using UnityEditor;
 using UnityEngine;
+
 
 namespace FullSerializer {
 	[InitializeOnLoad]

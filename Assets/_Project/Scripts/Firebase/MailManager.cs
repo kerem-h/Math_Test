@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class MailManager : MonoBehaviour
 {
@@ -29,6 +31,7 @@ public class MailManager : MonoBehaviour
         MobileUserDetection();
     }
 
+    
     private void MobileUserDetection()
     {
         var _mobileUserDetectionWebgl = new MobileUserDetectionWebgl();

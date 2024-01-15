@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         GameData.QuestionCount = 24;
         GameData.CurrentQuestion = 0;
-        GameData.AnswerCount = 3;
+        GameData.AnswerCount = 4;
         GameData.IsSolution = false;
 
         GameData.Questions = new Question[GameData.QuestionCount];

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnswerProperty
   m_EditorClassIdentifier: 
   Hovered: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  Selected: {r: 0.8207547, g: 0.5163597, b: 0.13550194, a: 1}
-  SelectedHovered: {r: 0.5943396, g: 0.3805569, b: 0.10933607, a: 1}
+  Selected: {r: 0, g: 0.4392157, b: 0.65882355, a: 1}
+  SelectedHovered: {r: 0.06038627, g: 0.3911981, b: 0.5566038, a: 1}
   Normal: {r: 1, g: 1, b: 1, a: 1}
-  Correct: {r: 0.28669456, g: 0.6320754, b: 0.18783373, a: 1}
-  Wrong: {r: 0.6509434, g: 0, b: 0, a: 1}
+  Correct: {r: 0.13725491, g: 1, b: 0.45490196, a: 1}
+  Wrong: {r: 1, g: 0.02745098, b: 0.05490196, a: 1}
