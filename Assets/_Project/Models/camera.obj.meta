@@ -1,0 +1,314 @@
+fileFormatVersion: 2
+guid: ccfa73631bd59eb42949451da5e64191
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlaneMat
+    second: {fileID: 2100000, guid: 310b8ee6e2b14ee438d955418c5dfd52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_Boole_camer_bodyMat
+    second: {fileID: 2100000, guid: 13731217a17791c4d86db01677a5c442, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_Boole_camer_body_windowMat
+    second: {fileID: 2100000, guid: 172e8b9f22d06144d881a273a8074b07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_Boole_camer_body_window_1Mat
+    second: {fileID: 2100000, guid: f21e7b9f7bb3caf488e7ca0349c2574d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_Boole_camer_body_window_Mat
+    second: {fileID: 2100000, guid: 2d3c069a4d55a5e4ba0f93fd1e31cb61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_Boole_windowMat
+    second: {fileID: 2100000, guid: e2bb85739d38b5e4ea99913535af4c5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_CylinderMat
+    second: {fileID: 2100000, guid: 20517cd9844c10749a06241740c1df4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_flashMat
+    second: {fileID: 2100000, guid: 96f49ff1395e5ec458b1cae816b1944a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_lenseMat
+    second: {fileID: 2100000, guid: f556d92d13134894dae3949c14d91962, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_lense_Boole1_Cylinder_1Mat
+    second: {fileID: 2100000, guid: eaa2613654d59374b95f2baa9380e798, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_lense_Boole1_Cylinder_Mat
+    second: {fileID: 2100000, guid: 17c48193b6bf01d44b0eaae4ffacfa62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_lense_Cylinder_Mat
+    second: {fileID: 2100000, guid: 50235796ee4ca7546ab29ea47f3835aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_lense_SphereMat
+    second: {fileID: 2100000, guid: f32bb8910b2cedf4da4699948b4dadc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Cylinder_Mat
+    second: {fileID: 2100000, guid: 6b9a866ee00d989429d1021c63714715, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_CylinderMat
+    second: {fileID: 2100000, guid: 1e250acdd86eb85468a42dcb8c7b8a1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_1Mat
+    second: {fileID: 2100000, guid: 4b26bb1aadfa57a4a952b1d9f6359a7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_2Mat
+    second: {fileID: 2100000, guid: 998ff32a30f7a134c8b8aa9b843c5e66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_3Mat
+    second: {fileID: 2100000, guid: e0f3d2a33b2cf3d45b131ffe4fa0eba4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_4Mat
+    second: {fileID: 2100000, guid: 9876958b91c3a2149bdb5d04a3bb52a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_5Mat
+    second: {fileID: 2100000, guid: ba372df6a432c2e479158233a4400d11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_6Mat
+    second: {fileID: 2100000, guid: 8f37704b6417b12459c98465f57ce6ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camra_nob_Null_Object_Cylinder_Mat
+    second: {fileID: 2100000, guid: 12fd094af3043344e972557788a38690, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_CubeMat
+    second: {fileID: 2100000, guid: e01da7a2218f32147adaf46748d6987a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder2_Cylinder_19_Cylinder_Mat
+    second: {fileID: 2100000, guid: b066ed2a62d67b8429f5f863a5095fbe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder2_Cylinder_19_Cylinder__Cylinder_21_Cylinder_23_Cylinder_Mat
+    second: {fileID: 2100000, guid: d7d11c34bc211714aae257f28cc83687, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder2_Cylinder_19_Cylinder__Cylinder_21_Cylinder_Mat
+    second: {fileID: 2100000, guid: 9fa4a643670ad3b47ba5b22898214be6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder2_Cylinder_19_Cylinder__Cylinder_Mat
+    second: {fileID: 2100000, guid: a2a8ddbdaad653048b59903c444192c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder2_Cylinder_Mat
+    second: {fileID: 2100000, guid: a1cac626dadd7fd4589bac44f3aa5645, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_CylinderMat
+    second: {fileID: 2100000, guid: 93624d6a62e213d4ca6e8f0abb082378, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_11_Cylinder_4_Cylinder_7_Cylinder_6_Cylinder_1_Cylinder_Mat
+    second: {fileID: 2100000, guid: 7abf0ccdbc54bcb42a7d7b2e8903cd2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_11_Cylinder_4_Cylinder_7_Cylinder_6_Cylinder_Mat
+    second: {fileID: 2100000, guid: c169b7c76ee6aed429489c5c16eaf173, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_11_Cylinder_4_Cylinder_7_Cylinder_Mat
+    second: {fileID: 2100000, guid: 2e13f326f5cf35f4c9edf2eb7b95de46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_11_Cylinder_4_Cylinder_Mat
+    second: {fileID: 2100000, guid: 334a1f032e2146a48960072a9b540629, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_11_Cylinder_Mat
+    second: {fileID: 2100000, guid: 653e5b2ff66c168469e9e86444ff302b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_1Mat
+    second: {fileID: 2100000, guid: 5945f2aa93a4f464cac3890366a29f82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_9_Cylinder_26_Cylinder_10_Cylinder_27_Cylinder_13_Cylinder_Mat
+    second: {fileID: 2100000, guid: 63a75fcb023403f4ebf1a46b3b512dba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_9_Cylinder_26_Cylinder_10_Cylinder_27_Cylinder_Mat
+    second: {fileID: 2100000, guid: 8100126c21e51374d842a17e23049169, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_9_Cylinder_26_Cylinder_10_Cylinder_Mat
+    second: {fileID: 2100000, guid: b4a4f4d6202514c449c8d93512170198, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_9_Cylinder_26_Cylinder_Mat
+    second: {fileID: 2100000, guid: 34261baf284bc8346b2429d7de64e6ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_9_Cylinder_Mat
+    second: {fileID: 2100000, guid: f4ce8b00dab0a7d46aa5da412a4855c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trypod_Cylinder_Mat
+    second: {fileID: 2100000, guid: cb06d9e8d1cdf6d4c8791d72f222ef37, type: 2}
+  materials:
+    materialImportMode: 0
+    materialName: 1
+    materialSearch: 2
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
