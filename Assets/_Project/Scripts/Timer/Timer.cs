@@ -15,7 +15,6 @@ public class Timer : MonoBehaviour
     }
     #endregion
 
-    private const float TestTime = 840f;
 
     public Action<string> OnTimerChanged;
     public Action OnTimerStarted;
@@ -30,7 +29,7 @@ public class Timer : MonoBehaviour
     {
         MailManager.Instance.OnTestStarted += StartTimer;
         
-        _previousSecond = Mathf.FloorToInt(TestTime);
+        _previousSecond = Mathf.FloorToInt(GameData.TestTime);
     }
     
     private void Update()
@@ -57,7 +56,7 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
-        _clock = new Clock(TestTime);
+        _clock = new Clock(GameData.TestTime);
         _clock.onTimerEnd += OnTimerEnd;
         OnTimerStarted?.Invoke();
     }

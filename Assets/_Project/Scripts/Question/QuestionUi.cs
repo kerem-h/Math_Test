@@ -26,7 +26,7 @@ public class QuestionUi : MonoBehaviour
         NextButton.SetActive(true);
         PreviousButton.SetActive(true);
         if (GameData.CurrentQuestion == 0) PreviousButton.SetActive(false);
-        else if (GameData.CurrentQuestion == GameData.QuestionCount - 1) NextButton.SetActive(false);
+        else if (GameData.CurrentQuestion == GameData.QuestionCount[GameData.CurrentTest] - 1) NextButton.SetActive(false);
     }
 
     public void NextQuestionButton()

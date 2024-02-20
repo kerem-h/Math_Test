@@ -5,21 +5,11 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class QuestionData
-{
-    public string Question;
-    public string Answer;
-    public string[] Options;
-    public string Explanation;
-    public int ParameterCount = 0;
-    public string FinalAnswer;
-    public Dictionary<string, float> Variables = new();
-}
-
+// It should be selected DATAONLINE and CSVFILENAME in the inspector when the game is exported to WEBGL
 public class DatabaseManager : MonoBehaviour
 {
+    # region Singleton
     public static DatabaseManager Instance;
-    string database_url = "https://storage.googleapis.com/math-database/database-example3.csv";
 
     private void Awake()
     {
@@ -28,29 +18,54 @@ public class DatabaseManager : MonoBehaviour
             Destroy(this);
         }
     }
+    # endregion
+    
+    public List<string> questionDatabaseUrls;
 
+    public bool IsDataOnline = true;
+    [SerializeField] private TextAsset csvFile;
     private void Start()
     {
-        StartCoroutine(GetData(database_url, (data) => {
-            MathHandler.Instance.questions = data;
-        }));
+        if (GameData.IsSolution) return;
+        
+        
+        if (IsDataOnline) {
+            StartCoroutine(GetData(questionDatabaseUrls, OnDataRecieved));
+        }
+        else 
+        {
+            var data = ProcessCSVFile(csvFile.bytes);
+            MathHandler.Instance.questionsList = new List<List<QuestionData>> { data };
+        }
+    }
+
+    private void OnDataRecieved(List<List<QuestionData>> data)
+    {
+        MathHandler.Instance.questionsList = data;
     }
 
 
-    private IEnumerator GetData(string url, Action<List<QuestionData>> callback) 
+    IEnumerator GetData(List<string> urls, Action<List<List<QuestionData>>> callback) 
     {
-        var questions = new List<QuestionData>();
-        UnityWebRequest request = UnityWebRequest.Get(url);
-        yield return request.SendWebRequest();
-    
-        if (request.isNetworkError || request.isHttpError)
+        List<List<QuestionData>> questions = new();
+        foreach (var url in urls)
         {
-            Debug.LogError("Error downloading file: " + request.error);
-        }
-        else
-        {
+
+            List<QuestionData> data;
+            UnityWebRequest request = UnityWebRequest.Get(url);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            yield return request.SendWebRequest();
+            
+            if ((request.isNetworkError || request.isHttpError))
+            {
+                DebugManager.Instance.AddLogs("Error downloading file: " + request.error);
+                Debug.LogError("Error downloading file: " + request.error);
+                continue;
+            }
+            
             byte[] results = request.downloadHandler.data;
-            questions = ProcessCSVFile(results);
+            data = ProcessCSVFile(results);
+            questions.Add(data);
         }
         callback?.Invoke(questions);
     }
@@ -59,65 +74,76 @@ public class DatabaseManager : MonoBehaviour
     List<QuestionData> ProcessCSVFile(byte[] csvData)
     {
         List<QuestionData> questions = new List<QuestionData>();
-        // Convert byte array to string
-        string csvText = System.Text.Encoding.UTF8.GetString(csvData);
+        string csvText = Encoding.UTF8.GetString(csvData);
 
-        // Split the CSV text into lines, handling different line endings
-        string[] lines = csvText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        string[] lines = ParseCSVLines(csvText);
 
-        for (int i = 0; i < lines.Length; i++) // Start from 1 if the first row is headers
+        for (int i = 0; i < lines.Length; i++)
         {
-            // Skip empty lines
-            if (string.IsNullOrWhiteSpace(lines[i]))
-                continue;
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            try {
+                
+                List<string> values = ParseCSVLine(lines[i]);
+                if (values.Count >= 6) {
 
-            List<string> values = ParseCSVLine(lines[i]);
-            if (values.Count >= 4) // Assuming at least 4 columns: Question, Answer, Options, Explanation
-            {
-                try
-                {
-                    QuestionData questionData = new QuestionData();
-                    questionData.Question = values[0];
-                    questionData.Answer = values[1];
-                    questionData.Options = values[2].Split(';'); // Assuming options are separated by semicolons
-                    questionData.Explanation = values[3];
-                    questions.Add(questionData);
+                        QuestionData questionData = new QuestionData();
+                        questionData.QuestionIndex = i + 1;
+                        questionData.Question = values[0].Trim();
+                        questionData.AnswerFormule = values[1].Trim();
+                        questionData.Ranges = values[2].Trim().Split(';');
+                        questionData.Explanation = values[3].Trim();
+                        questionData.Answers = values[4].Trim();
+                        questionData.ClockVariables = new List<string>(values[5].Trim().Split(";"));
+                        questions.Add(questionData); 
                 }
-                catch (Exception ex)
-                {
-                    // Handle or log the exception
-                }
+            }
+            catch (Exception ex) {
+                DebugManager.Instance.AddLogs("Error parsing line " + i + ": " + ex.Message);
             }
         }
         return questions; 
     }
-    List<string> ParseCSVLine(string line)
+
+    private string[] ParseCSVLines(string csvText)
     {
-        List<string> fields = new List<string>();
+        List<string> linesList = new List<string>();
+        int quoteCount = 0;
+        for (int i = 0; i < csvText.Length; i++) {
+            if (csvText[i] == '"')
+            {
+                quoteCount++;
+                if (quoteCount % 2 == 0) {
+                    quoteCount = 0;
+                }
+            }
+            if (csvText[i] == '\n' && quoteCount % 2 == 0) {
+                linesList.Add(csvText.Substring(0, i));
+                csvText = csvText.Substring(i + 1);
+                i = 0;
+            }
+        }
+        csvText.Trim();
+        linesList.Add(csvText);
+        return linesList.ToArray();
+    }
+
+    private List<string> ParseCSVLine(string line)
+    {
+        var fields = new List<string>();
+        var fieldBuilder = new StringBuilder();
         bool inQuotes = false;
-        StringBuilder fieldBuilder = new StringBuilder();
 
         foreach (char c in line)
         {
-            if (c == '"')
-            {
-                inQuotes = !inQuotes;
-                continue;
-            }
-        
-            if (c == ',' && !inQuotes)
+            if (c == '"') inQuotes = !inQuotes;
+            else if (c == ',' && !inQuotes)
             {
                 fields.Add(fieldBuilder.ToString());
                 fieldBuilder.Clear();
             }
-            else
-            {
-                fieldBuilder.Append(c);
-            }
+            else fieldBuilder.Append(c);
         }
-
-        // Add the last field
-        fields.Add(fieldBuilder.ToString());
+        fields.Add(fieldBuilder.ToString()); // Add last field
 
         return fields;
     }

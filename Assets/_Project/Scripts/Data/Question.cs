@@ -2,6 +2,7 @@
 
 public class Question
 {
+    public QuestionData questionData;
     public int correctAnswer;
     public int selectedAnswer;
     
@@ -13,7 +14,7 @@ public class Question
     public void SetQuestion()
     {
         selectedAnswer = -1;
-        correctAnswer = Random.Range(0, 3);
+        correctAnswer = Random.Range(0, 4);
     }
 }
 
