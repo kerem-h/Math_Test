@@ -23,7 +23,7 @@ public class MathHandler : MonoBehaviour
 
     MathUiHandler _mathUiHandler;
     public List<List<QuestionData>> questionsList;
-
+    public bool IsDataLoaded;
     #region Singleton
 
         public static MathHandler Instance;
@@ -60,7 +60,8 @@ public class MathHandler : MonoBehaviour
 
     private IEnumerator HandleQuestions()   
     {
-        yield return new WaitUntil(() => questionsList != null);
+        yield return new WaitUntil(() => IsDataLoaded);
+        Debug.Log(IsDataLoaded);
         ProcessAllQuestions();
         RandomizeQuestions();
         SetQuestionUi();
@@ -297,16 +298,24 @@ public class MathHandler : MonoBehaviour
     {
         try
         {
-            // DebugManager.Instance.AddLogs("Evaluating expression: " + expression);
-            // ExpressionEvaluator.Evaluate(expression, out float res);
-            // DebugManager.Instance.AddLogs("Result: " + res);
-            // return res;
+            expression = expression.Replace(",", ".");
+            DebugManager.Instance.AddLogs("Evaluating expression: " + expression);
+            Debug.Log("Evaluating expression: " + expression);
+            
+            ExpressionEvaluator.Evaluate(expression, out int res);
+            Debug.Log("Result: " + res);
+            DebugManager.Instance.AddLogs("Result: " + res);
+            return res;
+            
             DataTable table = new DataTable();
             table.Columns.Add("expression", string.Empty.GetType(), expression);
             DataRow row = table.NewRow();
             table.Rows.Add(row);
             float result = float.Parse((string)row["expression"]);
-            return result;
+            return result; 
+            
+         
+
         }
         catch (Exception e)
         {

@@ -42,6 +42,8 @@ public class DatabaseManager : MonoBehaviour
     private void OnDataRecieved(List<List<QuestionData>> data)
     {
         MathHandler.Instance.questionsList = data;
+        
+        if (data.Count > 1) MathHandler.Instance.IsDataLoaded = true;
     }
 
 
@@ -62,7 +64,7 @@ public class DatabaseManager : MonoBehaviour
                 Debug.LogError("Error downloading file: " + request.error);
                 continue;
             }
-            
+
             byte[] results = request.downloadHandler.data;
             data = ProcessCSVFile(results);
             questions.Add(data);
@@ -75,6 +77,7 @@ public class DatabaseManager : MonoBehaviour
     {
         List<QuestionData> questions = new List<QuestionData>();
         string csvText = Encoding.UTF8.GetString(csvData);
+        Debug.Log(csvText);
 
         string[] lines = ParseCSVLines(csvText);
 
