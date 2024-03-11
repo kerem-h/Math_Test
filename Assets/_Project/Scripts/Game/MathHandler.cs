@@ -61,7 +61,6 @@ public class MathHandler : MonoBehaviour
     private IEnumerator HandleQuestions()   
     {
         yield return new WaitUntil(() => IsDataLoaded);
-        Debug.Log(IsDataLoaded);
         ProcessAllQuestions();
         RandomizeQuestions();
         SetQuestionUi();
@@ -158,8 +157,11 @@ public class MathHandler : MonoBehaviour
             var answerText = answers[i];
             
             MatchCollection matches = Regex.Matches(answerText, pattern);
-            foreach (Match match in matches) {
-                string expression = match.Groups[1].Value;
+            foreach (Match match in matches)
+            {
+                var val = StringModifier.RandomlyDeletePlusOrMinus(match.Groups[1].Value);
+                val = StringModifier.RandomlyDeleteSlashOrAsterisk(val);
+                string expression = val;
                 var result = EvaluateExpression(expression);
                 if (clockIndexes.Contains(i)) {
                     answerText = answerText.Replace(match.Value, GetClockFromMinute((int) result));
@@ -204,18 +206,34 @@ public class MathHandler : MonoBehaviour
     {
         try
         {
+            // This place is for setting the parameters
             foreach (var option in question.Ranges)
             {
+                // Customer might want to set float values as well. You might need to change this part
+                int randomValue;
                 var _ = option.Split(":");
                 var match = _[0].Trim();
-                var range = _[1].Trim().Split(",");
-                var min = int.Parse(range[0].Trim('('));
-                var max = int.Parse(range[1]);
-                var iter = int.Parse(range[2].Trim(')'));
+                if (_[1].Contains("["))
+                {
+                    var list = _[1].Trim().Trim('(').Trim('[').Trim(')').Trim(']');
+                    var numbers = list.Split(",");
+                    int[] intNumbers = new int[numbers.Length];
+                    for (int i = 0; i < numbers.Length; i++) {
+                        intNumbers[i] = int.Parse(numbers[i].Trim());
+                    }
+                    randomValue = intNumbers[UnityEngine.Random.Range(0, intNumbers.Length)];
+                }
+                else
+                {
+                    var range = _[1].Trim().Split(",");
+                    var min = int.Parse(range[0].Trim('('));
+                    var max = int.Parse(range[1]);
+                    var iter = int.Parse(range[2].Trim(')'));
 
-                int stepCount = (max + 1 - min) / iter + 1;
-                int randomIndex = UnityEngine.Random.Range(0, stepCount);
-                var randomValue = min + randomIndex * iter;
+                    int stepCount = (max + 1 - min) / iter + 1;
+                    int randomIndex = UnityEngine.Random.Range(0, stepCount);
+                    randomValue = min + randomIndex * iter;
+                }
                 
                 question.Variables.Add(match, randomValue);
                 question.ParameterCount += 1;
@@ -299,12 +317,7 @@ public class MathHandler : MonoBehaviour
         try
         {
             expression = expression.Replace(",", ".");
-            DebugManager.Instance.AddLogs("Evaluating expression: " + expression);
-            Debug.Log("Evaluating expression: " + expression);
-            
             ExpressionEvaluator.Evaluate(expression, out int res);
-            Debug.Log("Result: " + res);
-            DebugManager.Instance.AddLogs("Result: " + res);
             return res;
             
             DataTable table = new DataTable();

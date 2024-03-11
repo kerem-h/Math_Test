@@ -36,6 +36,7 @@ public class DatabaseManager : MonoBehaviour
         {
             var data = ProcessCSVFile(csvFile.bytes);
             MathHandler.Instance.questionsList = new List<List<QuestionData>> { data };
+            MathHandler.Instance.IsDataLoaded = true;
         }
     }
 
@@ -77,7 +78,6 @@ public class DatabaseManager : MonoBehaviour
     {
         List<QuestionData> questions = new List<QuestionData>();
         string csvText = Encoding.UTF8.GetString(csvData);
-        Debug.Log(csvText);
 
         string[] lines = ParseCSVLines(csvText);
 
