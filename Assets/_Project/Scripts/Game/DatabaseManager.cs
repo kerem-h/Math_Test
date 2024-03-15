@@ -78,11 +78,11 @@ public class DatabaseManager : MonoBehaviour
     {
         List<QuestionData> questions = new List<QuestionData>();
         string csvText = Encoding.UTF8.GetString(csvData);
-
         string[] lines = ParseCSVLines(csvText);
 
         for (int i = 0; i < lines.Length; i++)
         {
+            Debug.Log(lines[i]);
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
             try {
                 
@@ -111,24 +111,36 @@ public class DatabaseManager : MonoBehaviour
     {
         List<string> linesList = new List<string>();
         int quoteCount = 0;
-        for (int i = 0; i < csvText.Length; i++) {
+        StringBuilder currentLine = new StringBuilder();
+
+        for (int i = 0; i < csvText.Length; i++)
+        {
             if (csvText[i] == '"')
             {
                 quoteCount++;
-                if (quoteCount % 2 == 0) {
-                    quoteCount = 0;
-                }
             }
-            if (csvText[i] == '\n' && quoteCount % 2 == 0) {
-                linesList.Add(csvText.Substring(0, i));
-                csvText = csvText.Substring(i + 1);
-                i = 0;
+
+            // Add the character to the current line regardless
+            currentLine.Append(csvText[i]);
+
+            // Check if we are at a line break and not inside quotes
+            if (csvText[i] == '\n' && quoteCount % 2 == 0)
+            {
+                // Add the accumulated line to the list and reset for the next line
+                linesList.Add(currentLine.ToString());
+                currentLine.Clear();
             }
         }
-        csvText.Trim();
-        linesList.Add(csvText);
+
+        // Add the last line if there's any content not followed by a newline
+        if (currentLine.Length > 0)
+        {
+            linesList.Add(currentLine.ToString());
+        }
+
         return linesList.ToArray();
     }
+
 
     private List<string> ParseCSVLine(string line)
     {
