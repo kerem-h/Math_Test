@@ -44,7 +44,7 @@ public class DatabaseManager : MonoBehaviour
     {
         MathHandler.Instance.questionsList = data;
         
-        if (data.Count > 1) MathHandler.Instance.IsDataLoaded = true;
+        if (data[0].Count > 1) MathHandler.Instance.IsDataLoaded = true;
     }
 
 
@@ -82,7 +82,8 @@ public class DatabaseManager : MonoBehaviour
 
         for (int i = 0; i < lines.Length; i++)
         {
-            Debug.Log(lines[i]);
+            
+            // Debug.Log(lines[i]);
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
             try {
                 
