@@ -13,4 +13,13 @@ public class QuestionData
     public string[] Ranges;
     public Dictionary<string, float> Variables = new();
     public List<string> ClockVariables;
+
+    public void SetAnswers()
+    {
+        for (int i = 0; i < AnswerStrings.Length; i++)
+        {
+            var answer = AnswerStrings[i];
+            
+        }
+    }
 }

@@ -37,12 +37,19 @@ public class MathUiHandler : MonoBehaviour
         ExplanationText.text = questionData.Explanation;
     }
 
-    public void SetQuestionUi(string question, string[] answers)
+    public void SetQuestionUi(string question, string[] answers, int correctAnswerIndex)
     {
         QuestionText.text = question;
-        for (int i = 0; i < answers.Length; i++)
-        {
-            AnswerTexts[i].text = answers[i];
+        
+        
+        AnswerTexts[correctAnswerIndex].text = answers[0];
+        
+        var index = 1;
+        for (int i = 0; i < AnswerTexts.Length; i++) {
+            
+            if (i == correctAnswerIndex) continue;
+            AnswerTexts[i].text = answers[index];
+            index++;
         }
     }
 

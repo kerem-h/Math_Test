@@ -2059,7 +2059,7 @@ MonoBehaviour:
   questionDatabaseUrls:
   - https://storage.googleapis.com/math-database/Database-1.csv
   IsDataOnline: 1
-  csvFile: {fileID: 4900000, guid: 03e7d501c6b40014489944245a61c30e, type: 3}
+  csvFile: {fileID: 4900000, guid: 85377479a6d97e5478684d4afb8faa56, type: 3}
 --- !u!4 &657707224
 Transform:
   m_ObjectHideFlags: 0
@@ -3748,6 +3748,7 @@ MonoBehaviour:
   - {fileID: 1704471504}
   - {fileID: 1393389240}
   - {fileID: 589551793}
+  - {fileID: 1715084862}
 --- !u!1 &1472412992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,7 +3840,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4312,7 +4313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1715084861
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4789,6 +4790,7 @@ MonoBehaviour:
   - {fileID: 1817925995}
   - {fileID: 234142044}
   - {fileID: 1227180004}
+  - {fileID: 565517795}
   ExplanationButton: {fileID: 1329559102}
   ExplanationText: {fileID: 798676863}
   OpenAnimation:
@@ -6137,15 +6139,15 @@ RectTransform:
   m_GameObject: {fileID: 909945022387120871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.99, y: 0.99, z: 0.99}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1108335486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -835, y: 0}
-  m_SizeDelta: {x: 35, y: 62}
+  m_SizeDelta: {x: 72, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1575166572799299677
 RectTransform:
@@ -7157,15 +7159,15 @@ RectTransform:
   m_GameObject: {fileID: 2743127130513090325}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.99, y: 0.99, z: 0.99}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1108335486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 835, y: 0}
-  m_SizeDelta: {x: 35, y: 62}
+  m_SizeDelta: {x: 72, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6315123839312444271
 MonoBehaviour:

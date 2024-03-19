@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             OnQuestionChanged?.Invoke();
         };
         
-        Timer.Instance.OnTimerEnded += FinishTest;
+        Timer.Instance.OnTimerEnded += FinishTest; 
     }
 
     public void ChangeQuestion(int i)
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         GameData.TestTimes = new[] { 1080f };
         GameData.QuestionCount = new[] {26};
         GameData.TestCount = 1;
-        GameData.AnswerCount = 4;
+        GameData.AnswerCount = 5;
         
         GameData.CurrentQuestion = 0;
         GameData.CurrentTest = 0;

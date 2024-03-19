@@ -50,12 +50,15 @@ public class MathHandler : MonoBehaviour
         StartCoroutine(HandleQuestions());
     }
 
-    private void SetQuestionUi() {
+    private void SetQuestionUi()
+    {
+        var question = GameData.GetQuestion(GameData.CurrentQuestion);
+        var AnswerIndex = question.correctAnswer;
         
         var questionData = GameData.GetCurrentQuestionData();
         var answers = questionData.AnswerStrings;
         
-        _mathUiHandler.SetQuestionUi(questionData.Question, answers);
+        _mathUiHandler.SetQuestionUi(questionData.Question, answers, AnswerIndex);
     }
 
     private IEnumerator HandleQuestions()   
@@ -122,7 +125,7 @@ public class MathHandler : MonoBehaviour
             step = SetResult(question, step);
             var result = EvaluateExpression(step);
             string key = "{" + question.ParameterCount + "}";
-            question.Variables.Add(key, result);
+            question.Variables.Add(key, float.Parse(result.ToString("F2")));
         }
         
         SetAnswers(question);
@@ -166,11 +169,20 @@ public class MathHandler : MonoBehaviour
                 if (clockIndexes.Contains(i)) {
                     answerText = answerText.Replace(match.Value, GetClockFromMinute((int) result));
                 }
-                answerText = answerText.Replace(match.Value, result.ToString("F" + dec));
+                // if rounding is not wanted delete this.
+                if (dec != "0")
+                    answerText = answerText.Replace(match.Value, result.ToString("F" + dec));
+                else
+                {
+                    answerText = answerText.Replace(match.Value, MathF.Ceiling(result).ToString());
+                }
             }
             
             answers[i] = answerText;
         }
+        
+        
+        
         question.AnswerStrings = answers;
     }
 
@@ -301,6 +313,10 @@ public class MathHandler : MonoBehaviour
         }
 
         question.Question = question.Question.Trim('\ufeff');
+
+        foreach (var variable in question.Variables) {
+            question.Explanation = question.Explanation.Replace(variable.Key, variable.Value.ToString());
+        }
         
         MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
         
@@ -319,16 +335,6 @@ public class MathHandler : MonoBehaviour
             expression = expression.Replace(",", ".");
             ExpressionEvaluator.Evaluate(expression, out int res);
             return res;
-            
-            DataTable table = new DataTable();
-            table.Columns.Add("expression", string.Empty.GetType(), expression);
-            DataRow row = table.NewRow();
-            table.Rows.Add(row);
-            float result = float.Parse((string)row["expression"]);
-            return result; 
-            
-         
-
         }
         catch (Exception e)
         {

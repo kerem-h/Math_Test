@@ -1,0 +1,106 @@
+"La surface d'un carré qui fait [{A}*{A}]m2, si l'un des cotés fait {B} m de moins, combien mesure l'un des côtés ?",{A}-{B},"{A}:(20,100,1);{B}:(2,18,1)","L’aire d’un carré est L x l . On dispose ici de sont aire ( [{A}*{A}] m2 ). 
+Il faut donc trouver la racine carré de [{A}*{A}] soit {A} puis retrancher {B} afin d’obtenir [{A}-{B}]",1:[{C}]; [{C}+-1];[{C}+-2];[{C}+-4];[{C}+-5],None
+"Quelle est la distance réelle de Bordeaux à Paris, sachant qu'elle représente {A} cm sur une carte à l'échelle 1/{B} ?",({A}*{B})/100000,"{A}:(3,50,1);{B}:(50000,5000000,50000)",{A} cm sur la carte correspond en réelle à {A} x {B} = [{A}*{B}] cm soit [{A}*{B}/100] m = [{A}*{B}/100000] km,1:[{C}]; [{C}*/10];[{C}*/100];[{C}*/1000];[{C}+-4],None
+Une voiture roule à {A} Km/heure. Quelle distance parcourt-elle en {B} heure et {C} minutes ?,{A}*({B}+{C}/60),"{A}:(30,240,10);{B}:(1,20,1);{C}:(0,55,5)",A venir,1:[{D}]; [{D}+-5];[{D}+-10];[{D}+-2];[{C}+-4],None
+"Pour former {A} recrues, un instructeur a besoin de {B} jours. Combien de jours lui faudra-t-il pour former {C} recrues, sachant qu'il est {D} % plus efficace avec des groupes plus importants?",({C}*{B}/{A})-{D}*({C}*{B}/{A})/100,"{A}:(5,20,1);{B}:(5,30,1);{C}:(21,35,1);{D}:(5,60,5)","Étape 1 : Jours pour {C} recrues sans efficacité :
+({C} recrues x {B} jours) ÷ {A}  recrues = [{C}*{B}/{A}] jours.
+
+Étape 2 : Réduction due à l'efficacité :
+{D}% de [{C}*{B}/{A}] jours = [({C}*{B}/{A})*{D}/100], soit [({C}*{B}/{A})*{D}/100] jours arrondis.
+Total = [{C}*{B}/{A}] jours - [{C}*{B}/{A}] jours = {D} jours.",1:[{E}]; [{E}+-1];[{E}+-2];[{E}+-3];[{C}+-4],None
+Un fermier a des canards et des lapins. Il compte [{A}+{B}] têtes et [{A}*2+{B}*4] pattes. Combien a-t-il de lapins?,{B},"{A}:(1,40,1);{B}:(1,40,1);{C}:(2,3,1)","Pour résoudre ce problème, nous pouvons utiliser un système d'équations pour représenter le nombre de canards (C) et de lapins (L) que le fermier possède, en tenant compte du nombre total de têtes et de pattes.
+Nous savons que le fermier a [{A}+{B}] têtes au total, ce qui signifie que C + L = [{A}+{B}] (équation 1, représentant le nombre total de têtes).
+
+Nous savons également que le fermier a [{A}*2+{B}*4] pattes au total, et chaque canard a 2 pattes et chaque cheval en a 4. Donc, 2C + 4L = [{A}*2+{B}*4] (équation 2, représentant le nombre total de pattes).
+
+Maintenant, nous pouvons résoudre ce système d'équations. Tout d'abord, nous pouvons réorganiser l'équation 1 pour obtenir C = [{A}+{B}] - L.
+
+Ensuite, nous pouvons substituer cette expression dans l'équation 2 :
+2([{A}+{B}] - L) + 4L = [{A}*2+{B}*4]
+
+Maintenant, distribuons le 2 dans la première partie de l'équation :
+[2*({A}+{B})] - 2L + 4L = [{A}*2+{B}*4]
+
+Maintenant, combinons les termes similaires :
+[2*({A}+{B})] + 2L = [{A}*2+{B}*4]
+
+Soustrayez 40 des deux côtés de l'équation :
+2L = [{A}*2+{B}*4] - [2*({A}+{B})]
+2L = [({A}*2+{B}*4) - (2*({A}+{B}))]
+
+Divisez les deux côtés par 2 pour résoudre pour C :
+L = [({A}*2+{B}*4) - (2*({A}+{B}))] / 2
+L = {C}
+
+Le fermier a donc {C} lapins.",1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+Un fermier a des canards et des lapins. Il compte [{A}+{B}] têtes et [{A}*2+{B}*4] pattes. Combien a-t-il de canards?,{A},"{A}:(1,40,1);{B}:(1,40,1);{C}:(2,3,1)",,1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+Un fermier a des poules et des chevaux. Il compte [{A}+{B}] têtes et [{A}*2+{B}*4] pattes. Combien a-t-il de chevaux?,{B},"{A}:(1,40,1);{B}:(1,40,1);{C}:(2,3,1)","Pour résoudre ce problème, nous pouvons utiliser un système d'équations pour représenter le nombre de poules (P) et de lapins (C) que le fermier possède, en tenant compte du nombre total de têtes et de pattes.
+Nous savons que le fermier a [{A}+{B}] têtes au total, ce qui signifie que P + C = [{A}+{B}] (équation 1, représentant le nombre total de têtes).
+
+Nous savons également que le fermier a [{A}*2+{B}*4] pattes au total, et chaque poule a 2 pattes et chaque cheval en a 4. Donc, 2P + 4C = [{A}*2+{B}*4] (équation 2, représentant le nombre total de pattes).
+
+Maintenant, nous pouvons résoudre ce système d'équations. Tout d'abord, nous pouvons réorganiser l'équation 1 pour obtenir P = [{A}+{B}] - C.
+
+Ensuite, nous pouvons substituer cette expression dans l'équation 2 :
+2([{A}+{B}] - C) + 4C = [{A}*2+{B}*4]
+
+Maintenant, distribuons le 2 dans la première partie de l'équation :
+[2*({A}+{B})] - 2C + 4C = [{A}*2+{B}*4]
+
+Maintenant, combinons les termes similaires :
+[2*({A}+{B})] + 2C = [{A}*2+{B}*4]
+
+Soustrayez 40 des deux côtés de l'équation :
+2C = [{A}*2+{B}*4] - [2*({A}+{B})]
+2C = [({A}*2+{B}*4) - (2*({A}+{B}))]
+
+Divisez les deux côtés par 2 pour résoudre pour C :
+C = [({A}*2+{B}*4) - (2*({A}+{B}))] / 2
+C = {C}
+
+Le fermier a donc {C} chevaux.",1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+Un fermier a des poules et des chevaux. Il compte [{A}+{B}] têtes et [{A}*2+{B}*4] pattes. Combien a-t-il de poules?,{A},"{A}:(1,40,1);{B}:(1,40,1);{C}:(2,3,1)",,1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+"Un transporteur de bois à {A} bout de bois dans son camion, il en dépose {B} chez A, puis {C} chez B, puis {D} chez C, et en récupère {E} chez D, combien en a t'il à la fin ?",{A}-{B}-{C}-{D}+{E},"{A}:(800,1000,1);{B}:(200,300,5);{C}:(100,300,3);{D}:(100,300,2);{E}:(200,500,1)",{A}-{B}-{C}-{D}+{E}={F},1:[{F}]; [{F}+-10];[{F}+-15];[{F}-2*{E}];[{C}+-4],None
+"Un marchand a du cafe de deux qualités.
+Quand il prend {A} Kg de la première qualité et {B} Kg de la seconde, le Kg de mélange vaut [{A}*{C}+{B}*{D}] €.
+Quand il prend {E} Kg de la première qualité et {F} Kg de la seconde, le Kg de mélange vaut [{E}*{C}+{F}*{D}] €.
+
+Quel est le prix de la première qualité ?",{C},"{A}:(1,20,1);{B}:(1,20,1);{C}:(5,70,1);{D}:(5,70,1);{E}:(1,20,1);{F}:(1,20,1);{G}:(2,3,1)",,1:[{H}]; [{H}+-1];[{H}+-{G}];[{H}+-4];[{C}+-4],None
+"Un marchand a du cafe de deux qualités.
+Quand il prend {A} Kg de la première qualité et {B} Kg de la seconde, le Kg de mélange vaut [{A}*{C}+{B}*{D}] €.
+Quand il prend {E} Kg de la première qualité et {F} Kg de la seconde, le Kg de mélange vaut [{E}*{C}+{F}*{D}] €.
+
+Quel est le prix de la deuxième qualité ?",{D},"{A}:(1,20,1);{B}:(1,20,1);{C}:(5,70,1);{D}:(5,70,1);{E}:(1,20,1);{F}:(1,20,1);{G}:(2,3,1)",,1:[{H}]; [{H}+-1];[{H}+-{G}];[{H}+-4];[{C}+-4],None
+"Un avion a {A}L de carburant, à la 1ère escale il en a consommé {B}/{C}e, à la 2ème escale il en a consommé {D}/{E}e (du carburant total), et à la 3ème escale il en a consommé {F}/{G}e (du carburant total). Combien lui reste t'il ?",{A}-({A}*{B}/{C})-({A}*{D}/{E})-({A}*{F}/{G}),"{A}:(5000,20000,500);{B}:(1,10,1);{C}:(20,40,5);{D}:(1,15,1);{E}:(20,50,5);{F}:(1,10,1);{G}:(20,40,5)","La premiere chose à noter est que l’on parle ici du carburant total.
+On doit donc venir soustraire à {A} L, {B}/{C} + {D}/{E} + {F}/{G} de {A} soit [{H}]",1:[{H}]; [{H}+-10];[{H}+-20];[{H}+-30];[{C}+-4],None
+Un hélicoptère consomme {A} litres de carburant par heure en vol stationnaire. Quelle quantité de carburant consommera-t-il après {B} heures et {C} minutes?,{A}*({B}+({C}/60)),"{A}:(50,400,10);{B}:(0,5,1);{C}:(5,55,5)","Consommation = {A} litres/h x {B},[{C}/60*100] h = {D} litres.",1:[{D}]; [{D}+-5];[{D}+-10];[{D}+-15];[{C}+-4],None
+Un avion est à une altitude de {A} mètres et monte à une vitesse de {B} mètres par minute pendant {C} minutes. À quelle altitude se trouve-t-il à la fin?,{A}+{B}*{C},"{A}:(500,5000,100);{B}:(100,3000,100);{C}:(1,30,1)",Si un avion monte de {B} m par minute et qu’il se trouve à {A} m. Il faut alors multiplier le taux de montée soit {B} par le nombre de minute {C} et additionner le résultat à l’altitude initiale {A} pour obtenir {D},1:[{D}]; [{D}+-{B}];[{D}+-100];[{D}+-(2*{B})];[{C}+-4],None
+"Un tireur d'élite utilise en moyenne {A} munitions pour toucher une cible. Si lors d'une mission il doit neutraliser {B} cibles, combien de munitions devra-t-il prévoir?",{A}*{B},"{A}:(1,20,1);{B}:(5,30,1)",{A} x {B} = [{A}*{B}],1:[{C}]; [{C}+-1];[{C}+-2];[{C}+-3];[{C}+-4],None
+"Sophie veut acheter un vélo à {A}€. Après négociations, le marchand lui accorde {B}% de remise. Combien Sophie paye-t-elle le vélo?",{A}-({A}*{B}/100),"{A}:(10,500,1);{B}:(3,80,1);{C}:(2,3,1)",Il faut calculer le pourcentage de remise. Soit {A} x {B} / 100 = {C} on soustrait ensuite {C} de {A},1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+"Lucas souhaite acquérir une montre à {A} €. Suite à sa demande, le vendeur lui fait une ristourne de {B}%. Combien Lucas débourse-t-il pour la montre?",{A}-({A}*{B}/100),"{A}:(10,500,1);{B}:(3,80,1);{C}:(2,3,1)",Il faut calculer le pourcentage de remise. Soit {A} x {B} / 100 = {C} on soustrait ensuite {C} de {A},1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+"Marie envisage d'acheter une paire de chaussures à {A}€. Après discussion, le commerçant lui offre {B}% de réduction. Combien Marie paie-t-elle la paire de chaussures?",{A}-({A}*{B}/100),"{A}:(10,500,1);{B}:(3,80,1);{C}:(2,3,1)",Il faut calculer le pourcentage de remise. Soit {A} x {B} / 100 = {C} on soustrait ensuite {C} de {A},1:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4];[{C}+-4],None
+"Pierre possède un verger composé de {A} pommiers et {B} poiriers. Sachant qu'il abat {C}% de poiriers et {D}% de pommiers, combien d'arbres a-t-il abattu au total ?",({A}*{D}/100)+({B}*{C}/100),"{A}:(10,500,2);{B}:(10,500,2);{C}:(2,80,1);{D}:(3,80,1);{E}:(2,3,1)","Pour trouver le nombre total d'arbres abattus, vous pouvez calculer le nombre d'arbres abattus pour chaque type d'arbre (poiriers et pommiers) séparément, puis les additionner.
+
+Pour les poiriers, Pierre abat {C}% d'entre eux :
+Nombre de poiriers abattus = {C}% de {B} = [{C}/100] x {B} = [{C}*{B}/100] poiriers abattus.
+Pour les pommiers, Pierre abat {D}% d'entre eux :
+Nombre de pommiers abattus = {D}% de {A} = [{D}/100] x {A} = [{A}*{D}/100] pommiers abattus.
+Maintenant, additionnons les deux chiffres pour obtenir le nombre total d'arbres abattus :
+Nombre total d'arbres abattus = [{C}*{B}/100] poiriers abattus + [{A}*{D}/100] pommiers abattus = {F} arbres abattus au total.",1:[{F}]; [{F}+-1];[{F}+-{E}];[{F}+-4];[{C}+-4],None
+"Clément a un jardin où il a planté {A} rosiers et {B} tulipes. Si il arrache {C}% de tulipes et {D}% de rosiers, combien de plantes a-t-il retirées en tout ?",({A}*{D}/100)+({B}*{C}/100),"{A}:(10,500,2);{B}:(10,500,2);{C}:(2,80,1);{D}:(3,80,1);{E}:(2,3,1)","Pour trouver le nombre total de plantes abattus, vous pouvez calculer le nombre de plantes abattus pour chaque type de plante (tulipes et rosiers) séparément, puis les additionner.
+
+Pour les tulipes, Pierre abat {C}% d'entre eux :
+Nombre de tulipes abattus = {C}% de {B} = [{C}/100] x {B} = [{C}*{B}/100] tulipes abattus.
+Pour les rosiers, Pierre abat {D}% d'entre eux :
+Nombre de pommiers abattus = {D}% de {A} = [{D}/100] x {A} = [{A}*{D}/100] rosiers abattus.
+Maintenant, additionnons les deux chiffres pour obtenir le nombre total de plantes abattus :
+Nombre total d'arbres abattus = [{C}*{B}/100] tulipes abattus + [{A}*{D}/100] rosiers abattus = {F} plantes abattus au total.",1:[{F}]; [{F}+-1];[{F}+-{E}];[{F}+-4];[{C}+-4],None
+"Pierre possède un verger composé de {A} pommiers et {B} poiriers. Sachant qu'il abat {C}% de poiriers et {D}% de pommiers, combien d'arbres restent ils au total ?",({A}+{B})-({A}*{D}/100)-({B}*{C}/100),"{A}:(10,500,2);{B}:(10,500,2);{C}:(2,80,1);{D}:(3,80,1);{E}:(2,3,1)","Pour trouver le nombre total d'arbres restant, vous pouvez calculer le nombre d'arbres abattus pour chaque type d'arbre (poiriers et pommiers) séparément, puis les soustraire au nombre d’arbres total.
+
+Pour les poiriers, Pierre abat {C}% d'entre eux :
+Nombre de poiriers abattus = {C}% de {B} = [{C}/100] x {B} = [{C}*{B}/100] poiriers abattus.
+Pour les pommiers, Pierre abat {D}% d'entre eux :
+Nombre de pommiers abattus = {D}% de {A} = [{D}/100] x {A} = [{A}*{D}/100] pommiers abattus.
+Maintenant, additionnons les deux chiffres pour obtenir le nombre total d'arbres abattus :
+Nombre total d'arbres abattus = [{C}*{B}/100] poiriers abattus + [{A}*{D}/100] pommiers abattus = [({A}*{D}/100)+({B}*{C}/100)]
+Nombre total d’arbres rentant = {A} + {B} - [({A}*{D}/100)+({B}*{C}/100)] = [{A}+{B}] - [({A}*{D}/100)+({B}*{C}/100)] = {F} arbres restant au total.",1:[{F}]; [{F}+-1];[{F}+-{E}];[{F}+-4];[{C}+-4],None
