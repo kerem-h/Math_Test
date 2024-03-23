@@ -125,7 +125,7 @@ public class MathHandler : MonoBehaviour
             step = SetResult(question, step);
             var result = EvaluateExpression(step);
             string key = "{" + question.ParameterCount + "}";
-            question.Variables.Add(key, float.Parse(result.ToString("F2")));
+            question.Variables.Add(key, float.Parse(result.ToString("F" + question.Answers.Split(":")[0].Trim())));
         }
         
         SetAnswers(question);
@@ -137,7 +137,7 @@ public class MathHandler : MonoBehaviour
         var data = question.Answers.Split(":");
         var dec = data[0].Trim();
         var tempAnswers = data[1].Trim().Split(";");
-        
+
         for (int i = 0; i < question.ClockVariables.Count; i++) {
             
             for (int j = 0; j < tempAnswers.Length; j++) {
@@ -149,7 +149,7 @@ public class MathHandler : MonoBehaviour
         }
 
         foreach (var v in question.Variables) {
-            question.Answers = question.Answers.Replace(v.Key, v.Value.ToString("F" + dec));
+            question.Answers = question.Answers.Replace(v.Key, v.Value.ToString());
         }
         
         var _ = question.Answers.Split(":");
@@ -333,7 +333,7 @@ public class MathHandler : MonoBehaviour
         try
         {
             expression = expression.Replace(",", ".");
-            ExpressionEvaluator.Evaluate(expression, out int res);
+            ExpressionEvaluator.Evaluate(expression, out float res);
             return res;
         }
         catch (Exception e)
