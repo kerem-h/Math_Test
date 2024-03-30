@@ -2058,7 +2058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionDatabaseUrls:
   - https://storage.googleapis.com/math-database/Database-1.csv
-  IsDataOnline: 0
+  IsDataOnline: 1
   csvFile: {fileID: 4900000, guid: 4cacc67144656d541989c201e9ec49a7, type: 3}
 --- !u!4 &657707224
 Transform:

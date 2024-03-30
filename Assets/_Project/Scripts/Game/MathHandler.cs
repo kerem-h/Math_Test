@@ -116,7 +116,8 @@ public class MathHandler : MonoBehaviour
     {
 
         var answer = question.AnswerFormule;
-        var steps = answer.Split(";");
+        var dec = answer.Split(":")[0].Trim();
+        var steps = answer.Split(":")[1].Trim().Split(";");
         
         for (int i = 0; i < steps.Length; i++)
         {
@@ -125,7 +126,7 @@ public class MathHandler : MonoBehaviour
             step = SetResult(question, step);
             var result = EvaluateExpression(step);
             string key = "{" + question.ParameterCount + "}";
-            question.Variables.Add(key, float.Parse(result.ToString("F" + question.Answers.Split(":")[0].Trim())));
+            question.Variables.Add(key, float.Parse(result.ToString("F" + dec)));
         }
         
         SetAnswers(question);
@@ -135,7 +136,8 @@ public class MathHandler : MonoBehaviour
     {
         List<int> clockIndexes = new List<int>();
         var data = question.Answers.Split(":");
-        var dec = data[0].Trim();
+        var dec = data[0].Split(";")[0].Trim();
+        var decText = data[0].Split(";")[1].Trim();
         var tempAnswers = data[1].Trim().Split(";");
 
         for (int i = 0; i < question.ClockVariables.Count; i++) {
@@ -174,7 +176,14 @@ public class MathHandler : MonoBehaviour
                     answerText = answerText.Replace(match.Value, result.ToString("F" + dec));
                 else
                 {
-                    answerText = answerText.Replace(match.Value, MathF.Ceiling(result).ToString());
+                    if (decText == "Floor")
+                        answerText = answerText.Replace(match.Value, MathF.Floor(result).ToString());
+                    else if (decText == "Ceil")
+                        answerText = answerText.Replace(match.Value, MathF.Ceiling(result).ToString());
+                    else if (decText == "Round")
+                        answerText = answerText.Replace(match.Value, MathF.Round(result).ToString());
+                    else if (decText == "None")
+                        answerText = answerText.Replace(match.Value, result.ToString());
                 }
             }
             
