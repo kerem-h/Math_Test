@@ -41,11 +41,9 @@ public class MathUiHandler : MonoBehaviour
     {
         QuestionText.text = question;
         
-        
         AnswerTexts[correctAnswerIndex].text = answers[0];
-        
         var index = 1;
-        for (int i = 0; i < AnswerTexts.Length; i++) {
+        for (int i = 0; i < GameData.AnswerCount; i++) {
             
             if (i == correctAnswerIndex) continue;
             AnswerTexts[i].text = answers[index];

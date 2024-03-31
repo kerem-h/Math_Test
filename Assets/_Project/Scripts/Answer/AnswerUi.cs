@@ -1,9 +1,20 @@
+using System;
 using UnityEngine;
 
 public class AnswerUi : MonoBehaviour
 {
     public AnswerButtons[] AnswerButtons;
-    
+    public static AnswerUi Instance;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         SetAnswerButtons();
@@ -37,9 +48,19 @@ public class AnswerUi : MonoBehaviour
         button.Select();
     }
 
+    public void DisableButton()
+    {
+        AnswerButtons[^1].gameObject.SetActive(false);
+    }
+
+    public void EnableButton()
+    {
+        AnswerButtons[^1].gameObject.SetActive(true);
+    }
     private void SetAnswerButtons()
     {
         var question = GameData.GetQuestion(GameData.CurrentQuestion);
+
         var isSolution = GameData.IsSolution;
         var selectedAnswer = question.selectedAnswer;
 

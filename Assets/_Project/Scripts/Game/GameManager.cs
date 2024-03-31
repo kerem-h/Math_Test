@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
             for (int j = 0; j < GameData.QuestionCount[i] ; j++)
             {
                 var question = new Question();
-                question.SetQuestion();
                 GameData.Questions[i][j] = question;
             }
         }

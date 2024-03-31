@@ -19,6 +19,7 @@ public static class GameData
                 for (int i = 0; i < questionData.Count; i++) {
                         var questiondata = questionData[i];
                         Questions[testIndex][i].questionData = questiondata;
+                        Questions[testIndex][i].SetQuestion(questiondata.AnswerCount);
                 }
         }
 

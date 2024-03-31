@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using UnityEngine;
 using System.Text.RegularExpressions;
@@ -54,9 +53,19 @@ public class MathHandler : MonoBehaviour
     {
         var question = GameData.GetQuestion(GameData.CurrentQuestion);
         var AnswerIndex = question.correctAnswer;
+
         
         var questionData = GameData.GetCurrentQuestionData();
         var answers = questionData.AnswerStrings;
+        GameData.AnswerCount = questionData.AnswerCount;
+        if (questionData.AnswerCount == 5)
+        {
+            AnswerUi.Instance.EnableButton();
+        }
+        else
+        {
+            AnswerUi.Instance.DisableButton();
+        }
         
         _mathUiHandler.SetQuestionUi(questionData.Question, answers, AnswerIndex);
     }
@@ -75,6 +84,7 @@ public class MathHandler : MonoBehaviour
         {
             foreach (var question in questionSet)
             {
+                question.AnswerCount = question.Answers.Split(":")[1].Split(";").Length;
                 ProcessQuestion(question);
             }
         }

@@ -4,6 +4,7 @@ public class QuestionData
 {
     public int QuestionIndex;
     public int ParameterCount = 0;
+    public int AnswerCount = 0;
     
     public string Question;
     public string Explanation;
