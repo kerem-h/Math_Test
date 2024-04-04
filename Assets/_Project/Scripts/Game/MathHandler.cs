@@ -241,27 +241,27 @@ public class MathHandler : MonoBehaviour
             foreach (var option in question.Ranges)
             {
                 // Customer might want to set float values as well. You might need to change this part
-                int randomValue;
+                float randomValue;
                 var _ = option.Split(":");
                 var match = _[0].Trim();
                 if (_[1].Contains("["))
                 {
                     var list = _[1].Trim().Trim('(').Trim('[').Trim(')').Trim(']');
                     var numbers = list.Split(",");
-                    int[] intNumbers = new int[numbers.Length];
+                    float[] intNumbers = new float[numbers.Length];
                     for (int i = 0; i < numbers.Length; i++) {
-                        intNumbers[i] = int.Parse(numbers[i].Trim());
+                        intNumbers[i] = float.Parse(numbers[i].Trim());
                     }
                     randomValue = intNumbers[UnityEngine.Random.Range(0, intNumbers.Length)];
                 }
                 else
                 {
                     var range = _[1].Trim().Split(",");
-                    var min = int.Parse(range[0].Trim('('));
-                    var max = int.Parse(range[1]);
-                    var iter = int.Parse(range[2].Trim(')'));
+                    var min = float.Parse(range[0].Trim('('));
+                    var max = float.Parse(range[1]);
+                    var iter = float.Parse(range[2].Trim(')'));
 
-                    int stepCount = (max + 1 - min) / iter + 1;
+                    int stepCount = (int)((max + 1 - min) / iter + 1);
                     int randomIndex = UnityEngine.Random.Range(0, stepCount);
                     randomValue = min + randomIndex * iter;
                 }
@@ -290,14 +290,14 @@ public class MathHandler : MonoBehaviour
         
     }
 
-    private static string GetClockFromMinute(int value) {
+    private static string GetClockFromMinute(float value) {
         // Ensure value is within 24 hours
         value = value % 1440;
         
         // Convert minutes to clock format
         string clock = "";
-        int hours = value / 60;
-        int minutes = value % 60;
+        int hours = (int)(value / 60);
+        int minutes = (int)(value % 60);
         if (hours < 10) {
             if (minutes < 10) clock = "0" + hours + ":0" + minutes;
             else clock = "0" + hours + ":" + minutes;
