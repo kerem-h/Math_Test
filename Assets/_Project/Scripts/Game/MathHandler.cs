@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using Random = System.Random;
 
 public class MathHandler : MonoBehaviour
 {
@@ -188,6 +189,7 @@ public class MathHandler : MonoBehaviour
                 {
                     if (decText == "Floor")
                         answerText = answerText.Replace(match.Value, MathF.Floor(result).ToString());
+                    
                     else if (decText == "Ceil")
                         answerText = answerText.Replace(match.Value, MathF.Ceiling(result).ToString());
                     else if (decText == "Round")
@@ -217,6 +219,21 @@ public class MathHandler : MonoBehaviour
 
     private QuestionData ChangeVariables(QuestionData question)
     {
+        // give me the pattern for {[combien,selicon]}
+        string pattern = @"\{\[(.*?)\]\}";
+        MatchCollection matches = Regex.Matches(question.Question, pattern);
+        foreach (Match match in matches)
+        {
+            var split = match.Value.Trim('{').Trim('}').Trim('[').Trim(']').Split(',');
+            List<string> variables = new List<string>();
+            foreach (var item in split)
+            {
+                variables.Add(item);
+            }
+            var randomIndex = UnityEngine.Random.Range(0, variables.Count);
+            question.Question = question.Question.Replace(match.Value, variables[randomIndex]);
+        }
+        
         foreach (var v in variables)
         {
             question.Question = question.Question.Replace(v.Key, v.Value);
@@ -276,6 +293,10 @@ public class MathHandler : MonoBehaviour
                     question.Explanation = question.Explanation.Replace(match, clock);
                 }
                 else {
+                    question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString());
+                    question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString());
+                    question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString());
+                    
                     question.Question = question.Question.Replace(match, randomValue.ToString());
                     question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
                     question.Explanation = question.Explanation.Replace(match, randomValue.ToString());
@@ -334,6 +355,10 @@ public class MathHandler : MonoBehaviour
         question.Question = question.Question.Trim('\ufeff');
 
         foreach (var variable in question.Variables) {
+            question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString());
+            question.Explanation = question.Explanation.Replace("Ceil" + variable.Key, MathF.Ceiling(variable.Value).ToString());
+            question.Explanation = question.Explanation.Replace("Round" + variable.Key, MathF.Round(variable.Value).ToString());
+            
             question.Explanation = question.Explanation.Replace(variable.Key, variable.Value.ToString());
         }
         
@@ -343,6 +368,10 @@ public class MathHandler : MonoBehaviour
             string expression = match.Groups[1].Value;
             var result = EvaluateExpression(expression);
 
+            question.Explanation = question.Explanation.Replace("Floor" + match.Value, MathF.Floor(result).ToString());
+            question.Explanation = question.Explanation.Replace("Ceil" + match.Value, MathF.Ceiling(result).ToString());
+            question.Explanation = question.Explanation.Replace("Round" + match.Value, MathF.Round(result).ToString());
+            
             question.Explanation = question.Explanation.Replace(match.Value, result.ToString());
         }
     }
