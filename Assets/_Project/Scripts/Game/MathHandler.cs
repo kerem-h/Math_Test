@@ -184,7 +184,10 @@ public class MathHandler : MonoBehaviour
                 }
                 // if rounding is not wanted delete this.
                 if (dec != "0")
+                {
                     answerText = answerText.Replace(match.Value, result.ToString("F" + dec));
+                }
+                
                 else
                 {
                     if (decText == "Floor")
