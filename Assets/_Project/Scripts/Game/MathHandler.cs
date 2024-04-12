@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using System.Globalization;
-using Random = System.Random;
 
 public class MathHandler : MonoBehaviour
 {
@@ -378,7 +377,8 @@ public class MathHandler : MonoBehaviour
     {
         try
         {
-            expression = expression.Replace(",", ".");
+            // This expression thing might be causing problems.
+            // expression = expression.Replace(",", ".");
             ExpressionEvaluator.Evaluate(expression, out float res);
             return res;
         }
