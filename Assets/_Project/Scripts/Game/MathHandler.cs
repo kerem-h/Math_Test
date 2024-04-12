@@ -137,7 +137,7 @@ public class MathHandler : MonoBehaviour
             step = SetResult(question, step);
             var result = EvaluateExpression(step);
             string key = "{" + question.ParameterCount + "}";
-            question.Variables.Add(key, float.Parse(result.ToString("F" + dec), CultureInfo.InvariantCulture));
+            question.Variables.Add(key, float.Parse(result.ToString("F" + dec, CultureInfo.InvariantCulture), CultureInfo.InvariantCulture));
         }
         
         SetAnswers(question);
@@ -162,7 +162,7 @@ public class MathHandler : MonoBehaviour
         }
 
         foreach (var v in question.Variables) {
-            question.Answers = question.Answers.Replace(v.Key, v.Value.ToString());
+            question.Answers = question.Answers.Replace(v.Key, v.Value.ToString(CultureInfo.InvariantCulture));
         }
         
         var _ = question.Answers.Split(":");
@@ -185,20 +185,20 @@ public class MathHandler : MonoBehaviour
                 // if rounding is not wanted delete this.
                 if (dec != "0")
                 {
-                    answerText = answerText.Replace(match.Value, result.ToString("F" + dec));
+                    answerText = answerText.Replace(match.Value, result.ToString("F" + dec, CultureInfo.InvariantCulture));
                 }
                 
                 else
                 {
                     if (decText == "Floor")
-                        answerText = answerText.Replace(match.Value, MathF.Floor(result).ToString());
+                        answerText = answerText.Replace(match.Value, MathF.Floor(result).ToString(CultureInfo.InvariantCulture));
                     
                     else if (decText == "Ceil")
-                        answerText = answerText.Replace(match.Value, MathF.Ceiling(result).ToString());
+                        answerText = answerText.Replace(match.Value, MathF.Ceiling(result).ToString(CultureInfo.InvariantCulture));
                     else if (decText == "Round")
-                        answerText = answerText.Replace(match.Value, MathF.Round(result).ToString());
+                        answerText = answerText.Replace(match.Value, MathF.Round(result).ToString(CultureInfo.InvariantCulture));
                     else if (decText == "None")
-                        answerText = answerText.Replace(match.Value, result.ToString());
+                        answerText = answerText.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
                 }
             }
             
@@ -215,7 +215,7 @@ public class MathHandler : MonoBehaviour
 
     private string SetResult(QuestionData question, string step) {
         foreach (var variable in question.Variables) {
-            step = step.Replace(variable.Key, variable.Value.ToString());
+            step = step.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
         }
         return step;
     }
@@ -290,17 +290,17 @@ public class MathHandler : MonoBehaviour
             if (question.ClockVariables.Contains(match)) {
                 var clock = GetClockFromMinute(randomValue);
                 question.Question = question.Question.Replace(match, clock);
-                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
+                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
                 question.Explanation = question.Explanation.Replace(match, clock);
             }
             else {
-                question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString());
-                question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString());
-                question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString());
+                question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString(CultureInfo.InvariantCulture));
+                question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString(CultureInfo.InvariantCulture));
+                question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString(CultureInfo.InvariantCulture));
                     
-                question.Question = question.Question.Replace(match, randomValue.ToString());
-                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
-                question.Explanation = question.Explanation.Replace(match, randomValue.ToString());
+                question.Question = question.Question.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
+                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
+                question.Explanation = question.Explanation.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
             }
             
         }
@@ -345,18 +345,18 @@ public class MathHandler : MonoBehaviour
             string expression = match.Groups[1].Value;
             var result = EvaluateExpression(expression);
 
-            question.Question = question.Question.Replace(match.Value, result.ToString());
+            question.Question = question.Question.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
             
         }
 
         question.Question = question.Question.Trim('\ufeff');
 
         foreach (var variable in question.Variables) {
-            question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString());
-            question.Explanation = question.Explanation.Replace("Ceil" + variable.Key, MathF.Ceiling(variable.Value).ToString());
-            question.Explanation = question.Explanation.Replace("Round" + variable.Key, MathF.Round(variable.Value).ToString());
+            question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Ceil" + variable.Key, MathF.Ceiling(variable.Value).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Round" + variable.Key, MathF.Round(variable.Value).ToString(CultureInfo.InvariantCulture));
             
-            question.Explanation = question.Explanation.Replace(variable.Key, variable.Value.ToString());
+            question.Explanation = question.Explanation.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
         }
         
         MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
@@ -365,11 +365,11 @@ public class MathHandler : MonoBehaviour
             string expression = match.Groups[1].Value;
             var result = EvaluateExpression(expression);
 
-            question.Explanation = question.Explanation.Replace("Floor" + match.Value, MathF.Floor(result).ToString());
-            question.Explanation = question.Explanation.Replace("Ceil" + match.Value, MathF.Ceiling(result).ToString());
-            question.Explanation = question.Explanation.Replace("Round" + match.Value, MathF.Round(result).ToString());
+            question.Explanation = question.Explanation.Replace("Floor" + match.Value, MathF.Floor(result).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Ceil" + match.Value, MathF.Ceiling(result).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Round" + match.Value, MathF.Round(result).ToString(CultureInfo.InvariantCulture));
             
-            question.Explanation = question.Explanation.Replace(match.Value, result.ToString());
+            question.Explanation = question.Explanation.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
         }
     }
 
@@ -377,8 +377,8 @@ public class MathHandler : MonoBehaviour
     {
         try
         {
-            // This expression thing might be causing problems.
-            // expression = expression.Replace(",", ".");
+            expression = expression.Replace(",", ".");
+            expression = expression.Replace(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, ".");
             ExpressionEvaluator.Evaluate(expression, out float res);
             return res;
         }
