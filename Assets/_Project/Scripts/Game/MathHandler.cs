@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using System.Globalization;
 using Random = System.Random;
 
 public class MathHandler : MonoBehaviour
@@ -137,7 +138,7 @@ public class MathHandler : MonoBehaviour
             step = SetResult(question, step);
             var result = EvaluateExpression(step);
             string key = "{" + question.ParameterCount + "}";
-            question.Variables.Add(key, float.Parse(result.ToString("F" + dec)));
+            question.Variables.Add(key, float.Parse(result.ToString("F" + dec), CultureInfo.InvariantCulture));
         }
         
         SetAnswers(question);
@@ -255,62 +256,56 @@ public class MathHandler : MonoBehaviour
 
     private static void SetParameters(QuestionData question)
     {
-        try
+        // This place is for setting the parameters
+        foreach (var option in question.Ranges)
         {
-            // This place is for setting the parameters
-            foreach (var option in question.Ranges)
+            // Customer might want to set float values as well. You might need to change this part
+            float randomValue;
+            var _ = option.Split(":");
+            var match = _[0].Trim();
+            if (_[1].Contains("["))
             {
-                // Customer might want to set float values as well. You might need to change this part
-                float randomValue;
-                var _ = option.Split(":");
-                var match = _[0].Trim();
-                if (_[1].Contains("["))
-                {
-                    var list = _[1].Trim().Trim('(').Trim('[').Trim(')').Trim(']');
-                    var numbers = list.Split(",");
-                    float[] intNumbers = new float[numbers.Length];
-                    for (int i = 0; i < numbers.Length; i++) {
-                        intNumbers[i] = float.Parse(numbers[i].Trim());
-                    }
-                    randomValue = intNumbers[UnityEngine.Random.Range(0, intNumbers.Length)];
+                var list = _[1].Trim().Trim('(').Trim('[').Trim(')').Trim(']');
+                var numbers = list.Split(",");
+                float[] intNumbers = new float[numbers.Length];
+                for (int i = 0; i < numbers.Length; i++) {
+                    intNumbers[i] = float.Parse(numbers[i].Trim(), CultureInfo.InvariantCulture);
                 }
-                else
-                {
-                    var range = _[1].Trim().Split(",");
-                    var min = float.Parse(range[0].Trim('('));
-                    var max = float.Parse(range[1]);
-                    var iter = float.Parse(range[2].Trim(')'));
-
-                    int stepCount = (int)((max + 1 - min) / iter + 1);
-                    int randomIndex = UnityEngine.Random.Range(0, stepCount);
-                    randomValue = min + randomIndex * iter;
-                }
-                
-                question.Variables.Add(match, randomValue);
-                question.ParameterCount += 1;
-
-                if (question.ClockVariables.Contains(match)) {
-                    var clock = GetClockFromMinute(randomValue);
-                    question.Question = question.Question.Replace(match, clock);
-                    question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
-                    question.Explanation = question.Explanation.Replace(match, clock);
-                }
-                else {
-                    question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString());
-                    question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString());
-                    question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString());
-                    
-                    question.Question = question.Question.Replace(match, randomValue.ToString());
-                    question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
-                    question.Explanation = question.Explanation.Replace(match, randomValue.ToString());
-                }
-            
+                randomValue = intNumbers[UnityEngine.Random.Range(0, intNumbers.Length)];
             }
+            else
+            {
+                var range = _[1].Trim().Split(",");
+                var min = float.Parse(range[0].Trim('('), CultureInfo.InvariantCulture);
+                var max = float.Parse(range[1], CultureInfo.InvariantCulture);
+                var iter = float.Parse(range[2].Trim(')'), CultureInfo.InvariantCulture);
+
+                int stepCount = (int)((max + 1 - min) / iter + 1);
+                int randomIndex = UnityEngine.Random.Range(0, stepCount);
+                randomValue = min + randomIndex * iter;
+            }
+                
+            question.Variables.Add(match, randomValue);
+            question.ParameterCount += 1;
+
+            if (question.ClockVariables.Contains(match)) {
+                var clock = GetClockFromMinute(randomValue);
+                question.Question = question.Question.Replace(match, clock);
+                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
+                question.Explanation = question.Explanation.Replace(match, clock);
+            }
+            else {
+                question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString());
+                question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString());
+                question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString());
+                    
+                question.Question = question.Question.Replace(match, randomValue.ToString());
+                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString());
+                question.Explanation = question.Explanation.Replace(match, randomValue.ToString());
+            }
+            
         }
-        catch (Exception exception) {
-            DebugManager.Instance.AddLogs("Error Setting Parameters on the question " + question.QuestionIndex + ":\n" + exception.Message + "\n" + "Check your Ranges in the CSV file");
-            Debug.Log("Error Setting Parameters on the question " + question.QuestionIndex + ":\n" + exception.Message);
-        }
+      
         
     }
 
