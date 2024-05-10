@@ -85,6 +85,10 @@ public class PopupUi : MonoBehaviour
             button.Button.transform.SetParent(layout); 
             button.Button.transform.localScale = Vector3.one;
         }
+        
+        // this is for the last button to be disabled
+        // Buttons[^1].Button.SetActive(false);
+        
         StartCoroutine(SetPopupBackground());
     }
 

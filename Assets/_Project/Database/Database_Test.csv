@@ -1,3 +1,31 @@
-"La surface d'un carrŽ qui fait [{A}*{A}]m2, si l'un des cotŽs fait {B} m de moins, combien mesure l'un des c™tŽs ?Ê",{A}-{B},"{A}:(20,100,1);{B}:(2,18,1)",A venir,0:[{C}] km; [{C}+-1];[{C}+-2];[{C}+-4];[{C}+-3],None
-"Quelle est la distance rŽelle de Bordeaux ˆ Paris, sachant qu'elle reprŽsente {A} cm sur une carte ˆ l'Žchelle 1/{B} ?",({A}*{B})/100000,"{A}:(3,50,1);{B}:(50000,5000000,50000)",A venir,0:[{C}]; [{C}*/10];[{C}*/100];[{C}*/1000];[{C}*/5],None
-Une voiture roule ˆ {A}Km/heure. Quelle distance parcourt-elle en {B} heure et {C} minutes ?,{A}*({B}+{C}/60),"{A}:(30,240,10);{B}:(1,20,1);{C}:(0,55,5)",A venir,0:[{D}]; [{D}+-5];[{D}+-10];[{D}+-2];[{D}+-7],None
+"Un avion part de l'aéroport de cognac vers Avord à {A} avec un vent de face de {B} km/h et vole à une vitesse de {C} km/h. {D} mn plus tard un avion décolle de Avord vers Cognac, il vole à {E} et à un vent de dos de {F} km/h. À quelle heure se rencontront ils sachant que la distance entre Cognac et avord est de {G}?",3:({A}+{D});{D}/60;{D}/60;{H}+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})),"{A}:(10,720,1);{B}:(5,60,5);{C}:(200,500,10);{D}:(5,60,5);{E}:(200,500,5);{F}:(5,60,5);{G}:(1000,3000,100)","Étape 1 : Calcul des vitesses effectives
+Premier avion (Cognac vers Avord) :
+Vitesse propre = {C} km/h
+Vent de face = {B} km/h
+Vitesse effective = {C} km/h - {B} km/h = [{C}-{B}] km/h
+Second avion (Avord vers Cognac) :
+Vitesse propre = {E} km/h
+Vent de dos = {F} km/h
+Vitesse effective = {E} km/h + {F} km/h = [{E}+{F}] km/h
+
+Étape 2 : Calcul du délai avant le départ du second avion
+Départ du premier avion à {A}
+Départ du second avion à {H} ( {D} plus tard)
+
+Étape 3 : Détermination de la distance parcourue par chaque avion avant qu'ils ne se rencontrent:
+Nous devons trouver le temps t après {H} auquel les deux avions se rencontrent. À ce moment, la somme des distances parcourues par les deux avions doit être égale à {G} km.
+
+La distance parcourue par chaque avion peut être exprimée comme suit :
+
+Premier avion parcourt [{C}-{B}] km/h × (t + {J}) heures (car il a commencé {D} heure plus tôt).
+Second avion parcourt [{E}+{F}] km/h × t heures.
+La somme de ces distances doit être {G} km, donc :
+[{C}-{B}](t + {J}) + [{E}+{F}] t = {G}
+
+Étape 4 : Résolution de l'équation
+[{C}-{B}]t + [({C}-{B})*{J}] + [{E}+{F}]t = {G}
+[{C}-{B}+{E}+{F}]t = [{G}-({C}-{B})*({I})]
+t = [{G}-({C}-{B})*({I})] / [{C}-{B}+{E}+{F}] ≈ [({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})] heures
+
+Étape 5 : Calcul de l'heure de la rencontre
+Le temps total depuis [{H}] est environ [({G}-({C}-{B})*({I})/({C}-{B}+{E}+{F})]. Donc, l'heure de la rencontre est approximativement à [({H})+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}-{F}))].",0;None:[{K}]; [{K}+-1];[{K}+-2];[{K}+-4],{A};{D};{H};{I};{K}

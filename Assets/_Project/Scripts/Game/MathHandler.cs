@@ -160,6 +160,8 @@ public class MathHandler : MonoBehaviour
                 }
             }
         }
+        // change the clock variable.
+        
 
         foreach (var v in question.Variables) {
             question.Answers = question.Answers.Replace(v.Key, v.Value.ToString(CultureInfo.InvariantCulture));
@@ -310,6 +312,8 @@ public class MathHandler : MonoBehaviour
 
     private static string GetClockFromMinute(float value) {
         // Ensure value is within 24 hours
+        if (value < 0) value = 1440 + value;
+        
         value = value % 1440;
         
         // Convert minutes to clock format
@@ -351,6 +355,18 @@ public class MathHandler : MonoBehaviour
 
         question.Question = question.Question.Trim('\ufeff');
 
+        try
+        {
+            for (int i = 0; i < question.ClockVariables.Count; i++) {
+                question.Explanation = question.Explanation.Replace(question.ClockVariables[i], GetClockFromMinute((int) question.Variables[question.ClockVariables[i]]));
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        
         foreach (var variable in question.Variables) {
             question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString(CultureInfo.InvariantCulture));
             question.Explanation = question.Explanation.Replace("Ceil" + variable.Key, MathF.Ceiling(variable.Value).ToString(CultureInfo.InvariantCulture));
