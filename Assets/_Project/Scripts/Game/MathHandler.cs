@@ -280,8 +280,8 @@ public class MathHandler : MonoBehaviour
                 var min = float.Parse(range[0].Trim('('), CultureInfo.InvariantCulture);
                 var max = float.Parse(range[1], CultureInfo.InvariantCulture);
                 var iter = float.Parse(range[2].Trim(')'), CultureInfo.InvariantCulture);
+                int stepCount = (int)((max - min) / iter) + 1;
 
-                int stepCount = (int)((max + 1 - min) / iter + 1);
                 int randomIndex = UnityEngine.Random.Range(0, stepCount);
                 randomValue = min + randomIndex * iter;
             }
@@ -304,7 +304,6 @@ public class MathHandler : MonoBehaviour
                 question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
                 question.Explanation = question.Explanation.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
             }
-            
         }
       
         
@@ -321,15 +320,15 @@ public class MathHandler : MonoBehaviour
         int hours = (int)(value / 60);
         int minutes = (int)(value % 60);
         if (hours < 10) {
-            if (minutes < 10) clock = "0" + hours + ":0" + minutes;
-            else clock = "0" + hours + ":" + minutes;
+            if (minutes < 10) clock = "0" + hours + "h0" + minutes;
+            else clock = "0" + hours + "h" + minutes;
         }
         else {
-            if (minutes < 10) clock = hours + ":0" + minutes;
-            else clock = hours + ":" + minutes;
+            if (minutes < 10) clock = hours + "h0" + minutes;
+            else clock = hours + "h" + minutes;
         }
-        if (hours < 12) clock += " AM";
-        else clock += " PM";
+
+        clock += "m";
         return clock;
     }
 

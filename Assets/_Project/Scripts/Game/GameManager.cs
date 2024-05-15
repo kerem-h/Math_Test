@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void InitializeData()
     {
         // Change this part if you need it
-        GameData.TestTimes = new[] { 1080f };
+        GameData.TestTimes = new[] { 2400f };
         GameData.QuestionCount = new[] {25};
         GameData.TestCount = 1;
         GameData.AnswerCount = 5;

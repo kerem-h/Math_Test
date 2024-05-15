@@ -87,7 +87,7 @@ public class PopupUi : MonoBehaviour
         }
         
         // this is for the last button to be disabled
-        // Buttons[^1].Button.SetActive(false);
+        Buttons[^1].Button.SetActive(false);
         
         StartCoroutine(SetPopupBackground());
     }
