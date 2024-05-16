@@ -53,9 +53,17 @@ public class GameManager : MonoBehaviour
     
     private void InitializeData()
     {
-        // Change this part if you need it
-        GameData.TestTimes = new[] { 2400f };
-        GameData.QuestionCount = new[] {25};
+        GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/cso.csv" };
+        GameData.TestTimes = new[] { 1080f };
+        GameData.QuestionCount = new[] {26};
+        GameData.IsPopupLastButtonDisabled = false;
+
+        // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/tours_1.csv" };
+        // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/tours_2.csv" };
+        // GameData.TestTimes = new[] { 2400f };
+        // GameData.QuestionCount = new[] {25};
+        // GameData.IsPopupLastButtonDisabled = true;
+        
         GameData.TestCount = 1;
         GameData.AnswerCount = 5;
         

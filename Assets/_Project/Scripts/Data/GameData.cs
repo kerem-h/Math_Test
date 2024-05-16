@@ -12,6 +12,8 @@ public static class GameData
         public static List<Question[]> Questions;
         public static float[] TestTimes;
         public static float TestTime => TestTimes[CurrentTest];
+        public static List<string> QuestionDatabaseUrls { get; set; }
+        public static bool IsPopupLastButtonDisabled { get; set; }
 
 
         public static void SetQuestionData(List<QuestionData> questionData, int testIndex) {

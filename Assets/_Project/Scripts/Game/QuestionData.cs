@@ -13,7 +13,6 @@ public class QuestionData
     public string[] AnswerStrings;
     public string[] Ranges;
     public Dictionary<string, float> Variables = new();
-    public List<string> ClockVariables;
 
     public void SetAnswers()
     {

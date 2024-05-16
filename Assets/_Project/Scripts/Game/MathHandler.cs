@@ -85,14 +85,17 @@ public class MathHandler : MonoBehaviour
         {
             foreach (var question in questionSet)
             {
-                question.AnswerCount = question.Answers.Split(":")[1].Split(";").Length;
                 ProcessQuestion(question);
             }
         }
     }
     private void ProcessQuestion(QuestionData question)
     {
-        question = ChangeVariables(question);
+        question.AnswerCount = question.Answers.Split(":")[1].Split(";").Length;
+        
+        // change the placeholder variables with the actual variables
+        ChangeVariables(question);
+        
         SetParameters(question);
         CalculateAnswer(question);
         SetQuestionText(question);
@@ -150,17 +153,6 @@ public class MathHandler : MonoBehaviour
         var dec = data[0].Split(";")[0].Trim();
         var decText = data[0].Split(";")[1].Trim();
         var tempAnswers = data[1].Trim().Split(";");
-
-        for (int i = 0; i < question.ClockVariables.Count; i++) {
-            
-            for (int j = 0; j < tempAnswers.Length; j++) {
-                
-                if (tempAnswers[j].Contains(question.ClockVariables[i])) {
-                    clockIndexes.Add(j);
-                }
-            }
-        }
-        // change the clock variable.
         
 
         foreach (var v in question.Variables) {
@@ -222,11 +214,30 @@ public class MathHandler : MonoBehaviour
         return step;
     }
 
-    private QuestionData ChangeVariables(QuestionData question)
+    private void ChangeVariables(QuestionData question)
+    {
+        RandomStringSelector(question);
+
+        // this code changes all the placeholders with the variables in the dictionary
+        foreach (var v in variables)
+        {
+            question.Question = question.Question.Replace(v.Key, v.Value);
+            question.Explanation = question.Explanation.Replace(v.Key, v.Value);
+            question.AnswerFormule = question.AnswerFormule.Replace(v.Key, v.Value);
+            question.Answers = question.Answers.Replace(v.Key, v.Value);
+            
+            for (int i = 0; i < question.Ranges.Length; i++) 
+                question.Ranges[i] = question.Ranges[i].Replace(v.Key, v.Value);
+        }
+    }
+
+    private static void RandomStringSelector(QuestionData question)
     {
         // give me the pattern for {[combien,selicon]}
         string pattern = @"\{\[(.*?)\]\}";
         MatchCollection matches = Regex.Matches(question.Question, pattern);
+        // This code checks if there is a list of strings. and replaces the variable with a random value from the list. It is requested from the 
+        // customer for diversity of the questions
         foreach (Match match in matches)
         {
             var split = match.Value.Trim('{').Trim('}').Trim('[').Trim(']').Split(',');
@@ -238,21 +249,6 @@ public class MathHandler : MonoBehaviour
             var randomIndex = UnityEngine.Random.Range(0, variables.Count);
             question.Question = question.Question.Replace(match.Value, variables[randomIndex]);
         }
-        
-        foreach (var v in variables)
-        {
-            question.Question = question.Question.Replace(v.Key, v.Value);
-            question.Explanation = question.Explanation.Replace(v.Key, v.Value);
-            question.AnswerFormule = question.AnswerFormule.Replace(v.Key, v.Value);
-            question.Answers = question.Answers.Replace(v.Key, v.Value);
-            
-            for (int i = 0; i < question.ClockVariables.Count; i++) 
-                question.ClockVariables[i] = question.ClockVariables[i].Replace(v.Key, v.Value);
-            
-            for (int i = 0; i < question.Ranges.Length; i++) 
-                question.Ranges[i] = question.Ranges[i].Replace(v.Key, v.Value);
-        }
-        return question;
     }
 
     private static void SetParameters(QuestionData question)
@@ -260,10 +256,10 @@ public class MathHandler : MonoBehaviour
         // This place is for setting the parameters
         foreach (var option in question.Ranges)
         {
-            // Customer might want to set float values as well. You might need to change this part
             float randomValue;
             var _ = option.Split(":");
             var match = _[0].Trim();
+            // This part is for the list of values
             if (_[1].Contains("["))
             {
                 var list = _[1].Trim().Trim('(').Trim('[').Trim(')').Trim(']');
@@ -274,6 +270,7 @@ public class MathHandler : MonoBehaviour
                 }
                 randomValue = intNumbers[UnityEngine.Random.Range(0, intNumbers.Length)];
             }
+            // This part is for the range of values
             else
             {
                 var range = _[1].Trim().Split(",");
@@ -289,21 +286,15 @@ public class MathHandler : MonoBehaviour
             question.Variables.Add(match, randomValue);
             question.ParameterCount += 1;
 
-            if (question.ClockVariables.Contains(match)) {
-                var clock = GetClockFromMinute(randomValue);
-                question.Question = question.Question.Replace(match, clock);
-                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
-                question.Explanation = question.Explanation.Replace(match, clock);
-            }
-            else {
-                question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString(CultureInfo.InvariantCulture));
-                question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString(CultureInfo.InvariantCulture));
-                question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString(CultureInfo.InvariantCulture));
+            
+            // after setting the parameter value, we need to change the variable in the question with the value
+            question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString(CultureInfo.InvariantCulture));
                     
-                question.Question = question.Question.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
-                question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
-                question.Explanation = question.Explanation.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
-            }
+            question.Question = question.Question.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
+            question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
         }
       
         
@@ -332,6 +323,42 @@ public class MathHandler : MonoBehaviour
         return clock;
     }
 
+    
+    private static string GetClockFromSecond(float value, bool showSeconds)
+    {
+        // Ensure value is within 24 hours (86400 seconds)
+        if (value < 0) value = 86400 + value;
+
+        value = value % 86400;
+
+        // Convert seconds to clock format
+        string clock = "";
+        int hours = (int)(value / 3600);
+        int minutes = (int)((value % 3600) / 60);
+        int seconds = (int)(value % 60);
+
+        if (hours > 0)
+        {
+            clock += hours < 10 ? "0" + hours + "h" : hours + "h";
+        }
+
+        if (minutes > 0 || hours > 0) // Show minutes if there are hours or minutes
+        {
+            clock += minutes < 10 ? "0" + minutes + "m" : minutes + "m";
+            if (!showSeconds && (hours > 0 && minutes > 0)) clock= clock.Substring(0, clock.Length - 1);
+        }
+
+        if (showSeconds && (seconds > 0 || minutes > 0 || hours > 0)) // Show seconds if there are hours or minutes or seconds
+        {
+            clock += seconds < 10 ? "0" + seconds + "s" : seconds + "s";
+            if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
+        }
+
+        return clock;
+    }
+
+    
+    
     private static void SetQuestionText(QuestionData question)
     {
         EvaluateCalculations(question);
@@ -354,17 +381,6 @@ public class MathHandler : MonoBehaviour
 
         question.Question = question.Question.Trim('\ufeff');
 
-        try
-        {
-            for (int i = 0; i < question.ClockVariables.Count; i++) {
-                question.Explanation = question.Explanation.Replace(question.ClockVariables[i], GetClockFromMinute((int) question.Variables[question.ClockVariables[i]]));
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-
         
         foreach (var variable in question.Variables) {
             question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString(CultureInfo.InvariantCulture));
@@ -386,6 +402,52 @@ public class MathHandler : MonoBehaviour
             
             question.Explanation = question.Explanation.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
         }
+        
+        ChangeClocks(question);
+    }
+
+    private static void ChangeClocks(QuestionData question)
+    {
+        string pattern = @"hms\((.*?)\)|hm\((.*?)\)";
+        MatchCollection matches = Regex.Matches(question.Question, pattern);
+        
+        question.Question = CalculateMatches(matches, question.Question);
+        
+        MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
+        question.Explanation = CalculateMatches(matches2, question.Explanation);
+        
+
+        for (int i = 0; i < question.AnswerStrings.Length; i++)
+        {
+            var answerString = question.AnswerStrings[i];
+            MatchCollection matches5 = Regex.Matches(answerString, pattern);
+            question.AnswerStrings[i] = CalculateMatches(matches5, question.AnswerStrings[i]);
+        }
+    }
+
+    private static string CalculateMatches(MatchCollection matches, string expression)
+    {
+        foreach (Match match in matches)
+        {
+            // Extract the value inside the brackets
+            string innerValue = match.Groups[1].Value;
+            bool isHms = !string.IsNullOrEmpty(innerValue);
+
+            if (!isHms)
+            {
+                innerValue = match.Groups[2].Value;
+            }
+
+            // Parse the value as a float
+            if (float.TryParse(innerValue, out float value))
+            {
+                // Convert the value to clock format
+                string clockFormat = GetClockFromSecond(value, isHms);
+                expression = expression.Replace(match.Value, clockFormat);
+            }
+            Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
+        }
+        return expression;
     }
 
     static float EvaluateExpression(string expression)

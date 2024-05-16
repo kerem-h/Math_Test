@@ -1,4 +1,4 @@
-"Un avion part de l'aéroport de cognac vers Avord à {A} avec un vent de face de {B} km/h et vole à une vitesse de {C} km/h. {D} mn plus tard un avion décolle de Avord vers Cognac, il vole à {E} et à un vent de dos de {F} km/h. À quelle heure se rencontront ils sachant que la distance entre Cognac et avord est de {G}?",3:({A}+{D});{D}/60;{D}/60;{H}+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})),"{A}:(10,720,1);{B}:(5,60,5);{C}:(200,500,10);{D}:(5,60,5);{E}:(200,500,5);{F}:(5,60,5);{G}:(1000,3000,100)","Étape 1 : Calcul des vitesses effectives
+"Un avion part de l'aéroport de cognac vers Avord � hms({A}) avec un vent de face de {B} km/h et vole à une vitesse de {C} km/h. {D} mn plus tard un avion décolle de Avord vers Cognac, il vole à {E} et à un vent de dos de {F} km/h. À quelle heure se rencontront ils sachant que la distance entre Cognac et avord est de hm({G})?",3:({A}+{D});{D}/60;{D}/60;{H}+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})),"{A}:(1000,72000,100);{B}:(5,60,5);{C}:(200,500,10);{D}:(500,600,50);{E}:(200,500,5);{F}:(5,60,5);{G}:(1000,3000,100)","Étape 1 : Calcul des vitesses effectives
 Premier avion (Cognac vers Avord) :
 Vitesse propre = {C} km/h
 Vent de face = {B} km/h
@@ -9,8 +9,8 @@ Vent de dos = {F} km/h
 Vitesse effective = {E} km/h + {F} km/h = [{E}+{F}] km/h
 
 Étape 2 : Calcul du délai avant le départ du second avion
-Départ du premier avion à {A}
-Départ du second avion à {H} ( {D} plus tard)
+Départ du premier avion à hms({A})
+Départ du second avion à hms({H}) (hm({D}) plus tard)
 
 Étape 3 : Détermination de la distance parcourue par chaque avion avant qu'ils ne se rencontrent:
 Nous devons trouver le temps t après {H} auquel les deux avions se rencontrent. À ce moment, la somme des distances parcourues par les deux avions doit être égale à {G} km.
@@ -28,4 +28,4 @@ La somme de ces distances doit être {G} km, donc :
 t = [{G}-({C}-{B})*({I})] / [{C}-{B}+{E}+{F}] ≈ [({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})] heures
 
 Étape 5 : Calcul de l'heure de la rencontre
-Le temps total depuis [{H}] est environ [({G}-({C}-{B})*({I})/({C}-{B}+{E}+{F})]. Donc, l'heure de la rencontre est approximativement à [({H})+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}-{F}))].",0;None:[{K}]; [{K}+-1];[{K}+-2];[{K}+-4],{A};{D};{H};{I};{K}
+Le temps total depuis [{H}] est environ [({G}-({C}-{B})*({I})/({C}-{B}+{E}+{F})]. Donc, l'heure de la rencontre est approximativement à [({H})+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}-{F}))].",0;None:hms([{K}]); hm([{K}+-1]);hms([{K}+-2]);hms([{K}+-4])

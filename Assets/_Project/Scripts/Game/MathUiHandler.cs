@@ -46,7 +46,7 @@ public class MathUiHandler : MonoBehaviour
         for (int i = 0; i < GameData.AnswerCount; i++) {
             
             if (i == correctAnswerIndex) continue;
-            AnswerTexts[i].text = answers[index];
+            AnswerTexts[i].text = answers[index].Trim();
             index++;
         }
     }

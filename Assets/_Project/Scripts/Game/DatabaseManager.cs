@@ -20,7 +20,7 @@ public class DatabaseManager : MonoBehaviour
     }
     # endregion
     
-    public List<string> questionDatabaseUrls;
+    [HideInInspector] public List<string> questionDatabaseUrls;
 
     public bool IsDataOnline = true;
     [SerializeField] private TextAsset csvFile;
@@ -28,6 +28,7 @@ public class DatabaseManager : MonoBehaviour
     {
         if (GameData.IsSolution) return;
         
+        questionDatabaseUrls = GameData.QuestionDatabaseUrls;
         
         if (IsDataOnline) {
             StartCoroutine(GetData(questionDatabaseUrls, OnDataRecieved));
@@ -88,7 +89,7 @@ public class DatabaseManager : MonoBehaviour
             try {
                 
                 List<string> values = ParseCSVLine(lines[i]);
-                if (values.Count >= 6) {
+                if (values.Count >= 5) {
 
                         QuestionData questionData = new QuestionData();
                         questionData.QuestionIndex = i + 1;
@@ -97,7 +98,6 @@ public class DatabaseManager : MonoBehaviour
                         questionData.Ranges = values[2].Trim().Split(';');
                         questionData.Explanation = values[3].Trim();
                         questionData.Answers = values[4].Trim();
-                        questionData.ClockVariables = new List<string>(values[5].Trim().Split(";"));
                         questions.Add(questionData); 
                 }
             }
