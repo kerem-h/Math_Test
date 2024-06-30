@@ -18,7 +18,15 @@ public class MathHandler : MonoBehaviour
         { "{P}", "{16}" }, { "{Q}", "{17}" }, { "{R}", "{18}" }, 
         { "{S}", "{19}" }, { "{T}", "{20}" }, { "{U}", "{21}" },
         { "{V}", "{22}" }, { "{W}", "{23}" }, { "{X}", "{24}" },
-        { "{Y}", "{25}" }, { "{Z}", "{26}" }
+        { "{Y}", "{25}" }, { "{Z}", "{26}" } , { "{AA}", "{27}" }, { "{AB}", "{28}" }, { "{AC}", "{29}" }, 
+        { "{AD}", "{30}" },  { "{AE}", "{31}" },  { "{AF}", "{32}" },
+        { "{AG}", "{33}" },  { "{AH}", "{34}" },  { "{AI}", "{35}" },
+        { "{AJ}", "{36}" }, { "{AK}", "{37}" }, { "{AL}", "{38}" },
+        { "{AM}", "{39}" }, { "{AN}", "{40}" }, { "{AO}", "{41}" },
+        { "{AP}", "{42}" }, { "{AQ}", "{43}" }, { "{AR}", "{44}" }, 
+        { "{AS}", "{45}" }, { "{AT}", "{46}" }, { "{AU}", "{47}" },
+        { "{AV}", "{48}" }, { "{AW}", "{49}" }, { "{AX}", "{50}" },
+        { "{AY}", "{51}" }, { "{AZ}", "{52}" }
     };
 
     MathUiHandler _mathUiHandler;
@@ -172,9 +180,11 @@ public class MathHandler : MonoBehaviour
                 var val = StringModifier.RandomlyDeletePlusOrMinus(match.Groups[1].Value);
                 val = StringModifier.RandomlyDeleteSlashOrAsterisk(val);
                 string expression = val;
+                expression = expression.Replace(",", ".");
+                expression = expression.Replace(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, ".");
                 var result = EvaluateExpression(expression);
                 if (clockIndexes.Contains(i)) {
-                    answerText = answerText.Replace(match.Value, GetClockFromMinute((int) result));
+                    answerText = answerText.Replace(match.Value, GetClockFromMinute(float.Parse(result.ToString(CultureInfo.InvariantCulture))).ToString(CultureInfo.InvariantCulture));
                 }
                 // if rounding is not wanted delete this.
                 if (dec != "0")
@@ -300,10 +310,13 @@ public class MathHandler : MonoBehaviour
         
     }
 
-    private static string GetClockFromMinute(float value) {
+    private static string GetClockFromMinute(float value)
+    {
+        value = (int)value;
         // Ensure value is within 24 hours
         if (value < 0) value = 1440 + value;
-        
+        if (value == 0) return "00h00m";
+         
         value = value % 1440;
         
         // Convert minutes to clock format
@@ -328,6 +341,9 @@ public class MathHandler : MonoBehaviour
     {
         // Ensure value is within 24 hours (86400 seconds)
         if (value < 0) value = 86400 + value;
+        
+        if (value == 0 && showSeconds) return "00h00m00s";
+        if (value < 60 && !showSeconds) return "00h00m";
 
         value = value % 86400;
 
@@ -345,13 +361,16 @@ public class MathHandler : MonoBehaviour
         if (minutes > 0 || hours > 0) // Show minutes if there are hours or minutes
         {
             clock += minutes < 10 ? "0" + minutes + "m" : minutes + "m";
-            if (!showSeconds && (hours > 0 && minutes > 0)) clock= clock.Substring(0, clock.Length - 1);
+            // Deplicated due to customer request
+            // if (!showSeconds && (hours > 0 && minutes > 0)) clock= clock.Substring(0, clock.Length - 1);
         }
 
         if (showSeconds && (seconds > 0 || minutes > 0 || hours > 0)) // Show seconds if there are hours or minutes or seconds
         {
             clock += seconds < 10 ? "0" + seconds + "s" : seconds + "s";
-            if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
+            
+            // Deplicated due to customer request   
+            // if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
         }
 
         return clock;
@@ -370,11 +389,15 @@ public class MathHandler : MonoBehaviour
         string pattern = @"\[(.*?)\]";
         // Find matches
         MatchCollection matches = Regex.Matches(question.Question, pattern);
-
+        
+        var data = question.Answers.Split(":");
+        var dec = data[0].Split(";")[0].Trim();
+        
         foreach (Match match in matches) {
             string expression = match.Groups[1].Value;
             var result = EvaluateExpression(expression);
-
+            result = float.Parse(result.ToString("F" + dec, CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+            
             question.Question = question.Question.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
             
         }
@@ -395,6 +418,7 @@ public class MathHandler : MonoBehaviour
         foreach (Match match in matches2) {
             string expression = match.Groups[1].Value;
             var result = EvaluateExpression(expression);
+            result = float.Parse(result.ToString("F" + dec, CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
 
             question.Explanation = question.Explanation.Replace("Floor" + match.Value, MathF.Floor(result).ToString(CultureInfo.InvariantCulture));
             question.Explanation = question.Explanation.Replace("Ceil" + match.Value, MathF.Ceiling(result).ToString(CultureInfo.InvariantCulture));
@@ -437,15 +461,20 @@ public class MathHandler : MonoBehaviour
             {
                 innerValue = match.Groups[2].Value;
             }
-
+            innerValue = innerValue.Split(",")[0];
             // Parse the value as a float
             if (float.TryParse(innerValue, out float value))
             {
                 // Convert the value to clock format
-                string clockFormat = GetClockFromSecond(value, isHms);
-                expression = expression.Replace(match.Value, clockFormat);
+                value = float.Parse(value.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                string clockFormat = GetClockFromSecond((int) value, isHms);
+                expression = expression.Replace(match.Value, clockFormat.ToString(CultureInfo.InvariantCulture));
             }
-            Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
+            else
+            {
+                Debug.Log(expression);
+                Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
+            }
         }
         return expression;
     }

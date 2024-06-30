@@ -1,31 +1,177 @@
-"Un avion part de l'aéroport de cognac vers Avord � hms({A}) avec un vent de face de {B} km/h et vole à une vitesse de {C} km/h. {D} mn plus tard un avion décolle de Avord vers Cognac, il vole à {E} et à un vent de dos de {F} km/h. À quelle heure se rencontront ils sachant que la distance entre Cognac et avord est de hm({G})?",3:({A}+{D});{D}/60;{D}/60;{H}+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})),"{A}:(1000,72000,100);{B}:(5,60,5);{C}:(200,500,10);{D}:(500,600,50);{E}:(200,500,5);{F}:(5,60,5);{G}:(1000,3000,100)","Étape 1 : Calcul des vitesses effectives
+"*QUESTION NON SUPPORTE PAR LE SYSTEME POUR LE MOMENT
+Une armée effectue une opération conjointe avec un avion et un sous-marin. L'avion doit transporter {A} kg de matériel à une base, et le sous-marin doit arriver en même temps à un point de rendez-vous.
+
+L'avion décolle avec un réservoir plein de carburant, mais consomme {B} % de plus chaque heure.
+L'avion vole à une vitesse de {C} km/h la première heure, augmente sa vitesse de {D} % la deuxième heure, puis réduit sa vitesse de {E} % la troisième heure. 
+
+Quelle est la quantité de carburant consommée par l'avion si la distance de vole de l'avion est de {F} et qu'il consomme initialement {G}?",2:{C}*(1+{D}/100);{H}*(1-{E}/100);{C}+{H}+{I};{G}*(1-((1+({B}/100))^({F}-{J})/{I}))/(1-[1+({B}/100))],"{A}:(100,500,1);{B}:(2,10,2);{C}:(50,150,10);{D}:(5,50,5);{E}:(5,60,5);{F}:(500,1000,50);{G}:(50,100,10)","Calculer les vitesses:
+Première heure : {C} km/h
+Deuxième heure : {C} + {D}% de {C} = {H}
+Troisième heure : [{C}*(1+{D}/100)] - {E}% de [{C}*(1+{D}/100)] = {I}
+
+Calculer le temps de vol total:
+En examinant rapidement la situation et si {F} est > à {C} + {H} + {I}  = [{C}+{H}+{I}] on peut dire que l'avion volera au minimum 3 h 
+On peut donc déduite qu'en 3h il aura parcouru {C} + {H} + {I} et qu'il lui reste {F} - ({C} + {H} + {I} ) = [{F}-{J}] km à parcourir à {I} km/h
+
+Soit:
+[{F}-{J}] / {I} = [({F}-{J})/{I}] h
+
+L'avion aura donc volé au total : 
+
+Pour la calcul de sa consommation de carburant, nous utiliserons la formule :
+Ctotal = conso initial * (1 - pourcentage d'augementation^nombre d'heure) / (1 - pourcentage d'augementation)
+Ctotal = {G} * (1 - [1+({B}/100)]^[({F}-{J})/{I})] / [(1 - (1+({B}/100)))])
+Ctotal = [{G}*(1-((1+({B}/100))^({F}-{J})/{I}))/(1-(1+({B}/100)))]",2;None:[{K}] L; [{K}+-1] L;[{K}+-2] L;[{K}+-4] L
+"*QUESTION NON SUPPORTE PAR LE SYSTEME POUR LE MOMENT
+Marie part en randonnée à 8h du matin et souhaite planifier son trajet sur une carte à l'échelle 1/{A}. Elle prévoit de suivre un chemin qui mesure {B} cm sur la carte, en marchant à une vitesse moyenne de {C} km/h. Le dénivelé du sentier, qui s'élève à {D} mètres, lui demandera un effort supplémentaire, ajoutant {E} minutes pour chaque {F} mètres grimpés. Lorsqu'elle arrive enfin à son point de destination, Marie découvre qu'elle a raté le bus précédent. Sachant que le premier bus du jour est aussi passé à 8h précises et que les bus suivants passent toutes les 30 minutes, combien de temps Marie devra attendre le prochain bus?",3:{B}*{A}/100000;{H}/{C};({H}/{C})*3600;{D}/{F}*{E};{D}/{F}*{E}*3600;{J}+{L};28800+{L},"{A}:(50000,500000,50000);{B}:(2,10,1);{C}:(2,15,1);{D}:(300,600,50);{E}:(5,20,5);{F}:(50,200,50)","Étape 1: Calcul de la distance réelle
+La carte est à l'échelle 1/{A}. Donc, 1 cm sur la carte représente {A} cm (ou [{A}/100000] km) dans la réalité.
+
+Distance réelle = {B} cm * [{A}/100000] km/cm = {H} km
+
+Étape 2: Calcul du temps de marche sans tenir compte du dénivelé
+Marie marche à une vitesse moyenne de {C} km/h.
+
+Temps de marche (sans dénivelé) = Distance réelle / Vitesse = {H} km / {C} km/h = {I} heures = hm({J})
+
+Étape 3: Temps supplémentaire dû au dénivelé
+Le dénivelé est de {D} mètres. Chaque {F} mètres grimpés ajoutent {E} minutes.
+
+Temps supplémentaire dû au dénivelé = ({D} m / {F} m) * {E} minutes = {J} minutes
+
+Étape 4: Détermination de l'heure d'arrivée à la destination
+Marie part à 8h du matin. Le temps total de marche est la somme du temps de marche sans tenir compte du dénivelé et du temps supplémentaire dû au dénivelé.
+
+Temps total de marche = hm({J}) + hm({K}) = hm({L})
+
+Heure d'arrivée = 8h00 + hm({L}) = hm({M})
+
+Étape 5: Calcul du temps d'attente pour le prochain bus
+Les bus passent toutes les 30 minutes. Le premier bus du jour est passé à 8h précises.",2;None:[{M}] min;[{M}+-1] min;[{M}+-2] min;[{M}+-3] min;[{M}+-4] min
+"my questions hm(1111,24)",3:{B}*{A}/100000;{H}/{C};({H}/{C})*3600;{D}/{F}*{E};{D}/{F}*{E}*3600;{J}+{L};28800+{L},"{A}:(50000,500000,50000);{B}:(2,10,1);{C}:(2,15,1);{D}:(300,600,50);{E}:(5,20,5);{F}:(50,200,50)","Étape 1: Calcul de la distance réelle
+La carte est à l'échelle 1/{A}. Donc, 1 cm sur la carte représente {A} cm (ou [{A}/100000] km) dans la réalité.
+
+Distance réelle = {B} cm * [{A}/100000] km/cm = {H} km
+
+Étape 2: Calcul du temps de marche sans tenir compte du dénivelé
+Marie marche à une vitesse moyenne de {C} km/h.
+
+Temps de marche (sans dénivelé) = Distance réelle / Vitesse = {H} km / {C} km/h = {I} heures = hm({J})
+
+Étape 3: Temps supplémentaire dû au dénivelé
+Le dénivelé est de {D} mètres. Chaque {F} mètres grimpés ajoutent {E} minutes.
+
+Temps supplémentaire dû au dénivelé = ({D} m / {F} m) * {E} minutes = {J} minutes
+
+Étape 4: Détermination de l'heure d'arrivée à la destination
+Marie part à 8h du matin. Le temps total de marche est la somme du temps de marche sans tenir compte du dénivelé et du temps supplémentaire dû au dénivelé.
+
+Temps total de marche = hm({J}) + hm({K}) = hm({L})
+
+Heure d'arrivée = 8h00 + hm({L}) = hm({M})
+
+Étape 5: Calcul du temps d'attente pour le prochain bus
+Les bus passent toutes les 30 minutes. Le premier bus du jour est passé à 8h précises.",2;None:[{M}] min;[{M}+-1] min;[{M}+-2] min;[{M}+-3] min;[{M}+-4] min
+"Un avion part de l'aéroport de cognac vers Avord à hm({A}) avec un vent de face de {B} km/h et vole à une vitesse de {C} km/h. {D} mn plus tard un avion décolle de Avord vers Cognac, il vole à {E} et à un vent de dos de {F} km/h. À quelle heure se rencontront ils sachant que la distance entre Cognac et avord est de {G} km?",3:({A}+{D});{D}/3600;{D}/3600;({G}-({C}-{B})*({J}))/({C}-{B}+{E}+{F});{H}+{K}*3600,"{A}:(3600,43200,60);{B}:(5,60,5);{C}:(200,500,10);{D}:(300,3600,300);{E}:(200,500,5);{F}:(5,60,5);{G}:(1000,3000,100)","Étape 1 : Calcul des vitesses effectives
 Premier avion (Cognac vers Avord) :
 Vitesse propre = {C} km/h
 Vent de face = {B} km/h
 Vitesse effective = {C} km/h - {B} km/h = [{C}-{B}] km/h
+
 Second avion (Avord vers Cognac) :
 Vitesse propre = {E} km/h
 Vent de dos = {F} km/h
 Vitesse effective = {E} km/h + {F} km/h = [{E}+{F}] km/h
 
 Étape 2 : Calcul du délai avant le départ du second avion
-Départ du premier avion à hms({A})
-Départ du second avion à hms({H}) (hm({D}) plus tard)
+Départ du premier avion à hm({A})
+Départ du second avion à hm({H}) ( hm({D}) plus tard)
 
 Étape 3 : Détermination de la distance parcourue par chaque avion avant qu'ils ne se rencontrent:
-Nous devons trouver le temps t après {H} auquel les deux avions se rencontrent. À ce moment, la somme des distances parcourues par les deux avions doit être égale à {G} km.
+Nous devons trouver le temps t après hm({H}) auquel les deux avions se rencontrent. À ce moment, la somme des distances parcourues par les deux avions doit être égale à {G} km.
 
 La distance parcourue par chaque avion peut être exprimée comme suit :
 
-Premier avion parcourt [{C}-{B}] km/h × (t + {J}) heures (car il a commencé {D} heure plus tôt).
+Premier avion parcourt [{C}-{B}] km/h × (t + {J}) heures (car il a commencé hm({D}) heure plus tôt).
 Second avion parcourt [{E}+{F}] km/h × t heures.
 La somme de ces distances doit être {G} km, donc :
-[{C}-{B}](t + {J}) + [{E}+{F}] t = {G}
+[{C}-{B}] x (t + {J}) + [{E}+{F}] t = {G}
 
 Étape 4 : Résolution de l'équation
 [{C}-{B}]t + [({C}-{B})*{J}] + [{E}+{F}]t = {G}
-[{C}-{B}+{E}+{F}]t = [{G}-({C}-{B})*({I})]
-t = [{G}-({C}-{B})*({I})] / [{C}-{B}+{E}+{F}] ≈ [({G}-({C}-{B})*({I}))/({C}-{B}+{E}+{F})] heures
+[{C}-{B}+{E}+{F}]t = [{G}-({C}-{B})*({J})]
+t = [{G}-({C}-{B})*({J})] / [{C}-{B}+{E}+{F}] ≈ [({G}-({C}-{B})*({J}))/({C}-{B}+{E}+{F})] heures
 
 Étape 5 : Calcul de l'heure de la rencontre
-Le temps total depuis [{H}] est environ [({G}-({C}-{B})*({I})/({C}-{B}+{E}+{F})]. Donc, l'heure de la rencontre est approximativement à [({H})+(({G}-({C}-{B})*({I}))/({C}-{B}+{E}-{F}))].",0;None:hms([{K}]); hm([{K}+-1]);hms([{K}+-2]);hms([{K}+-4])
+Le temps total depuis hm({H}) est environ {K}. Donc, l'heure de la rencontre est approximativement à hm({L}) .",0;Round:hms([{L}]); hms([{L}+-1]);hms([{L}+-2]);hms([{L}+-4]);hms([{L}+-7])
+"Un jardinier dispose d'un terrain rectangulaire de {A} mètres sur {B} mètres. Il souhaite y planter des arbres en respectant une distance de {C} mètres entre chaque arbre. Sachant que le jardinier souhaite planter des arbres sur la moitié de la surface totale, combien lui faudra-t-il de terreau pour remplir les trous de plantation sachant qu'un sac de terreau contient {E} litres et que chaque trou mesure {F} centimètres de côté et {G} centimètres de profondeur ?
+
+Note: 1 mètre cube = 1000 litres",2:{A}*{B};{L}/2;{A}/{C};{B}/{C};{J}*{K};({F}*{F}*{G})/100;{M}*1000;{N}/{E};{L}*{O},"{A}:(20,100,2);{B}:(20,200,2);{C}:(2,8,2);{D}:(3600,9000,300);{E}:(10,70,5);{F}:(20,50,1);{G}:(20,50,1)","Étape 1: Calcul du nombre d'arbres pouvant être plantés sur la totalité du terrain
+Les arbres doivent être plantés avec une distance de 5 mètres entre eux. Nous calculons d'abord le nombre d'arbres par rangée et par colonne :
+
+Nombre d'arbres par rangée = {A} mètres / {C} mètres = {J} arbres
+Nombre d'arbres par colonne = {B} mètres / {C} mètres = {K} arbres
+
+Donc, le nombre total d'arbres pouvant être plantés :
+
+Nombre total d'arbres = {J} x {K} = {L} arbres
+
+Étape 2: Calcul du nombre d'arbres sur la moitié du terrain:
+
+{L} arbres / 2 = {I} arbres
+
+Étape 3: Calcul du volume de terreau nécessaire pour chaque trou de plantation
+Chaque trou de plantation mesure {F} centimètres de côté et {G} centimètres de profondeur. Nous convertissons les dimensions en mètres pour calculer le volume :
+
+Dimensions du trou :
+
+Côté : [{F}/100] mètres
+Profondeur : [{G}/100] mètres
+Volume d'un trou = [{F}/100] mètres * [{F}/100] mètres * [{G}/100] mètres = {M} mètres cubes
+
+Volume d'un trou en litres = {M} mètres cubes * 1000 litres/mètre cube = {N} litres
+
+Étape 4: Déterminer le nombre de sacs de terreau nécessaires
+Un sac de terreau contient {E} litres.
+
+Nombre de sacs par trou = Volume d'un trou en litres / Volume d'un sac
+Nombre de sacs par trou = {N} litres / {E} litres = {O} sacs
+
+Pour {I} arbres :
+
+Nombre total de sacs = {I} arbres * {O} sacs = {P} sacs",0;Ceil:[{P}] sacs; [{P}+-1] sacs;[{P}+-2] sacs;[{P}+-4] sacs
+"Un jardinier dispose d'un terrain rectangulaire de {A} mètres sur {B} mètres. Il souhaite y planter des arbres en respectant une distance de {C} mètres entre chaque arbre. Sachant que le jardinier souhaite planter des arbres sur la moitié de la surface totale, combien lui faudra-t-il de terreau pour remplir les trous de plantation sachant qu'un sac de terreau contient {E} litres et que chaque trou mesure {F} centimètres de côté et {G} centimètres de profondeur ?
+
+Note: 1 mètre cube = 1000 litres",2:{A}*{B};{L}/2;{A}/{C};{B}/{C};{J}*{K};({F}*{F}*{G})/100;{M}*1000;{N}/{E};{L}*{O},"{A}:(20,100,2);{B}:(20,200,2);{C}:(2,8,2);{D}:(3600,9000,300);{E}:(10,70,5);{F}:(20,50,1);{G}:(20,50,1)","Étape 1: Calcul du nombre d'arbres pouvant être plantés sur la totalité du terrain
+Les arbres doivent être plantés avec une distance de 5 mètres entre eux. Nous calculons d'abord le nombre d'arbres par rangée et par colonne :
+
+Nombre d'arbres par rangée = {A} mètres / {C} mètres = {J} arbres
+Nombre d'arbres par colonne = {B} mètres / {C} mètres = {K} arbres
+
+Donc, le nombre total d'arbres pouvant être plantés :
+
+Nombre total d'arbres = {J} x {K} = {L} arbres
+
+Étape 2: Calcul du nombre d'arbres sur la moitié du terrain:
+
+{L} arbres / 2 = {I} arbres
+
+Étape 3: Calcul du volume de terreau nécessaire pour chaque trou de plantation
+Chaque trou de plantation mesure {F} centimètres de côté et {G} centimètres de profondeur. Nous convertissons les dimensions en mètres pour calculer le volume :
+
+Dimensions du trou :
+
+Côté : [{F}/100] mètres
+Profondeur : [{G}/100] mètres
+Volume d'un trou = [{F}/100] mètres * [{F}/100] mètres * [{G}/100] mètres = {M} mètres cubes
+
+Volume d'un trou en litres = {M} mètres cubes * 1000 litres/mètre cube = {N} litres
+
+Étape 4: Déterminer le nombre de sacs de terreau nécessaires
+Un sac de terreau contient {E} litres.
+
+Nombre de sacs par trou = Volume d'un trou en litres / Volume d'un sac
+Nombre de sacs par trou = {N} litres / {E} litres = {O} sacs
+
+Pour {I} arbres :
+
+Nombre total de sacs = {I} arbres * {O} sacs = {P} sacs",0;Ceil:[{P}] sacs; [{P}+-1] sacs;[{P}+-2] sacs;[{P}+-4] sacs

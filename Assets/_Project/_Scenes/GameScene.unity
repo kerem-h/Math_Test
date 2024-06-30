@@ -2354,7 +2354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionDatabaseUrls:
   - https://storage.googleapis.com/math-database/tours_1.csv
-  IsDataOnline: 1
+  IsDataOnline: 0
   csvFile: {fileID: 4900000, guid: 03e7d501c6b40014489944245a61c30e, type: 3}
 --- !u!4 &657707224
 Transform:
@@ -5615,7 +5615,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 30
   m_Viewport: {fileID: 1205631141}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 128948712}
