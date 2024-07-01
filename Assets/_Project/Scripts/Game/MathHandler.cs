@@ -85,6 +85,7 @@ public class MathHandler : MonoBehaviour
         ProcessAllQuestions();
         RandomizeQuestions();
         SetQuestionUi();
+        
     }
 
     private void ProcessAllQuestions()
@@ -100,7 +101,6 @@ public class MathHandler : MonoBehaviour
     private void ProcessQuestion(QuestionData question)
     {
         question.AnswerCount = question.Answers.Split(":")[1].Split(";").Length;
-        
         // change the placeholder variables with the actual variables
         ChangeVariables(question);
         
@@ -108,6 +108,8 @@ public class MathHandler : MonoBehaviour
         CalculateAnswer(question);
         SetQuestionText(question);
     }
+
+
     private void RandomizeQuestions()
     {
         for (int i = 0; i < questionsList.Count; i++)
@@ -146,7 +148,35 @@ public class MathHandler : MonoBehaviour
             question.ParameterCount += 1;
             var step = steps[i];
             step = SetResult(question, step);
-            var result = EvaluateExpression(step);
+
+            
+            float result = 0;
+            if (step.Contains("Dec"))
+            {
+                // Decimal feature
+                var decValue = step.Split(new string[] { "Dec" }, StringSplitOptions.None)[1].Trim();
+                decValue = decValue.Replace(",", ".");
+                var decArray = decValue.Split('.');
+
+                string decim = "0";
+                if (decArray.Length > 1)
+                {
+                    decim = "0." + decArray[1].Trim();
+                }
+
+                if (float.TryParse(decim, NumberStyles.Float, CultureInfo.InvariantCulture, out float value))
+                {
+                    result = value;
+                }
+                else
+                {
+                    Debug.Log("Error parsing decimal part: " + decim);
+                }
+            }
+            else {
+                result = EvaluateExpression(step);
+                result = float.Parse(Helper.ConvertToNormalNotation(result.ToString("F" + dec, CultureInfo.InvariantCulture)), CultureInfo.InvariantCulture);
+            }
             string key = "{" + question.ParameterCount + "}";
             question.Variables.Add(key, float.Parse(result.ToString("F" + dec, CultureInfo.InvariantCulture), CultureInfo.InvariantCulture));
         }
@@ -218,8 +248,11 @@ public class MathHandler : MonoBehaviour
 
 
     private string SetResult(QuestionData question, string step) {
-        foreach (var variable in question.Variables) {
-            step = step.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
+        foreach (var variable in question.Variables)
+        {
+            var value_variable = variable.Value.ToString(CultureInfo.InvariantCulture);
+            value_variable = Helper.ConvertToNormalNotation(value_variable);
+            step = step.Replace(variable.Key, value_variable);
         }
         return step;
     }
@@ -235,6 +268,8 @@ public class MathHandler : MonoBehaviour
             question.Explanation = question.Explanation.Replace(v.Key, v.Value);
             question.AnswerFormule = question.AnswerFormule.Replace(v.Key, v.Value);
             question.Answers = question.Answers.Replace(v.Key, v.Value);
+            if (question.Conditions != null)
+                question.Conditions = question.Conditions.Replace(v.Key, v.Value);
             
             for (int i = 0; i < question.Ranges.Length; i++) 
                 question.Ranges[i] = question.Ranges[i].Replace(v.Key, v.Value);
@@ -295,18 +330,149 @@ public class MathHandler : MonoBehaviour
                 
             question.Variables.Add(match, randomValue);
             question.ParameterCount += 1;
-
             
-            // after setting the parameter value, we need to change the variable in the question with the value
-            question.Explanation = question.Explanation.Replace("Floor" + match, MathF.Floor(randomValue).ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace("Ceil" + match, MathF.Ceiling(randomValue).ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace("Round" + match, MathF.Round(randomValue).ToString(CultureInfo.InvariantCulture));
-                    
-            question.Question = question.Question.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
-            question.AnswerFormule = question.AnswerFormule.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace(match, randomValue.ToString(CultureInfo.InvariantCulture));
         }
-      
+            // Condition Feature
+          if (!string.IsNullOrEmpty(question.Conditions) && question.Conditions != "None")
+          {
+              var conditions = question.Conditions.Split(":");
+              foreach (var condition in conditions)
+              {
+                  if (string.IsNullOrEmpty(condition)) continue;
+            
+                  var cond = condition.Split(";");
+                  var change_variable = cond[1].Trim();
+                  string condition_changed = new string(condition);
+                  foreach (var variable in question.Variables)
+                  {
+                      var value = variable.Value;
+                      // change every variable key with the variable value in the condition
+                      condition_changed = condition_changed.Replace(variable.Key, value.ToString(CultureInfo.InvariantCulture));
+                  }
+
+                  var condition_arr = condition_changed.Split(";");
+            
+                  var if_statement = condition_arr[0].Trim();
+                  var if_accept = condition_arr[2].Trim();
+                  var if_reject = condition_arr[3].Trim();
+
+                  var if_acc_res = EvaluateExpression(if_accept);
+                  var if_rej_res = EvaluateExpression(if_reject);
+
+                  if (if_statement.Contains("<"))
+                  {
+                      if (if_statement.Contains("="))
+                      {
+                          // <=
+                          var statement_split = if_statement.Split("<=");
+                          var base_val= statement_split[0].Trim();
+                          var comp_val = statement_split[1].Trim();
+                          if (float.Parse(base_val, CultureInfo.InvariantCulture) <= float.Parse(comp_val, CultureInfo.InvariantCulture))
+                          {
+                              question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                          else
+                          {
+                              question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                    
+                      }
+                      else
+                      {
+                          // <
+                          var statement_split = if_statement.Split("<");
+                          var base_val= statement_split[0].Trim();
+                          var comp_val = statement_split[1].Trim();
+                          if (float.Parse(base_val, CultureInfo.InvariantCulture) < float.Parse(comp_val, CultureInfo.InvariantCulture))
+                          {
+                              question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                          else
+                          {
+                              question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                      }
+                  }
+                  else if (if_statement.Contains(">"))
+                  {
+                      if (if_statement.Contains("="))
+                      {
+                          // >=
+                          var statement_split = if_statement.Split(">=");
+                          var base_val= statement_split[0].Trim();
+                          var comp_val = statement_split[1].Trim();
+                          if (float.Parse(base_val, CultureInfo.InvariantCulture) >= float.Parse(comp_val, CultureInfo.InvariantCulture))
+                          {
+                              question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                          else
+                          {
+                              question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                      }
+                      else
+                      {
+                          // >
+                          var statement_split = if_statement.Split(">");
+                          var base_val= statement_split[0].Trim();
+                          var comp_val = statement_split[1].Trim();
+                          if (float.Parse(base_val, CultureInfo.InvariantCulture) > float.Parse(comp_val, CultureInfo.InvariantCulture))
+                          {
+                              question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                          else
+                          {
+                              question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                          }
+                      }
+                  }
+                  else if (if_statement.Contains("="))
+                  {
+                      // ==
+                      var statement_split = if_statement.Split("==");
+                      var base_val= statement_split[0].Trim();
+                      var comp_val = statement_split[1].Trim();
+                      if (float.Parse(base_val, CultureInfo.InvariantCulture) == float.Parse(comp_val, CultureInfo.InvariantCulture))
+                      {
+                          question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                      }
+                      else
+                      {
+                          question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                      }
+                  }
+                  else
+                  {
+                      // !=
+                      var statement_split = if_statement.Split("!=");
+                      var base_val= statement_split[0].Trim();
+                      var comp_val = statement_split[1].Trim();
+                      if (float.Parse(base_val, CultureInfo.InvariantCulture) != float.Parse(comp_val, CultureInfo.InvariantCulture))
+                      {
+                          question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                      }
+                      else
+                      {
+                          question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                      }
+                  }
+              }
+          }
+
+
+          
+          // after setting the parameter value, we need to change the variable in the question with the value
+          foreach (var variable in question.Variables)
+          {
+            question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Ceil" + variable.Key, MathF.Ceiling(variable.Value).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Round" + variable.Key, MathF.Round(variable.Value).ToString(CultureInfo.InvariantCulture));
+            
+            question.Question = question.Question.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
+            question.AnswerFormule = question.AnswerFormule.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
+          }
+  
         
     }
 
@@ -398,7 +564,7 @@ public class MathHandler : MonoBehaviour
             var result = EvaluateExpression(expression);
             result = float.Parse(result.ToString("F" + dec, CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
             
-            question.Question = question.Question.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
+            question.Question = question.Question.Replace(match.Value, Helper.ConvertToNormalNotation(result.ToString(CultureInfo.InvariantCulture)));
             
         }
 
@@ -406,11 +572,11 @@ public class MathHandler : MonoBehaviour
 
         
         foreach (var variable in question.Variables) {
-            question.Explanation = question.Explanation.Replace("Floor" + variable.Key, MathF.Floor(variable.Value).ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace("Ceil" + variable.Key, MathF.Ceiling(variable.Value).ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace("Round" + variable.Key, MathF.Round(variable.Value).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Floor" + variable.Key, Helper.ConvertToNormalNotation(MathF.Floor(variable.Value).ToString(CultureInfo.InvariantCulture)));
+            question.Explanation = question.Explanation.Replace("Ceil" + variable.Key,  Helper.ConvertToNormalNotation(MathF.Ceiling(variable.Value).ToString(CultureInfo.InvariantCulture)));
+            question.Explanation = question.Explanation.Replace("Round" + variable.Key, Helper.ConvertToNormalNotation(MathF.Round(variable.Value).ToString(CultureInfo.InvariantCulture)));
             
-            question.Explanation = question.Explanation.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace(variable.Key, Helper.ConvertToNormalNotation(variable.Value.ToString(CultureInfo.InvariantCulture)));
         }
         
         MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
@@ -420,11 +586,11 @@ public class MathHandler : MonoBehaviour
             var result = EvaluateExpression(expression);
             result = float.Parse(result.ToString("F" + dec, CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
 
-            question.Explanation = question.Explanation.Replace("Floor" + match.Value, MathF.Floor(result).ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace("Ceil" + match.Value, MathF.Ceiling(result).ToString(CultureInfo.InvariantCulture));
-            question.Explanation = question.Explanation.Replace("Round" + match.Value, MathF.Round(result).ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace("Floor" + match.Value, Helper.ConvertToNormalNotation(MathF.Floor(result).ToString(CultureInfo.InvariantCulture)));
+            question.Explanation = question.Explanation.Replace("Ceil" + match.Value,  Helper.ConvertToNormalNotation(MathF.Ceiling(result).ToString(CultureInfo.InvariantCulture)));
+            question.Explanation = question.Explanation.Replace("Round" + match.Value, Helper.ConvertToNormalNotation(MathF.Round(result).ToString(CultureInfo.InvariantCulture)));
             
-            question.Explanation = question.Explanation.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
+            question.Explanation = question.Explanation.Replace(match.Value, Helper.ConvertToNormalNotation(result.ToString(CultureInfo.InvariantCulture)));
         }
         
         ChangeClocks(question);

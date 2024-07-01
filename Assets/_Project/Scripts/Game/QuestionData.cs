@@ -10,6 +10,7 @@ public class QuestionData
     public string Explanation;
     public string Answers;
     public string AnswerFormule;
+    public string Conditions;
     public string[] AnswerStrings;
     public string[] Ranges;
     public Dictionary<string, float> Variables = new();

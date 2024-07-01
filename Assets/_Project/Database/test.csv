@@ -1,0 +1,23 @@
+"Une entreprise de transport doit livrer des marchandises à travers trois villes situées à des distances successives de {A} km, {B} km et {C} km. Le camion part à hm({D}) du matin. Il roule à une vitesse moyenne de {E} km/h. Après avoir parcouru les {A} premiers kilomètres, le chauffeur fait une pause de {F} minutes pour se reposer. Ensuite, il roule pendant {B} kilomètres supplémentaires à une vitesse moyenne de {G} kts en raison de travaux sur la route. Après avoir livré les marchandises dans la deuxième ville, il fait une pause déjeuner de {H} minutes. Pour le dernier segment de {C} kilomètres, la vitesse du camion augmente de {I}% par rapport à sa vitesse initiale. À quelle heure le camion atteindra-t-il la troisième ville ?
+Note: 1kt = 1,852 km/h",2:{A}/{E};{J}+{F}/60;{B}/({G}*1.852);{L}+{H}/60;{E}*(1+({I}/100));{C}/{N};{K}+{M}+{O};{P}*3600;{D}+{P},"{A}:(100,300,10);{B}:(100,300,10);{C}:(100,300,10);{D}:(28800,39600,300);{E}:(100,300,5);{F}:(5,55,1);{G}:(100,200,5);{H}:(5,55,1);{I}:(10,60,5)","Étape 1: Temps pour parcourir les {A} premiers kilomètres
+Temps pour parcourir {A} km = Distance / Vitesse = {A} km / {E} km/h = {J} heures 
+
+Étape 2: Ajouter le temps de pause de {F} minutes
+Temps total après la première pause = {J} heure + {F} minutes = {K} heures
+
+Étape 3: Temps pour parcourir les {B} kilomètres suivants
+Temps pour parcourir {B} km = Distance / Vitesse = {B} km / [{G}*1.852]({G} km/h) ≈ {L} heures
+
+Étape 4: Ajouter le temps de pause déjeuner de {H} minutes
+Temps total après la deuxième pause = {L} + {H} minutes = {M} heures
+
+Étape 5: Temps pour parcourir les {C} derniers kilomètres
+Augmentation de la vitesse de {I}% = {E} km/h * [1+({I}/100)] = {N} km/h
+
+Temps pour parcourir {C} km = Distance / Vitesse
+Temps pour parcourir {C} km = {C} km / {N} km/h ≈ {O} heure
+
+Étape 6: Calculer l'heure d'arrivée
+Temps total = {J} heures + {F} minutes + {L} heures + {H} minutes + {O} heures = {P} heures
+
+Heure d'arrivée = hm({D}) + hms({P}) = hms({Q})",0;None:hms([{Q}]);hms([{Q}+-67]);hms([{Q}+-428]);hms([{Q}+-603]);hms([{Q}+-1082])

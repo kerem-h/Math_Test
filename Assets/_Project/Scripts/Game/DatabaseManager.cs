@@ -45,7 +45,7 @@ public class DatabaseManager : MonoBehaviour
     {
         MathHandler.Instance.questionsList = data;
         
-        if (data[0].Count > 1) MathHandler.Instance.IsDataLoaded = true;
+        if (data[0].Count >= 1) MathHandler.Instance.IsDataLoaded = true;
     }
 
 
@@ -84,7 +84,6 @@ public class DatabaseManager : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
             
-            // Debug.Log(lines[i]);
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
             try {
                 
@@ -98,6 +97,9 @@ public class DatabaseManager : MonoBehaviour
                         questionData.Ranges = values[2].Trim().Split(';');
                         questionData.Explanation = values[3].Trim();
                         questionData.Answers = values[4].Trim();
+                        if (values.Count > 5) {
+                            questionData.Conditions = values[5].Trim();
+                        }
                         questions.Add(questionData); 
                 }
             }
