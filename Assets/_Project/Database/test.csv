@@ -21,3 +21,32 @@ Temps pour parcourir {C} km = {C} km / {N} km/h ≈ {O} heure
 Temps total = {J} heures + {F} minutes + {L} heures + {H} minutes + {O} heures = {P} heures
 
 Heure d'arrivée = hm({D}) + hms({P}) = hms({Q})",0;None:hms([{Q}]);hms([{Q}+-67]);hms([{Q}+-428]);hms([{Q}+-603]);hms([{Q}+-1082])
+"Une course de drones se déroule sur un circuit de [{B}+{E}+{F}] km. Les drones parcourent les {B} premiers kilomètres à une vitesse moyenne de {C} km/h. Ensuite, à cause des vents forts, leur vitesse est réduite de {D}% pour les {E} km suivants. Pour les {F} derniers kilomètres, ils peuvent augmenter leur vitesse de {G}% par rapport à leur vitesse initiale. Sachant qu'il y a un ravitaillement de {H} minutes à mi-parcours, quelle est la durée totale de la course, incluant le temps de ravitaillement ?",4:{B}/{C};{C}*(1-({D}/100));{E}/{J};{C}*(1+{G}/100);{F}/{L};{H}/60;{I}+{K}+{M}+{N};{O}*3600,"{A}:(50,100,5);{B}:(50,200,5);{C}:(100,200,1);{D}:(20,60,5);{E}:(50,200,10);{F}:(50,150,1);{G}:(20,50,1);{H}:(10,55,5)","Étape 1: Calcul du temps pour les {B} premiers kilomètres
+Les drones parcourent les {B} premiers kilomètres à une vitesse moyenne de {C} km/h.
+
+Temps pour les {B} premiers kilomètres = Distance / Vitesse = {B} km / {C} km/h = {I} heures
+
+Étape 2: Calcul du temps pour les {E} kilomètres suivants avec une vitesse réduite
+La vitesse est réduite de {D}%, donc la nouvelle vitesse est :
+
+Nouvelle vitesse = Vitesse initiale * (1 - [{D}/100] ) = {C} km/h * [1-{D}/100] = {J} km/h
+
+Temps pour les {E} kilomètres suivants = Distance / Vitesse
+Temps pour les {E} kilomètres suivants = {E} km / {J} km/h ≈ {K} heures
+
+Étape 3: Calcul du temps pour les {F} derniers kilomètres avec une vitesse augmentée
+La vitesse est augmentée de {G}%, donc la nouvelle vitesse est :
+
+Nouvelle vitesse = Vitesse initiale * (1 + [{G}/100]) = {C} km/h * [{G}/100] = {L} km/h
+
+Temps pour les {F} derniers kilomètres = Distance / Vitesse
+Temps pour les {F} derniers kilomètres = {F} km / {L} km/h = {M} heures
+
+Étape 4: Calcul du temps de ravitaillement
+Le temps de ravitaillement est de {F} minutes. Nous devons convertir ce temps en heures :
+
+Temps de ravitaillement = {H} minutes = {H} / 60 heures = {N} heures
+
+Étape 5: Calcul du temps total de la course
+Temps total de la course = Temps pour les {B} premiers kilomètres + Temps pour les {E} kilomètres suivants + Temps pour les {F} derniers kilomètres + Temps de ravitaillement
+Temps total de la course = {I} heures + {K} heures + {M} heures + {N} heures ≈ {O} heures soit hms({P})",0;None:hms([{P}]);hms([{P}+-60]);hms([{P}+-30]);hms([{P}+-180]);hms([{P}+-3500])
