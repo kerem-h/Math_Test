@@ -447,7 +447,9 @@ public class MathHandler : MonoBehaviour
                           var comp_val = statement_split[1].Trim();
                           var b_val = question.Variables[base_val];
                           var c_val = question.Variables[comp_val];
+                          var counter = 0;
                           while (b_val >= c_val) {
+                              counter++;
                               foreach (var variable in question.Ranges) {
                                     var _ = variable.Split(":");
                                     var match = _[0].Trim();
@@ -456,6 +458,12 @@ public class MathHandler : MonoBehaviour
                                     }
                                     else if (match == comp_val) {
                                         c_val = GetRandomValueFromRange(_);
+                                    }
+                                    
+                                    if (counter > 2000)
+                                    {
+                                        DebugManager.Instance.AddLogs("Infinite Loop"); 
+                                        break;
                                     }
                               }
                           }
@@ -470,7 +478,9 @@ public class MathHandler : MonoBehaviour
                           var comp_val = statement_split[1].Trim();
                           var b_val = question.Variables[base_val];
                           var c_val = question.Variables[comp_val];
+                          var counter = 0;
                           while (b_val <= c_val) {
+                              counter++;
                               foreach (var variable in question.Ranges) {
                                   var _ = variable.Split(":");
                                   var match = _[0].Trim();
@@ -481,6 +491,11 @@ public class MathHandler : MonoBehaviour
                                       c_val = GetRandomValueFromRange(_);
                                   }
                                 }
+                              if (counter > 2000)
+                              {
+                                  DebugManager.Instance.AddLogs("Infinite Loop"); 
+                                  break;
+                              }
                           }
                           question.Variables[base_val] = b_val;
                           question.Variables[comp_val] = c_val;

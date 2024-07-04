@@ -1,29 +1,29 @@
-"Une course de drones se déroule sur un circuit de [{B}+{E}+{F}] km. Les drones parcourent les {B} premiers kilomètres à une vitesse moyenne de {C} km/h. Ensuite, à cause des vents forts, leur vitesse est réduite de {D}% pour les {E} km suivants. Pour les {F} derniers kilomètres, ils peuvent augmenter leur vitesse de {G}% par rapport à leur vitesse initiale. Sachant qu'il y a un ravitaillement de {H} minutes à mi-parcours, quelle est la durée totale de la course, incluant le temps de ravitaillement ?",4:{B}/{C};{C}*(1-({D}/100));{E}/{J};{C}*(1+{G}/100);{F}/{L};{H}/60;{I}+{K}+{M}+{N};{O}*3600,"{A}:(50,100,5);{B}:(50,200,5);{C}:(100,200,1);{D}:(20,60,5);{E}:(50,200,10);{F}:(50,150,1);{G}:(20,50,1);{H}:(10,55,5)","Étape 1: Calcul du temps pour les {B} premiers kilomètres
-Les drones parcourent les {B} premiers kilomètres à une vitesse moyenne de {C} km/h.
+"*QUESTION NON SUPPORTE PAR LE SYSTEME POUR LE MOMENT
+Marie part en randonnee a 8h du matin et souhaite planifier son trajet sur une carte a l'echelle 1/{A}. Elle prevoit de suivre un chemin qui mesure {B} cm sur la carte, en marchant a une vitesse moyenne de {C} km/h. Le denivele du sentier, qui s'eleve a {D} metres, lui demandera un effort supplementaire, ajoutant {E} minutes pour chaque {F} metres grimpes. Lorsqu'elle arrive enfin a son point de destination, Marie decouvre qu'elle a rate le bus precedent. Sachant que le premier bus du jour est aussi passe a 8h precises et que les bus suivants passent toutes les 30 minutes, combien de temps Marie devra attendre le prochain bus?",3:{B}{A}/100000;{G}/{C};({G}/{C})*3600;({D}/{F}){E};{J}*60;{I}+{K};28800+{L};{M}/3600;Dec{N};{O}*3600;1800-{P},"{A}:(50000,500000,50000);{B}:(2,10,1);{C}:(2,15,1);{D}:(300,600,50);{E}:(5,20,5);{F}:(50,200,50)","etape 1: Calcul de la distance reelle
+La carte est a l'echelle 1/{A}. Donc, 1 cm sur la carte represente {A} cm (ou [{A}/100000] km) dans la realite.
 
-Temps pour les {B} premiers kilomètres = Distance / Vitesse = {B} km / {C} km/h = {I} heures
+Distance reelle = {B} cm * [{A}/100000] km/cm = {G} km
 
-Étape 2: Calcul du temps pour les {E} kilomètres suivants avec une vitesse réduite
-La vitesse est réduite de {D}%, donc la nouvelle vitesse est :
+etape 2: Calcul du temps de marche sans tenir compte du denivele
+Marie marche a une vitesse moyenne de {C} km/h.
 
-Nouvelle vitesse = Vitesse initiale * (1 - [{D}/100] ) = {C} km/h * [1-{D}/100] = {J} km/h
+Temps de marche (sans denivele) = Distance reelle / Vitesse = {G} km / {C} km/h = {H} heures = hm({I})
 
-Temps pour les {E} kilomètres suivants = Distance / Vitesse
-Temps pour les {E} kilomètres suivants = {E} km / {J} km/h ≈ {K} heures
+etape 3: Temps supplementaire d� au denivele
+Le denivele est de {D} metres. Chaque {F} metres grimpes ajoutent {E} minutes.
 
-Étape 3: Calcul du temps pour les {F} derniers kilomètres avec une vitesse augmentée
-La vitesse est augmentée de {G}%, donc la nouvelle vitesse est :
+Temps supplementaire d� au denivele = ({D} m / {F} m) * {E} minutes = {J} minutes
 
-Nouvelle vitesse = Vitesse initiale * (1 + [{G}/100]) = {C} km/h * [{G}/100] = {L} km/h
+etape 4: Determination de l'heure d'arrivee a la destination
+Marie part a 8h du matin. Le temps total de marche est la somme du temps de marche sans tenir compte du denivele et du temps supplementaire d� au denivele.
 
-Temps pour les {F} derniers kilomètres = Distance / Vitesse
-Temps pour les {F} derniers kilomètres = {F} km / {L} km/h = {M} heures
+Temps total de marche = hm({I}) + hm({K}) = hm({L})
 
-Étape 4: Calcul du temps de ravitaillement
-Le temps de ravitaillement est de {F} minutes. Nous devons convertir ce temps en heures :
+Heure d'arrivee = 8h00 + hm({L}) = hm({M})
 
-Temps de ravitaillement = {H} minutes = {H} / 60 heures = {N} heures
+etape 5: Calcul du temps d'attente pour le prochain bus
+Les bus passent toutes les 30 minutes.
+Le prochain bus est dans hm({Q})
 
-Étape 5: Calcul du temps total de la course
-Temps total de la course = Temps pour les {B} premiers kilomètres + Temps pour les {E} kilomètres suivants + Temps pour les {F} derniers kilomètres + Temps de ravitaillement
-Temps total de la course = {I} heures + {K} heures + {M} heures + {N} heures ≈ {O} heures soit hms({P})",0;None:hms([{P}]);hms([{P}+-60]);hms([{P}+-30]);hms([{P}+-180]);hms([{P}+-3500]),{A}<{B}:
+{O}
+{P}",0;Round:hm([{Q}]);hm([{Q}+-120]);hm([{Q}+-360]);hm([{Q}+-400]);hm([{Q}+-800])
