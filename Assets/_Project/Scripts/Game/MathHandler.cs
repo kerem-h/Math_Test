@@ -32,6 +32,7 @@ public class MathHandler : MonoBehaviour
     MathUiHandler _mathUiHandler;
     public List<List<QuestionData>> questionsList;
     public bool IsDataLoaded;
+    public bool IsDataProcessed = false;
     #region Singleton
 
         public static MathHandler Instance;
@@ -58,14 +59,15 @@ public class MathHandler : MonoBehaviour
         StartCoroutine(HandleQuestions());
     }
 
-    private void SetQuestionUi()
+    private async void SetQuestionUi()
     {
-        var question = GameData.GetQuestion(GameData.CurrentQuestion);
+        Question question = await GameData.GetQuestion(GameData.CurrentQuestion);
         var AnswerIndex = question.correctAnswer;
 
         
-        var questionData = GameData.GetCurrentQuestionData();
+        var questionData = await GameData.GetCurrentQuestionData();
         var answers = questionData.AnswerStrings;
+
         GameData.AnswerCount = questionData.AnswerCount;
         if (questionData.AnswerCount == 5)
         {
@@ -83,9 +85,27 @@ public class MathHandler : MonoBehaviour
     {
         yield return new WaitUntil(() => IsDataLoaded);
         ProcessAllQuestions();
-        RandomizeQuestions();
+        if (DebugManager.Instance.IsDebugBuild)
+        {
+            SetQuestionsWithoutRandomization();
+        }
+        else {
+            RandomizeQuestions();
+        }
+        IsDataProcessed = true;
         SetQuestionUi();
         
+    }
+
+    private void SetQuestionsWithoutRandomization() {
+        for (int i = 0; i < questionsList.Count; i++)
+        {
+            var questionCount = GameData.QuestionCount[i];
+            var questions = questionsList[i].ToList();
+
+            questionsList[i] = questions;
+            StartCoroutine(GameData.SetQuestionData(questionsList[i], i));
+        }
     }
 
     private void ProcessAllQuestions()
@@ -130,7 +150,7 @@ public class MathHandler : MonoBehaviour
 
           
             questionsList[i] = randomizedQuestions;
-            GameData.SetQuestionData(questionsList[i], i);
+            StartCoroutine(GameData.SetQuestionData(questionsList[i], i));
         }
     }
     
@@ -184,7 +204,6 @@ public class MathHandler : MonoBehaviour
 
     private static void SetAnswers(QuestionData question)
     {
-        List<int> clockIndexes = new List<int>();
         var data = question.Answers.Split(":");
         var dec = data[0].Split(";")[0].Trim();
         var decText = data[0].Split(";")[1].Trim();
@@ -211,10 +230,6 @@ public class MathHandler : MonoBehaviour
                 expression = expression.Replace(",", ".");
                 expression = expression.Replace(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, ".");
                 var result = EvaluateExpression(expression);
-                if (clockIndexes.Contains(i)) {
-                    answerText = answerText.Replace(match.Value, GetClockFromMinute(float.Parse(result.ToString(CultureInfo.InvariantCulture))).ToString(CultureInfo.InvariantCulture));
-                }
-                // if rounding is not wanted delete this.
                 if (dec != "0")
                 {
                     answerText = answerText.Replace(match.Value, result.ToString("F" + dec, CultureInfo.InvariantCulture));
@@ -335,32 +350,99 @@ public class MathHandler : MonoBehaviour
 
                       var if_acc_res = EvaluateExpression(if_accept);
                       var if_rej_res = EvaluateExpression(if_reject);
+                      
+                      try
+                      {
 
-                      if (if_statement.Contains("<"))
-                      {
-                          if (if_statement.Contains("="))
+                          if (if_statement.Contains("<"))
                           {
-                              // <=
-                              var statement_split = if_statement.Split("<=");
-                              var base_val= statement_split[0].Trim();
-                              var comp_val = statement_split[1].Trim();
-                              if (float.Parse(base_val, CultureInfo.InvariantCulture) <= float.Parse(comp_val, CultureInfo.InvariantCulture))
+                              if (if_statement.Contains("="))
                               {
-                                  question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                              }
-                              else
-                              {
-                                  question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                              }
+                                  // <=
+                                  var statement_split = if_statement.Split("<=");
+                                  var base_val= statement_split[0].Trim();
+                                  var comp_val = statement_split[1].Trim();
+                                  if (float.Parse(base_val, CultureInfo.InvariantCulture) <= float.Parse(comp_val, CultureInfo.InvariantCulture))
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                                  else
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
                     
+                              }
+                              else
+                              {
+                                  // <
+                                  var statement_split = if_statement.Split("<");
+                                  var base_val= statement_split[0].Trim();
+                                  var comp_val = statement_split[1].Trim();
+                                  if (float.Parse(base_val, CultureInfo.InvariantCulture) < float.Parse(comp_val, CultureInfo.InvariantCulture))
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                                  else
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                              }
+                          }
+                          else if (if_statement.Contains(">"))
+                          {
+                              if (if_statement.Contains("="))
+                              {
+                                  // >=
+                                  var statement_split = if_statement.Split(">=");
+                                  var base_val= statement_split[0].Trim();
+                                  var comp_val = statement_split[1].Trim();
+                                  if (float.Parse(base_val, CultureInfo.InvariantCulture) >= float.Parse(comp_val, CultureInfo.InvariantCulture))
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                                  else
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                              }
+                              else
+                              {
+                                  // >
+                                  var statement_split = if_statement.Split(">");
+                                  var base_val= statement_split[0].Trim();
+                                  var comp_val = statement_split[1].Trim();
+                                  if (float.Parse(base_val, CultureInfo.InvariantCulture) > float.Parse(comp_val, CultureInfo.InvariantCulture))
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                                  else
+                                  {
+                                      question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                                  }
+                              }
+                          }
+                          else if (if_statement.Contains("="))
+                          {
+                              // ==
+                              var statement_split = if_statement.Split("==");
+                              var base_val= statement_split[0].Trim();
+                              var comp_val = statement_split[1].Trim();
+                              if (float.Parse(base_val, CultureInfo.InvariantCulture) == float.Parse(comp_val, CultureInfo.InvariantCulture))
+                              {
+                                  question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                              }
+                              else
+                              {
+                                  question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                              }
                           }
                           else
                           {
-                              // <
-                              var statement_split = if_statement.Split("<");
+                              // !=
+                              var statement_split = if_statement.Split("!=");
                               var base_val= statement_split[0].Trim();
                               var comp_val = statement_split[1].Trim();
-                              if (float.Parse(base_val, CultureInfo.InvariantCulture) < float.Parse(comp_val, CultureInfo.InvariantCulture))
+                              if (float.Parse(base_val, CultureInfo.InvariantCulture) != float.Parse(comp_val, CultureInfo.InvariantCulture))
                               {
                                   question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
                               }
@@ -370,68 +452,9 @@ public class MathHandler : MonoBehaviour
                               }
                           }
                       }
-                      else if (if_statement.Contains(">"))
+                      catch (Exception e)
                       {
-                          if (if_statement.Contains("="))
-                          {
-                              // >=
-                              var statement_split = if_statement.Split(">=");
-                              var base_val= statement_split[0].Trim();
-                              var comp_val = statement_split[1].Trim();
-                              if (float.Parse(base_val, CultureInfo.InvariantCulture) >= float.Parse(comp_val, CultureInfo.InvariantCulture))
-                              {
-                                  question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                              }
-                              else
-                              {
-                                  question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                              }
-                          }
-                          else
-                          {
-                              // >
-                              var statement_split = if_statement.Split(">");
-                              var base_val= statement_split[0].Trim();
-                              var comp_val = statement_split[1].Trim();
-                              if (float.Parse(base_val, CultureInfo.InvariantCulture) > float.Parse(comp_val, CultureInfo.InvariantCulture))
-                              {
-                                  question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                              }
-                              else
-                              {
-                                  question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                              }
-                          }
-                      }
-                      else if (if_statement.Contains("="))
-                      {
-                          // ==
-                          var statement_split = if_statement.Split("==");
-                          var base_val= statement_split[0].Trim();
-                          var comp_val = statement_split[1].Trim();
-                          if (float.Parse(base_val, CultureInfo.InvariantCulture) == float.Parse(comp_val, CultureInfo.InvariantCulture))
-                          {
-                              question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                          }
-                          else
-                          {
-                              question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                          }
-                      }
-                      else
-                      {
-                          // !=
-                          var statement_split = if_statement.Split("!=");
-                          var base_val= statement_split[0].Trim();
-                          var comp_val = statement_split[1].Trim();
-                          if (float.Parse(base_val, CultureInfo.InvariantCulture) != float.Parse(comp_val, CultureInfo.InvariantCulture))
-                          {
-                              question.Variables[change_variable] = float.Parse(if_acc_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                          }
-                          else
-                          {
-                              question.Variables[change_variable] = float.Parse(if_rej_res.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                          }
+                          Console.WriteLine(e);
                       }
                       
                   }
@@ -497,6 +520,37 @@ public class MathHandler : MonoBehaviour
                                   break;
                               }
                           }
+                          question.Variables[base_val] = b_val;
+                          question.Variables[comp_val] = c_val;
+                      }
+                      else if (condit.Contains("!="))
+                      {
+                          // >
+                          var statement_split = condit.Split("!=");
+                          var base_val= statement_split[0].Trim();
+                          var comp_val = statement_split[1].Trim();
+                          var b_val = question.Variables[base_val];
+                          var c_val = question.Variables[comp_val];
+                          var counter = 0;
+                          while (b_val == c_val) {
+                              counter++;
+                              foreach (var variable in question.Ranges) {
+                                  var _ = variable.Split(":");
+                                  var match = _[0].Trim();
+                                  if (match == base_val) {
+                                      b_val = GetRandomValueFromRange(_);
+                                  }
+                                  else if (match == comp_val) {
+                                      c_val = GetRandomValueFromRange(_);
+                                  }
+                              }
+                              if (counter > 2000)
+                              {
+                                  DebugManager.Instance.AddLogs("Infinite Loop"); 
+                                  break;
+                              }
+                          }
+
                           question.Variables[base_val] = b_val;
                           question.Variables[comp_val] = c_val;
                       }
@@ -593,11 +647,13 @@ public class MathHandler : MonoBehaviour
         int minutes = (int)((value % 3600) / 60);
         int seconds = (int)(value % 60);
 
+        // ADD = to the > to get the 00h method
         if (hours > 0)
         {
             clock += hours < 10 ? "0" + hours + "h" : hours + "h";
         }
-
+        
+        // ADD = to the > to get the 00h method
         if (minutes > 0 || hours > 0) // Show minutes if there are hours or minutes
         {
             clock += minutes < 10 ? "0" + minutes + "m" : minutes + "m";
@@ -612,7 +668,6 @@ public class MathHandler : MonoBehaviour
             // Deplicated due to customer request   
             // if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
         }
-
         return clock;
     }
 
@@ -628,10 +683,17 @@ public class MathHandler : MonoBehaviour
     {
         string pattern = @"\[(.*?)\]";
         // Find matches
+        foreach (var variable in question.Variables)
+        {
+            question.Question = question.Question.Replace(variable.Key, variable.Value.ToString(CultureInfo.InvariantCulture));
+        }
+        
         MatchCollection matches = Regex.Matches(question.Question, pattern);
         
         var data = question.Answers.Split(":");
         var dec = data[0].Split(";")[0].Trim();
+
+
         
         foreach (Match match in matches) {
             string expression = match.Groups[1].Value;

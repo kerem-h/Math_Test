@@ -60,10 +60,12 @@ public class AnswerController : MonoBehaviour
         else if (index >= GameData.AnswerCount) index = 0;
         HoverIndex = index;
     }
-    private void ResetAnswers()
+    private async void ResetAnswers()
     {
         HoverIndex = 0;
-        SelectedAnswerIndex = GameData.GetSelectedAnswerIndex();
+        int value = await GameData.GetSelectedAnswerIndex();  // Make sure to await the Task<int>
+        SelectedAnswerIndex = value;
     }
+
     
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,8 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
-        if (!GameData.IsSolution) InitializeData();
+        BuildManager.Instance.SetBuildOptions();
+        if (!GameData.IsSolution) StartCoroutine(InitializeData());
 
     }
 
@@ -51,28 +53,8 @@ public class GameManager : MonoBehaviour
         GameData.CurrentQuestion = i;
     }
     
-    private void InitializeData()
+    private IEnumerator InitializeData()
     {
-        // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/cso.csv" };
-        // GameData.TestTimes = new[] { 1080f };
-        // GameData.QuestionCount = new[] {26};
-        // GameData.IsPopupLastButtonDisabled = false;
-
-        // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/tours_1.csv" };
-        // GameData.TestTimes = new[] { 2400f };
-        // GameData.QuestionCount = new[] {25};
-        // GameData.IsPopupLastButtonDisabled = true;
-        
-        // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/tours_2.csv" };
-        // GameData.TestTimes = new[] { 2400f };
-        // GameData.QuestionCount = new[] {25};
-        // GameData.IsPopupLastButtonDisabled = true;
-        
-        
-        GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/debug.csv" };
-        GameData.TestTimes = new[] { 9999f };
-        GameData.QuestionCount = new[] {25};
-        GameData.IsPopupLastButtonDisabled = true;
 
         GameData.TestCount = 1;
         GameData.AnswerCount = 5;
@@ -81,6 +63,10 @@ public class GameManager : MonoBehaviour
         GameData.CurrentTest = 0;
         GameData.IsSolution = false;
 
+        if (DebugManager.Instance.IsDebugBuild) {
+            yield return new WaitUntil(() => MathHandler.Instance.IsDataLoaded);
+        }
+        
         GameData.Questions = new List<Question[]>();
         for (int i = 0; i < GameData.TestCount; i++) {
             GameData.Questions.Add(new Question[GameData.QuestionCount[i]]);

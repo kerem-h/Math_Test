@@ -8,7 +8,7 @@ public class TimerUi : MonoBehaviour
 
     private void Start()
     {
-        if (GameData.IsSolution)
+        if (GameData.IsSolution || DebugManager.Instance.IsDebugBuild)
         {
             timerPanel.SetActive(false);
             return;

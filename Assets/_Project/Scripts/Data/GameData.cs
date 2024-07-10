@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public static class GameData
@@ -16,8 +18,9 @@ public static class GameData
         public static bool IsPopupLastButtonDisabled { get; set; }
 
 
-        public static void SetQuestionData(List<QuestionData> questionData, int testIndex) {
-                
+        public static IEnumerator SetQuestionData(List<QuestionData> questionData, int testIndex) {
+                if (DebugManager.Instance.IsDebugBuild)
+                        yield return new WaitUntil(() => MathHandler.Instance.IsDataLoaded);
                 for (int i = 0; i < questionData.Count; i++) {
                         var questiondata = questionData[i];
                         Questions[testIndex][i].questionData = questiondata;
@@ -25,11 +28,37 @@ public static class GameData
                 }
         }
 
-        public static QuestionData GetCurrentQuestionData() {
+        public static async Task<QuestionData> GetCurrentQuestionData() {
+                
+                // Check if it's a debug build and wait for the data to load if necessary.
+                if (DebugManager.Instance.IsDebugBuild && !IsSolution )
+                {
+                        await Task.Run(() =>
+                        {
+                                // This loop will keep running until IsDataLoaded becomes true
+                                while (!MathHandler.Instance.IsDataProcessed)
+                                {
+                                        Task.Delay(100).Wait(); // Wait for 100 milliseconds before checking again
+                                }
+                        });
+                }
                 return Questions[CurrentTest][CurrentQuestion].questionData;
         }
 
-        public static Question GetQuestion(int i) {
+        public static async Task<Question> GetQuestion(int i) {
+                // Check if it's a debug build and wait for the data to load if necessary.
+                if (DebugManager.Instance.IsDebugBuild && !IsSolution)
+                {
+                        await Task.Run(() =>
+                        {
+                                // This loop will keep running until IsDataLoaded becomes true
+                                while (!MathHandler.Instance.IsDataProcessed)
+                                {
+                                        Task.Delay(100).Wait(); // Wait for 100 milliseconds before checking again
+                                }
+                        });
+                }
+                
                 if (i >= 0 && i < QuestionCount[CurrentTest])
                         return Questions[CurrentTest][i];
                 Debug.Log("Index Out of Array");
@@ -92,8 +121,22 @@ public static class GameData
                 question.selectedAnswer = i;
         }
 
-        public static int GetSelectedAnswerIndex()
+        public static async Task<int> GetSelectedAnswerIndex()
         {
+                // Check if it's a debug build and wait for the data to load if necessary.
+                if (DebugManager.Instance.IsDebugBuild)
+                {
+                        await Task.Run(() =>
+                        {
+                                // This loop will keep running until IsDataLoaded becomes true
+                                while (!MathHandler.Instance.IsDataLoaded)
+                                {
+                                        Task.Delay(100).Wait(); // Wait for 100 milliseconds before checking again
+                                }
+                        });
+                }
+    
+                // Assuming Questions is a list of lists and each inner list contains objects with a property `selectedAnswer`
                 return Questions[CurrentTest][CurrentQuestion].selectedAnswer;
         }
 

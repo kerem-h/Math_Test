@@ -57,9 +57,9 @@ public class AnswerUi : MonoBehaviour
     {
         AnswerButtons[^1].gameObject.SetActive(true);
     }
-    private void SetAnswerButtons()
+    private async void SetAnswerButtons()
     {
-        var question = GameData.GetQuestion(GameData.CurrentQuestion);
+        var question = await GameData.GetQuestion(GameData.CurrentQuestion);
 
         var isSolution = GameData.IsSolution;
         var selectedAnswer = question.selectedAnswer;

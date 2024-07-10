@@ -31,8 +31,8 @@ public class MathUiHandler : MonoBehaviour
             ExplanationButton.SetActive(false);
     }
 
-    private void SetExplanationText() {
-        var questionData = GameData.GetCurrentQuestionData();
+    private async void SetExplanationText() {
+        var questionData = await GameData.GetCurrentQuestionData();
         if (questionData == null) return;
         ExplanationText.text = questionData.Explanation;
     }
@@ -53,8 +53,12 @@ public class MathUiHandler : MonoBehaviour
 
     public void Explanation()
     {
-        if (PopupPanel.transform.localScale != Vector3.zero) {
-            CloseAnimation.OnAnimationEnd += () => ExplanationPanel.SetActive(false);
+        if (PopupPanel.transform.localScale != Vector3.zero)
+        {
+            CloseAnimation.OnAnimationEnd += () => {
+                PopupPanel.transform.localScale = Vector3.zero;
+                ExplanationPanel.SetActive(false);
+            };
             TweenAnimations.PopUpAnimation(PopupPanel, CloseAnimation);
         }
         else {

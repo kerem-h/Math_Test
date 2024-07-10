@@ -37,6 +37,8 @@ public class DatabaseManager : MonoBehaviour
         {
             var data = ProcessCSVFile(csvFile.bytes);
             MathHandler.Instance.questionsList = new List<List<QuestionData>> { data };
+            if (DebugManager.Instance.IsDebugBuild)
+                GameData.QuestionCount = new[] {data.Count};
             MathHandler.Instance.IsDataLoaded = true;
         }
     }
@@ -44,8 +46,14 @@ public class DatabaseManager : MonoBehaviour
     private void OnDataRecieved(List<List<QuestionData>> data)
     {
         MathHandler.Instance.questionsList = data;
-        
-        if (data[0].Count >= 1) MathHandler.Instance.IsDataLoaded = true;
+
+        if (data[0].Count >= 1)
+        {
+            if (DebugManager.Instance.IsDebugBuild)
+                GameData.QuestionCount = new[] {data[0].Count};
+
+            MathHandler.Instance.IsDataLoaded = true;
+        }
     }
 
 

@@ -78,21 +78,22 @@ public class PopupUi : MonoBehaviour
     {
         var Buttons = Popup.Instance.Buttons;
         var Layouts = SetLayouts();
+        int layoutCount = Layouts.Count;
+        int buttonsPerLayout = Mathf.CeilToInt((float)Buttons.Count / layoutCount);
+    
         for (int i = 0; i < Buttons.Count; i++)
         {
             var button = Buttons[i];
-            var layout = Layouts[i / (Buttons.Count / Layouts.Count)];
+            var layoutIndex = i / buttonsPerLayout;
+            layoutIndex = Mathf.Min(layoutIndex, layoutCount - 1); // Ensure index is within range
+            var layout = Layouts[layoutIndex];
             button.Button.transform.SetParent(layout); 
             button.Button.transform.localScale = Vector3.one;
         }
-        
-        // this is for the last button to be disabled
-        if (GameData.IsPopupLastButtonDisabled) {
-            Buttons[^1].Button.SetActive(false);
-        }
-        
+    
         StartCoroutine(SetPopupBackground());
     }
+
 
     private List<Transform> SetLayouts()
     {

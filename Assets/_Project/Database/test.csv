@@ -1,29 +1,14 @@
-"*QUESTION NON SUPPORTE PAR LE SYSTEME POUR LE MOMENT
-Marie part en randonnee a 8h du matin et souhaite planifier son trajet sur une carte a l'echelle 1/{A}. Elle prevoit de suivre un chemin qui mesure {B} cm sur la carte, en marchant a une vitesse moyenne de {C} km/h. Le denivele du sentier, qui s'eleve a {D} metres, lui demandera un effort supplementaire, ajoutant {E} minutes pour chaque {F} metres grimpes. Lorsqu'elle arrive enfin a son point de destination, Marie decouvre qu'elle a rate le bus precedent. Sachant que le premier bus du jour est aussi passe a 8h precises et que les bus suivants passent toutes les 30 minutes, combien de temps Marie devra attendre le prochain bus?",3:{B}{A}/100000;{G}/{C};({G}/{C})*3600;({D}/{F}){E};{J}*60;{I}+{K};28800+{L};{M}/3600;Dec{N};{O}*3600;1800-{P},"{A}:(50000,500000,50000);{B}:(2,10,1);{C}:(2,15,1);{D}:(300,600,50);{E}:(5,20,5);{F}:(50,200,50)","etape 1: Calcul de la distance reelle
-La carte est a l'echelle 1/{A}. Donc, 1 cm sur la carte represente {A} cm (ou [{A}/100000] km) dans la realite.
+"Un drone décolle de la base aérienne à hm({A}) et vole à la vitesse de {B} km/h. hm({C}) après, le pilatus immatriculé F-GMVS décolle pour le rattraper et il vole à {D} km/h. A quelle heure le pilatus va t’il rattraper le drone ?",3:{A}+{C};{B}*{C}/3600;{D}-{B};{E}/{G};{H}*3600;{A}+{I},"{A}:(3600,43200,60);{B}:(200,300,10);{C}:(300,7200,300);{D}:(300,500,10)","Étape 1 : Détermination de l'avance du drone
+Le drone décolle à hm({A}) et vole à une vitesse de {B} km/h. Lorsque le Pilatus décolle hm({C}) plus tard soit à hm({E}), le drone aura parcouru :
+Distance = Vitesse du drone × Temps = {B} km/h × [{C}/3600] ( hm({C}) ) = {F} km
 
-Distance reelle = {B} cm * [{A}/100000] km/cm = {G} km
+Étape 2 : Calcul de la vitesse relative
+La vitesse relative du Pilatus par rapport au drone est la différence entre leur vitesse, car ils se dirigent dans la même direction :
+Vitesse relative = Vitesse du Pilatus - Vitesse du drone = {D} km/h - {B} km/h = {G} km/h
 
-etape 2: Calcul du temps de marche sans tenir compte du denivele
-Marie marche a une vitesse moyenne de {C} km/h.
+Étape 3 : Calcul du temps nécessaire pour rattraper le drone
+Le temps nécessaire pour que le Pilatus rattrape le drone peut être calculé en divisant la distance initiale par la vitesse relative :
+Temps de rattrapage = Distance initiale / Vitesse relative = {E} km / {G} km/h = {H} heures soit hm([{I}])
 
-Temps de marche (sans denivele) = Distance reelle / Vitesse = {G} km / {C} km/h = {H} heures = hm({I})
-
-etape 3: Temps supplementaire d� au denivele
-Le denivele est de {D} metres. Chaque {F} metres grimpes ajoutent {E} minutes.
-
-Temps supplementaire d� au denivele = ({D} m / {F} m) * {E} minutes = {J} minutes
-
-etape 4: Determination de l'heure d'arrivee a la destination
-Marie part a 8h du matin. Le temps total de marche est la somme du temps de marche sans tenir compte du denivele et du temps supplementaire d� au denivele.
-
-Temps total de marche = hm({I}) + hm({K}) = hm({L})
-
-Heure d'arrivee = 8h00 + hm({L}) = hm({M})
-
-etape 5: Calcul du temps d'attente pour le prochain bus
-Les bus passent toutes les 30 minutes.
-Le prochain bus est dans hm({Q})
-
-{O}
-{P}",0;Round:hm([{Q}]);hm([{Q}+-120]);hm([{Q}+-360]);hm([{Q}+-400]);hm([{Q}+-800])
+Étape 4 : Détermination de l'heure de la rencontre
+Le Pilatus rattrape le drone hm({I}) après son départ à hm({A}), donc à hm({J}).",0;Round:hm([{J}]); hm([{J}+-120]);hm([{J}+-300]);hm([{J}+-360]);hm([{J}+-420])

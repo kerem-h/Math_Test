@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -35,8 +36,11 @@ public class Popup : MonoBehaviour
         }
     }
     
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(() => MathHandler.Instance.IsDataLoaded || GameData.IsSolution);
+        
+        buttonCount = GameData.QuestionCount[0];
         GameManager.Instance.OnQuestionChanged += ClosePopup;
         InitializePopup();
     }
@@ -65,14 +69,23 @@ public class Popup : MonoBehaviour
     }
     public void PopupButtonClicked()
     {
-        if (_isPopupOpen)
+        if (DebugManager.Instance.IsDebugBuild)
         {
-            OnPopupClosed?.Invoke();
+            DebugManager.Instance.OpenDebugPanel();
         }
         else
         {
-            OnPopupOpened?.Invoke();
+            if (_isPopupOpen)
+            {
+                OnPopupClosed?.Invoke();
+            }
+            else
+            {
+                OnPopupOpened?.Invoke();
+            }
+            _isPopupOpen = !_isPopupOpen;
+            
         }
-        _isPopupOpen = !_isPopupOpen;
+
     }
 }
