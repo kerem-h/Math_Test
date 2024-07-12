@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -16,6 +17,11 @@ public static class Helper
         if (email != null)
             return Regex.IsMatch (email, EmailPattern);
         return false;
+    }
+    public static float TruncateTo(this float value, int decimalPlaces)
+    {
+        float factor = (float)Math.Pow(10, decimalPlaces);
+        return (float)Math.Truncate(value * factor) / factor;
     }
     public static string ConvertToNormalNotation(string scientificNotation)
     {

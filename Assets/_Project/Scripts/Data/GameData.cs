@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -28,42 +29,52 @@ public static class GameData
                 }
         }
 
-        public static async Task<QuestionData> GetCurrentQuestionData() {
-                
-                // Check if it's a debug build and wait for the data to load if necessary.
-                if (DebugManager.Instance.IsDebugBuild && !IsSolution )
-                {
-                        await Task.Run(() =>
-                        {
-                                // This loop will keep running until IsDataLoaded becomes true
-                                while (!MathHandler.Instance.IsDataProcessed)
-                                {
-                                        Task.Delay(100).Wait(); // Wait for 100 milliseconds before checking again
-                                }
-                        });
-                }
-                return Questions[CurrentTest][CurrentQuestion].questionData;
+        public static void GetCurrentQuestionData(Action<QuestionData> callback)
+        {
+                CoroutineManager.Instance.StartManagedCoroutine(GetCurrentQuestionDataCoroutine(callback));
         }
 
-        public static async Task<Question> GetQuestion(int i) {
-                // Check if it's a debug build and wait for the data to load if necessary.
+        private static IEnumerator GetCurrentQuestionDataCoroutine(Action<QuestionData> callback)
+        {
                 if (DebugManager.Instance.IsDebugBuild && !IsSolution)
                 {
-                        await Task.Run(() =>
+                        while (!MathHandler.Instance.IsDataProcessed)
                         {
-                                // This loop will keep running until IsDataLoaded becomes true
-                                while (!MathHandler.Instance.IsDataProcessed)
-                                {
-                                        Task.Delay(100).Wait(); // Wait for 100 milliseconds before checking again
-                                }
-                        });
+                                yield return new WaitForSeconds(0.1f); // Wait for 100 milliseconds
+                        }
                 }
-                
-                if (i >= 0 && i < QuestionCount[CurrentTest])
-                        return Questions[CurrentTest][i];
-                Debug.Log("Index Out of Array");
-                return null;
+
+                yield return new WaitForEndOfFrame();
+                callback(Questions[CurrentTest][CurrentQuestion].questionData);
         }
+
+        public static void GetQuestion(int i, Action<Question> callback)
+        {
+                CoroutineManager.Instance.StartManagedCoroutine(GetQuestionCoroutine(i, callback));
+        }
+
+        private static IEnumerator GetQuestionCoroutine(int i, Action<Question> callback)
+        {
+                if (DebugManager.Instance.IsDebugBuild && !IsSolution)
+                {
+                        while (!MathHandler.Instance.IsDataProcessed)
+                        {
+                                yield return new WaitForSeconds(0.1f); // Wait for 100 milliseconds
+                        }
+                }
+                yield return new WaitForEndOfFrame();
+
+                if (i >= 0 && i < QuestionCount[CurrentTest])
+                {
+                        callback(Questions[CurrentTest][i]);
+                }
+                else
+                {
+                        Debug.Log("Index Out of Array");
+                        callback(null);
+                }
+        }
+
         
         // Correct, Wrong, Blank
         public static int[][] GetResults()
@@ -121,24 +132,26 @@ public static class GameData
                 question.selectedAnswer = i;
         }
 
-        public static async Task<int> GetSelectedAnswerIndex()
+        public static void GetSelectedAnswerIndex(Action<int> callback)
         {
-                // Check if it's a debug build and wait for the data to load if necessary.
+                CoroutineManager.Instance.StartManagedCoroutine(GetSelectedAnswerIndexCoroutine(callback));
+        }
+
+        private static IEnumerator GetSelectedAnswerIndexCoroutine(Action<int> callback)
+        {
                 if (DebugManager.Instance.IsDebugBuild)
                 {
-                        await Task.Run(() =>
+                        while (!MathHandler.Instance.IsDataLoaded)
                         {
-                                // This loop will keep running until IsDataLoaded becomes true
-                                while (!MathHandler.Instance.IsDataLoaded)
-                                {
-                                        Task.Delay(100).Wait(); // Wait for 100 milliseconds before checking again
-                                }
-                        });
+                                yield return new WaitForSeconds(0.1f); // Wait for 100 milliseconds
+                        }
                 }
-    
-                // Assuming Questions is a list of lists and each inner list contains objects with a property `selectedAnswer`
-                return Questions[CurrentTest][CurrentQuestion].selectedAnswer;
+                yield return new WaitForEndOfFrame();
+
+                int selectedAnswerIndex = Questions[CurrentTest][CurrentQuestion].selectedAnswer;
+                callback(selectedAnswerIndex);
         }
+
 
         public static bool IsGameFinished() {
                 if (CurrentTest == TestCount - 1) return true;

@@ -16,9 +16,12 @@ public class QuestionUi : MonoBehaviour
 
     private void SetQuestionUi()
     {
-        var question = GameData.GetQuestion(GameData.CurrentQuestion);
-        SetQuestionButtons();
-        QuestionText.text = (GameData.CurrentQuestion+1).ToString();
+        // get question to see if there is any question to display
+        GameData.GetQuestion(GameData.CurrentQuestion, (question) =>
+        {
+            SetQuestionButtons();
+            QuestionText.text = (GameData.CurrentQuestion+1).ToString();
+        });
     }
 
     private void SetQuestionButtons()

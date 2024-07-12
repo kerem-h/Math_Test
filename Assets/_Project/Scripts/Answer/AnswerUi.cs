@@ -57,34 +57,44 @@ public class AnswerUi : MonoBehaviour
     {
         AnswerButtons[^1].gameObject.SetActive(true);
     }
-    private async void SetAnswerButtons()
+    private void SetAnswerButtons()
     {
-        var question = await GameData.GetQuestion(GameData.CurrentQuestion);
-
-        var isSolution = GameData.IsSolution;
-        var selectedAnswer = question.selectedAnswer;
-
-        for (int i = 0; i < AnswerButtons.Length; i++)
+        GameData.GetQuestion(GameData.CurrentQuestion, (question) =>
         {
-            var button = AnswerButtons[i];
-            button.Index = i;
-            button.ResetHover();
-            button.ResetSelection();
-            
-            if (isSolution)
+            if (question == null)
             {
-                button.DisableButton();
-                if (i == question.correctAnswer)
-                    button.SetCorrectButton();
-                if (i == question.selectedAnswer && question.selectedAnswer != question.correctAnswer) button.SetWrongButton();
+                Debug.LogError("Question is null.");
+                return;
             }
-            else
+
+            var isSolution = GameData.IsSolution;
+            var selectedAnswer = question.selectedAnswer;
+
+            for (int i = 0; i < AnswerButtons.Length; i++)
             {
-                if (i == question.selectedAnswer)
-                    button.Select(); 
+                var button = AnswerButtons[i];
+                button.Index = i;
+                button.ResetHover();
+                button.ResetSelection();
+
+                if (isSolution)
+                {
+                    button.DisableButton();
+                    if (i == question.correctAnswer)
+                        button.SetCorrectButton();
+                    if (i == question.selectedAnswer && question.selectedAnswer != question.correctAnswer)
+                        button.SetWrongButton();
+                }
+                else
+                {
+                    if (i == question.selectedAnswer)
+                        button.Select();
+                }
             }
-        }
+        });
     }
+
+
     private void ResetHover()
     {
         for (int i = 0; i < AnswerButtons.Length; i++)

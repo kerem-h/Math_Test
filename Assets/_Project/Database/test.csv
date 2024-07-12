@@ -1,7 +1,7 @@
 "Un drone décolle de la base aérienne à hm({A}) et vole à la vitesse de {B} km/h. hm({C}) après, le pilatus immatriculé F-GMVS décolle pour le rattraper et il vole à {D} km/h. A quelle heure le pilatus va t’il rattraper le drone ?",3:{A}+{C};{B}*{C}/3600;{D}-{B};{E}/{G};{H}*3600;{A}+{I},"{A}:(3600,43200,60);{B}:(200,300,10);{C}:(300,7200,300);{D}:(300,500,10)","Étape 1 : Détermination de l'avance du drone
 Le drone décolle à hm({A}) et vole à une vitesse de {B} km/h. Lorsque le Pilatus décolle hm({C}) plus tard soit à hm({E}), le drone aura parcouru :
 Distance = Vitesse du drone × Temps = {B} km/h × [{C}/3600] ( hm({C}) ) = {F} km
-
+hms(4.02) hms(4,02) hm(811904.4) hm(811904,4)
 Étape 2 : Calcul de la vitesse relative
 La vitesse relative du Pilatus par rapport au drone est la différence entre leur vitesse, car ils se dirigent dans la même direction :
 Vitesse relative = Vitesse du Pilatus - Vitesse du drone = {D} km/h - {B} km/h = {G} km/h
@@ -11,4 +11,4 @@ Le temps nécessaire pour que le Pilatus rattrape le drone peut être calculé e
 Temps de rattrapage = Distance initiale / Vitesse relative = {E} km / {G} km/h = {H} heures soit hm([{I}])
 
 Étape 4 : Détermination de l'heure de la rencontre
-Le Pilatus rattrape le drone hm({I}) après son départ à hm({A}), donc à hm({J}).",0;Round:hm([{J}]); hm([{J}+-120]);hm([{J}+-300]);hm([{J}+-360]);hm([{J}+-420])
+Le Pilatus rattrape le drone hm({I}) après son départ à hm({A}), donc à hm({J}).",0;Round:hm([{J}]); hm([{J}+-120]);hm([{J}+-300]);hm([{J}+-360]);hm([{J}+-420]),{A}<{B};{A};{A}-10000;{A}+10000;{B};{B}+10000;{B}-10000:{E}<40000;{E};{E}+50;{E}-5000

@@ -23,7 +23,8 @@ public class QuestionManager : MonoBehaviour {
 
     private void SetQuestion()
     {
-        var question = GameData.GetQuestion(GameData.CurrentQuestion);
-        OnQuestionChanged?.Invoke();
+        GameData.GetQuestion(GameData.CurrentQuestion, (question => {
+            OnQuestionChanged?.Invoke();
+        }));
     }
 }

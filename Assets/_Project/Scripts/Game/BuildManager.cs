@@ -30,30 +30,30 @@ public class BuildManager : MonoBehaviour
         {
             case BuildType.CSO:
                 // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/cso.csv" };
-                GameData.QuestionDatabaseUrls = new List<string> { "http://localhost:3000/cso.csv" };
+                GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=cso.csv" };
 
                 GameData.TestTimes = new[] { 1080f };
                 GameData.QuestionCount = new[] {26};
                 break;
             case BuildType.Tours1:
                 // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/tours_1.csv" };
-                GameData.QuestionDatabaseUrls = new List<string> { "http://localhost:3000/tours_1.csv" };
+                GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=tours_1.csv" };
 
                 GameData.TestTimes = new[] { 2400f };
                 GameData.QuestionCount = new[] {25};
                 break;
             case BuildType.Tours2:
                 // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/tours_2.csv" };
-                GameData.QuestionDatabaseUrls = new List<string> { "http://localhost:3000/tours_2.csv" };
+                GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=tours_2.csv" };
 
                 GameData.TestTimes = new[] { 2700f };
                 GameData.QuestionCount = new[] {15};
                 break;
             case BuildType.Debug:
                 // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/debug.csv" };
-                GameData.QuestionDatabaseUrls = new List<string> { "http://localhost:3000/debug.csv" };
-                // DebugManager.Instance.IsDebugBuild = true;
-                GameData.QuestionCount = new[] {25};
+                GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=debug.csv" };
+                DebugManager.Instance.IsDebugBuild = true;
+                // GameData.QuestionCount = new[] {25};
                 GameData.TestTimes = new[] { 99999f };
                 break;
         }

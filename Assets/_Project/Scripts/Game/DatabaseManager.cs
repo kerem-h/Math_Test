@@ -52,6 +52,7 @@ public class DatabaseManager : MonoBehaviour
             if (DebugManager.Instance.IsDebugBuild)
                 GameData.QuestionCount = new[] {data[0].Count};
 
+
             MathHandler.Instance.IsDataLoaded = true;
         }
     }
@@ -67,7 +68,7 @@ public class DatabaseManager : MonoBehaviour
             UnityWebRequest request = UnityWebRequest.Get(url);
             request.downloadHandler = new DownloadHandlerBuffer();
             yield return request.SendWebRequest();
-            
+
             if ((request.isNetworkError || request.isHttpError))
             {
                 DebugManager.Instance.AddLogs("Error downloading file: " + request.error);

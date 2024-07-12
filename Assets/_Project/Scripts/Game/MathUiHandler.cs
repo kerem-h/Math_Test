@@ -31,10 +31,15 @@ public class MathUiHandler : MonoBehaviour
             ExplanationButton.SetActive(false);
     }
 
-    private async void SetExplanationText() {
-        var questionData = await GameData.GetCurrentQuestionData();
-        if (questionData == null) return;
-        ExplanationText.text = questionData.Explanation;
+    private void SetExplanationText()
+    {
+        QuestionData questionData = null;
+        GameData.GetCurrentQuestionData((questionDat) =>
+        {
+            questionData = questionDat;
+            if (questionData == null) return;
+            ExplanationText.text = questionData.Explanation;
+        });
     }
 
     public void SetQuestionUi(string question, string[] answers, int correctAnswerIndex)
