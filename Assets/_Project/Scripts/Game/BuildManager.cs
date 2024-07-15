@@ -21,6 +21,7 @@ public class BuildManager : MonoBehaviour
      CSO,
      Tours1,
      Tours2,
+     Eopan,
      Debug
     }
     public BuildType buildType;
@@ -49,6 +50,12 @@ public class BuildManager : MonoBehaviour
 
                 GameData.TestTimes = new[] { 2700f };
                 GameData.QuestionCount = new[] {15};
+                break;
+            case BuildType.Eopan:
+                GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=eopan.csv" };
+
+                GameData.TestTimes = new[] { 1080f };
+                GameData.QuestionCount = new[] {24};
                 break;
             case BuildType.Debug:
                 // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/debug.csv" };

@@ -207,7 +207,10 @@ public class MathHandler : MonoBehaviour
             
             // Calculated Condition Feature
             string key = "{" + question.ParameterCount + "}";
-            
+            if (string.IsNullOrEmpty(question.Conditions) || question.Conditions == "None") {
+                question.Variables.Add(key, float.Parse(result.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture));
+                continue;
+            }
             var conditions = question.Conditions.Split(":");
             var result_updated = false;
             for (int j = 0; j < conditions.Length; j++)
