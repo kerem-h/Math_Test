@@ -479,10 +479,10 @@ public class MathHandler : MonoBehaviour
                     else if (decText == "Round")
                         answerText = answerText.Replace(match.Value, MathF.Round(result).ToString(CultureInfo.InvariantCulture));
                     else if (decText == "None")
-                        answerText = answerText.Replace(match.Value, result.ToString(CultureInfo.InvariantCulture));
+                        answerText = answerText.Replace(match.Value, ((int)result).ToString(CultureInfo.InvariantCulture));
                 }
             }
-            
+        
             answers[i] = answerText;
         }
         
@@ -928,10 +928,18 @@ public class MathHandler : MonoBehaviour
         else
         {
             var range = _[1].Trim().Split(",");
-            var min = float.Parse(range[0].Trim('('), CultureInfo.InvariantCulture);
-            var max = float.Parse(range[1], CultureInfo.InvariantCulture);
-            var iter = float.Parse(range[2].Trim(')'), CultureInfo.InvariantCulture);
-            int stepCount = (int)((max - min) / iter) + 1;
+            var min = ParseFloat(range[0].Trim('('));
+            var max = ParseFloat(range[1]);
+            var iter = ParseFloat(range[2].Trim(')'));
+
+            // Ensure the step count calculation avoids precision issues
+            int stepCount = Mathf.FloorToInt((max - min) / iter) + 1;
+
+            // Adjust step count if necessary to avoid rounding issues
+            if (Math.Abs((max - min) - (stepCount - 1) * iter) < iter * 0.5f)
+            {
+                stepCount -= 1;
+            }
 
             int randomIndex = UnityEngine.Random.Range(0, stepCount);
             randomValue = min + randomIndex * iter;
@@ -939,7 +947,9 @@ public class MathHandler : MonoBehaviour
 
         return randomValue;
     }
-
+    static float ParseFloat(string value) {
+        return float.Parse(value, CultureInfo.InvariantCulture);
+    }
     private static string GetClockFromSecond(float value, bool showSeconds)
     {
         // Ensure value is within 24 hours (86400 seconds)

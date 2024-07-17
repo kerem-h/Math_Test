@@ -33,8 +33,7 @@ public class BuildManager : MonoBehaviour
                 // GameData.QuestionDatabaseUrls = new List<string> { "https://storage.googleapis.com/math-database/cso.csv" };
                 GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=cso.csv" };
 
-                // GameData.TestTimes = new[] { 1080f };
-                GameData.TestTimes = new[] { 20f };
+                GameData.TestTimes = new[] { 1080f };
                 GameData.QuestionCount = new[] {26};
                 break;
             case BuildType.Tours1:
