@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class MathHandler : MonoBehaviour
 {
@@ -927,26 +928,71 @@ public class MathHandler : MonoBehaviour
         // This part is for the range of values
         else
         {
-            var range = _[1].Trim().Split(",");
-            var min = ParseFloat(range[0].Trim('('));
-            var max = ParseFloat(range[1]);
-            var iter = ParseFloat(range[2].Trim(')'));
+            string input = _[1].Trim();
+            string[] rangeParts = input.Split(',');
+            float min = float.Parse(rangeParts[0].Trim('('));
+            float max = float.Parse(rangeParts[1]);
+            float iter = float.Parse(rangeParts[2].Trim(')'));
 
-            // Ensure the step count calculation avoids precision issues
-            int stepCount = Mathf.FloorToInt((max - min) / iter) + 1;
-
-            // Adjust step count if necessary to avoid rounding issues
-            if (Math.Abs((max - min) - (stepCount - 1) * iter) < iter * 0.5f)
+            // Calculate the step count more robustly
+            int stepCount = 0;
+            float current = min;
+            while (current <= max)
             {
-                stepCount -= 1;
+                stepCount++;
+                current += iter;
+            }
+
+            // This correction accounts for the possibility that the last increment slightly exceeds 'max' due to floating-point precision
+            if (current - iter < max)
+            {
+                stepCount--;
             }
 
             int randomIndex = UnityEngine.Random.Range(0, stepCount);
             randomValue = min + randomIndex * iter;
+            var random = Delete9sAnd01s(randomValue.ToString(CultureInfo.InvariantCulture));
+            randomValue = float.Parse(random, CultureInfo.InvariantCulture);
         }
 
         return randomValue;
     }
+
+    public static string Delete9sAnd01s(string number)
+    {
+        if (number.EndsWith("9999") && number.Contains("."))
+        {
+            while (number.EndsWith("9"))
+            {
+                number = number.Substring(0, number.Length - 1);
+            }
+            var lastChar = number.Substring(number.Length - 1);
+            if (lastChar == ".")
+            {
+                number = number.Substring(0, number.Length - 1);
+            }
+            // increment the last digit by 1
+            var lastDigit = int.Parse(number.Substring(number.Length - 1));
+            lastDigit++;
+            number = number.Substring(0, number.Length - 1) + lastDigit;
+        }
+        else if (number.EndsWith("0001"))
+        {
+            number = number.Substring(0, number.Length - 1);
+            while (number.EndsWith("0"))
+            {
+                number = number.Substring(0, number.Length - 1);
+            }
+            var lastChar = number.Substring(number.Length - 1);
+            if (lastChar == ".")
+            {
+                number = number.Substring(0, number.Length - 1);
+            }
+        }
+
+        return number; 
+    }
+    
     static float ParseFloat(string value) {
         return float.Parse(value, CultureInfo.InvariantCulture);
     }

@@ -7,7 +7,7 @@ public class QuestionUi : MonoBehaviour
     public TextMeshProUGUI QuestionText;
     public GameObject NextButton;
     public GameObject PreviousButton;
-    
+
     private void Start()
     {
         SetQuestionUi();
@@ -20,6 +20,7 @@ public class QuestionUi : MonoBehaviour
         GameData.GetQuestion(GameData.CurrentQuestion, (question) =>
         {
             SetQuestionButtons();
+
             QuestionText.text = (GameData.CurrentQuestion+1).ToString();
         });
     }
