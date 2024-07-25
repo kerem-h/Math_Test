@@ -239,7 +239,7 @@ public class MathHandler : MonoBehaviour
                         while (true) {
                             
                             var change_variable = conditionArray[k].Trim();
-                            if (float.Parse(change_variable.Trim('{').Trim('}').Trim()) > question.ParameterCount) {
+                            if (float.Parse(change_variable.Trim('{').Trim('}').Trim(), CultureInfo.InvariantCulture) > question.ParameterCount) {
                                 Debug.Log("Value is not initialized " + change_variable);
                                 k += 3;
                                 continue;
@@ -930,9 +930,9 @@ public class MathHandler : MonoBehaviour
         {
             string input = _[1].Trim();
             string[] rangeParts = input.Split(',');
-            float min = float.Parse(rangeParts[0].Trim('('));
-            float max = float.Parse(rangeParts[1]);
-            float iter = float.Parse(rangeParts[2].Trim(')'));
+            float min = float.Parse(rangeParts[0].Trim('('), CultureInfo.InvariantCulture);
+            float max = float.Parse(rangeParts[1], CultureInfo.InvariantCulture);
+            float iter = float.Parse(rangeParts[2].Trim(')'), CultureInfo.InvariantCulture);
 
             // Calculate the step count more robustly
             int stepCount = 0;
@@ -962,6 +962,9 @@ public class MathHandler : MonoBehaviour
     {
         if (number.EndsWith("9999") && number.Contains("."))
         {
+            Debug.Log("it is being used");
+            Debug.Log(number);
+
             while (number.EndsWith("9"))
             {
                 number = number.Substring(0, number.Length - 1);
@@ -978,6 +981,8 @@ public class MathHandler : MonoBehaviour
         }
         else if (number.EndsWith("0001"))
         {
+            Debug.Log("it is being used with 0001");
+            Debug.Log(number);
             number = number.Substring(0, number.Length - 1);
             while (number.EndsWith("0"))
             {
