@@ -70,6 +70,7 @@ public class MathHandler : MonoBehaviour
 
         
         QuestionData questionData = null;
+        
         GameData.GetCurrentQuestionData((questionDat) => {
             questionData = questionDat;
         
@@ -84,6 +85,7 @@ public class MathHandler : MonoBehaviour
         {
             AnswerUi.Instance.DisableButton();
         }
+        
         
         _mathUiHandler.SetQuestionUi(questionData.Question, answers, AnswerIndex);
         });
@@ -236,8 +238,10 @@ public class MathHandler : MonoBehaviour
                     try {
                         
                         int k = 1;
-                        while (true) {
-                            
+                        var i = 0;
+                        while (i < 2000)
+                        {
+                            i++;
                             var change_variable = conditionArray[k].Trim();
                             if (float.Parse(change_variable.Trim('{').Trim('}').Trim(), CultureInfo.InvariantCulture) > question.ParameterCount) {
                                 Debug.Log("Value is not initialized " + change_variable);
@@ -576,8 +580,10 @@ public class MathHandler : MonoBehaviour
                       try
                       {
                           int i = 1;
-                          while (true)
+                          var j = 0;
+                          while (j < 2000)
                           {
+                              j++;
                             var change_variable = cond[i].Trim();
                             if (float.Parse(change_variable.Trim('{').Trim('}').Trim()) > question.ParameterCount) {
                                 Debug.Log("Value is not initialized " + change_variable);
@@ -866,30 +872,64 @@ public class MathHandler : MonoBehaviour
                           var statement_split = condit.Split("!=");
                           var base_val= statement_split[0].Trim();
                           var comp_val = statement_split[1].Trim();
+
                           var b_val = question.Variables[base_val];
                           var c_val = question.Variables[comp_val];
-                          var counter = 0;
-                          while (b_val == c_val) {
-                              counter++;
-                              foreach (var variable in question.Ranges) {
-                                  var _ = variable.Split(":");
-                                  var match = _[0].Trim();
-                                  if (match == base_val) {
-                                      b_val = GetRandomValueFromRange(_);
+                          if (statement_split.Length > 2)
+                          {
+                              string other_val = statement_split[2].Trim();
+                              var d_val = question.Variables[other_val];
+                              var counter = 0;
+                              while (b_val == c_val || b_val == d_val || c_val == d_val) {
+                                  counter++;
+                                  foreach (var variable in question.Ranges) {
+                                      var _ = variable.Split(":");
+                                      var match = _[0].Trim();
+                                      if (match == base_val) {
+                                          b_val = GetRandomValueFromRange(_);
+                                      }
+                                      else if (match == comp_val) {
+                                          c_val = GetRandomValueFromRange(_);
+                                      }
+                                      else if (match == other_val) {
+                                          d_val = GetRandomValueFromRange(_);
+                                      }
                                   }
-                                  else if (match == comp_val) {
-                                      c_val = GetRandomValueFromRange(_);
+                                  if (counter > 2000)
+                                  {
+                                      DebugManager.Instance.AddLogs("Infinite Loop"); 
+                                      break;
                                   }
                               }
-                              if (counter > 2000)
-                              {
-                                  DebugManager.Instance.AddLogs("Infinite Loop"); 
-                                  break;
-                              }
+                                question.Variables[base_val] = b_val;
+                                question.Variables[comp_val] = c_val;
+                                question.Variables[other_val] = d_val;
                           }
 
-                          question.Variables[base_val] = b_val;
-                          question.Variables[comp_val] = c_val;
+                          else
+                          {
+                              var counter = 0;
+                              while (b_val == c_val) {
+                                  counter++;
+                                  foreach (var variable in question.Ranges) {
+                                      var _ = variable.Split(":");
+                                      var match = _[0].Trim();
+                                      if (match == base_val) {
+                                          b_val = GetRandomValueFromRange(_);
+                                      }
+                                      else if (match == comp_val) {
+                                          c_val = GetRandomValueFromRange(_);
+                                      }
+                                  }
+                                  if (counter > 2000)
+                                  {
+                                      DebugManager.Instance.AddLogs("Infinite Loop"); 
+                                      break;
+                                  }
+                              }
+                              question.Variables[base_val] = b_val;
+                              question.Variables[comp_val] = c_val;
+                          }
                       }
                   }
               }
@@ -934,19 +974,12 @@ public class MathHandler : MonoBehaviour
             float max = float.Parse(rangeParts[1], CultureInfo.InvariantCulture);
             float iter = float.Parse(rangeParts[2].Trim(')'), CultureInfo.InvariantCulture);
 
-            // Calculate the step count more robustly
-            int stepCount = 0;
-            float current = min;
-            while (current <= max)
+            int stepCount = (int)((max - min) / iter);
+
+            // Check if the last increment falls exactly on the max, if not, add one more step
+            if (min + stepCount * iter < max)
             {
                 stepCount++;
-                current += iter;
-            }
-
-            // This correction accounts for the possibility that the last increment slightly exceeds 'max' due to floating-point precision
-            if (current - iter < max)
-            {
-                stepCount--;
             }
 
             int randomIndex = UnityEngine.Random.Range(0, stepCount);
@@ -962,9 +995,6 @@ public class MathHandler : MonoBehaviour
     {
         if (number.EndsWith("9999") && number.Contains("."))
         {
-            Debug.Log("it is being used");
-            Debug.Log(number);
-
             while (number.EndsWith("9"))
             {
                 number = number.Substring(0, number.Length - 1);
@@ -981,8 +1011,6 @@ public class MathHandler : MonoBehaviour
         }
         else if (number.EndsWith("0001"))
         {
-            Debug.Log("it is being used with 0001");
-            Debug.Log(number);
             number = number.Substring(0, number.Length - 1);
             while (number.EndsWith("0"))
             {
@@ -1000,45 +1028,6 @@ public class MathHandler : MonoBehaviour
     
     static float ParseFloat(string value) {
         return float.Parse(value, CultureInfo.InvariantCulture);
-    }
-    private static string GetClockFromSecond(float value, bool showSeconds)
-    {
-        // Ensure value is within 24 hours (86400 seconds)
-        if (value < 0) value = 86400 + value;
-        
-        if (value == 0 && showSeconds) return "00h00m00s";
-        if (value < 60 && !showSeconds) return "00h00m";
-
-        value = value % 86400;
-
-        // Convert seconds to clock format
-        string clock = "";
-        int hours = (int)(value / 3600);
-        int minutes = (int)((value % 3600) / 60);
-        int seconds = (int)(value % 60);
-
-        // ADD = to the > to get the 00h method
-        if (hours > 0)
-        {
-            clock += hours < 10 ? "0" + hours + "h" : hours + "h";
-        }
-        
-        // ADD = to the > to get the 00h method
-        if (minutes > 0 || hours > 0) // Show minutes if there are hours or minutes
-        {
-            clock += minutes < 10 ? "0" + minutes + "m" : minutes + "m";
-            // Deplicated due to customer request
-            // if (!showSeconds && (hours > 0 && minutes > 0)) clock= clock.Substring(0, clock.Length - 1);
-        }
-
-        if (showSeconds && (seconds > 0 || minutes > 0 || hours > 0)) // Show seconds if there are hours or minutes or seconds
-        {
-            clock += seconds < 10 ? "0" + seconds + "s" : seconds + "s";
-            
-            // Deplicated due to customer request   
-            // if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
-        }
-        return clock;
     }
 
     
@@ -1103,55 +1092,160 @@ public class MathHandler : MonoBehaviour
         ChangeClocks(question);
     }
 
+    
     private static void ChangeClocks(QuestionData question)
-    {
-        string pattern = @"hms\((.*?)\)|hm\((.*?)\)";
-        MatchCollection matches = Regex.Matches(question.Question, pattern);
-        
-        question.Question = CalculateMatches(matches, question.Question);
-        
-        MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
-        question.Explanation = CalculateMatches(matches2, question.Explanation);
-        
+{
+    string pattern = @"hms\((.*?)\)|hm\((.*?)\)|dhm\((.*?)\)";
+    question.Question = ReplaceTimeFormat(pattern, question.Question);
+    question.Explanation = ReplaceTimeFormat(pattern, question.Explanation);
 
-        for (int i = 0; i < question.AnswerStrings.Length; i++)
+    for (int i = 0; i < question.AnswerStrings.Length; i++)
+    {
+        question.AnswerStrings[i] = ReplaceTimeFormat(pattern, question.AnswerStrings[i]);
+    }
+}
+
+private static string ReplaceTimeFormat(string pattern, string text)
+{
+    MatchCollection matches = Regex.Matches(text, pattern);
+    foreach (Match match in matches)
+    {
+        string innerValue = match.Groups[1].Success ? match.Groups[1].Value :
+                            match.Groups[2].Success ? match.Groups[2].Value : match.Groups[3].Value;
+        innerValue = innerValue.Split(",")[0].Split(".")[0];
+
+        if (float.TryParse(innerValue, out float seconds))
         {
-            var answerString = question.AnswerStrings[i];
-            MatchCollection matches5 = Regex.Matches(answerString, pattern);
-            question.AnswerStrings[i] = CalculateMatches(matches5, question.AnswerStrings[i]);
+            string formattedTime = FormatTime(seconds, match.Groups[1].Success, match.Groups[3].Success);
+            text = text.Replace(match.Value, formattedTime);
+        }
+        else
+        {
+            Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
         }
     }
+    return text;
+}
 
-    private static string CalculateMatches(MatchCollection matches, string expression)
-    {
-        foreach (Match match in matches)
-        {
-            // Extract the value inside the brackets
-            string innerValue = match.Groups[1].Value;
-            bool isHms = !string.IsNullOrEmpty(innerValue);
+private static string FormatTime(float seconds, bool showSeconds, bool showDays)
+{
+    if (seconds < 0) seconds += 86400; // Normalize negative seconds
+    if (!showDays)
+        seconds %= 86400; // Ensure seconds are within a single day
 
-            if (!isHms)
-            {
-                innerValue = match.Groups[2].Value;
-            }
-            innerValue = innerValue.Split(",")[0];
-            innerValue = innerValue.Split(".")[0];
-            // Parse the value as a float
-            if (float.TryParse(innerValue, out float value))
-            {
-                // Convert the value to clock format
-                value = float.Parse(value.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-                string clockFormat = GetClockFromSecond((int) value, isHms);
-                expression = expression.Replace(match.Value, clockFormat.ToString(CultureInfo.InvariantCulture));
-            }
-            else
-            {
-                Debug.Log(expression);
-                Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
-            }
-        }
-        return expression;
-    }
+    int days = (int)(seconds / 86400);
+    int hours = (int)((seconds % 86400) / 3600);
+    int minutes = (int)((seconds % 3600) / 60);
+    int sec = (int)(seconds % 60);
+
+    string timeFormat = "";
+    if (showDays && days > 0)
+        timeFormat += days + "d";
+    if (hours > 0 || timeFormat.Length > 0) // Show hours if there are days or hours
+        timeFormat += (hours < 10 ? "0" : "") + hours + "h";
+    if (minutes > 0 || timeFormat.Length > 0) // Show minutes if there are days, hours, or minutes
+        timeFormat += (minutes < 10 ? "0" : "") + minutes + "m";
+    if (showSeconds && (sec > 0 || timeFormat.Length > 0)) // Show seconds if specified
+        timeFormat += (sec < 10 ? "0" : "") + sec + "s";
+
+    return timeFormat;
+}
+    
+    
+    
+    //
+    // private static void ChangeClocks(QuestionData question)
+    // {
+    //     string pattern = @"hms\((.*?)\)|hm\((.*?)\)|dhm\((.*?)\)";
+    //     MatchCollection matches = Regex.Matches(question.Question, pattern);
+    //     
+    //     question.Question = CalculateMatches(matches, question.Question);
+    //     
+    //     MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
+    //     question.Explanation = CalculateMatches(matches2, question.Explanation);
+    //     
+    //
+    //     for (int i = 0; i < question.AnswerStrings.Length; i++)
+    //     {
+    //         var answerString = question.AnswerStrings[i];
+    //         MatchCollection matches5 = Regex.Matches(answerString, pattern);
+    //         question.AnswerStrings[i] = CalculateMatches(matches5, question.AnswerStrings[i]);
+    //     }
+    // }
+    //
+    // private static string CalculateMatches(MatchCollection matches, string expression)
+    // {
+    //     foreach (Match match in matches)
+    //     {
+    //         // Extract the value inside the brackets
+    //         string innerValue = match.Groups[1].Value;
+    //         bool isHms = !string.IsNullOrEmpty(innerValue);
+    //
+    //         if (!isHms)
+    //         {
+    //             innerValue = match.Groups[2].Value;
+    //         }
+    //         innerValue = innerValue.Split(",")[0];
+    //         innerValue = innerValue.Split(".")[0];
+    //         // Parse the value as a float
+    //         if (float.TryParse(innerValue, out float value))
+    //         {
+    //             // Convert the value to clock format
+    //             value = float.Parse(value.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+    //             string clockFormat = GetClockFromSecond((int) value, isHms);
+    //             expression = expression.Replace(match.Value, clockFormat.ToString(CultureInfo.InvariantCulture));
+    //         }
+    //         else
+    //         {
+    //             Debug.Log(expression);
+    //             Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
+    //         }
+    //     }
+    //     return expression;
+    // }
+    // private static string GetClockFromSecond(float value, bool showSeconds)
+    // {
+    //     // Ensure value is within 24 hours (86400 seconds)
+    //     if (value < 0) value = 86400 + value;
+    //     
+    //     if (value == 0 && showSeconds) return "00h00m00s";
+    //     if (value < 60 && !showSeconds) return "00h00m";
+    //
+    //     value = value % 86400;
+    //
+    //     // Convert seconds to clock format
+    //     string clock = "";
+    //     int hours = (int)(value / 3600);
+    //     int minutes = (int)((value % 3600) / 60);
+    //     int seconds = (int)(value % 60);
+    //
+    //     // ADD = to the > to get the 00h method
+    //     if (hours > 0)
+    //     {
+    //         clock += hours < 10 ? "0" + hours + "h" : hours + "h";
+    //     }
+    //     
+    //     // ADD = to the > to get the 00h method
+    //     if (minutes > 0 || hours > 0) // Show minutes if there are hours or minutes
+    //     {
+    //         clock += minutes < 10 ? "0" + minutes + "m" : minutes + "m";
+    //         // Deplicated due to customer request
+    //         // if (!showSeconds && (hours > 0 && minutes > 0)) clock= clock.Substring(0, clock.Length - 1);
+    //     }
+    //
+    //     if (showSeconds && (seconds > 0 || minutes > 0 || hours > 0)) // Show seconds if there are hours or minutes or seconds
+    //     {
+    //         clock += seconds < 10 ? "0" + seconds + "s" : seconds + "s";
+    //         
+    //         // Deplicated due to customer request   
+    //         // if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
+    //     }
+    //     return clock;
+    // }
+
+    
+    
+    
 
     static float EvaluateExpression(string expression)
     {

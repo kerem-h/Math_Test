@@ -14,13 +14,5 @@ public class QuestionData
     public string[] AnswerStrings;
     public string[] Ranges;
     public Dictionary<string, float> Variables = new();
-
-    public void SetAnswers()
-    {
-        for (int i = 0; i < AnswerStrings.Length; i++)
-        {
-            var answer = AnswerStrings[i];
-            
-        }
-    }
+    
 }

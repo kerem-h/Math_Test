@@ -13,7 +13,8 @@ public class MathUiHandler : MonoBehaviour
     public PopupAnimationSettings CloseAnimation;
     public GameObject PopupPanel;
     public GameObject ExplanationPanel;
-    [SerializeField] private GameObject _visual1;
+    [SerializeField] private GameObject prefabPattern;
+    [SerializeField] private PatternManager patternManager;
 
     private void Start()
     {
@@ -46,18 +47,20 @@ public class MathUiHandler : MonoBehaviour
     public void SetQuestionUi(string question, string[] answers, int correctAnswerIndex)
     {
         QuestionText.text = question;
-        // TODO: Implement this where the image is the visual for the question and there will be text where the numbers will be placed. Images should be set with their texts and it
-        // TODO: should be checked if the question contains "|" character. If it contains, the text should be hidden and the image should be shown.
-        // if (question.Contains("|"))
-        // {
-        //     QuestionText.gameObject.SetActive(false);
-        //     _visual1.SetActive(true);
-        // }
-        // else
-        // {
-        //     QuestionText.gameObject.SetActive(true);
-        //     _visual1.SetActive(false);
-        // }
+        if (question.Contains("|"))
+        {
+            QuestionText.gameObject.SetActive(false);
+            var list = question.Trim('|').Split('|');
+            var _number = int.Parse(list[0]);
+            var _values = list[1].Split(',');
+            patternManager.DeleteAllPatterns();
+            patternManager.SpawnPattern(_number, _values );
+        }
+        else
+        {
+            QuestionText.gameObject.SetActive(true);
+            patternManager.DeleteAllPatterns();
+        }
         AnswerTexts[correctAnswerIndex].text = answers[0];
         var index = 1;
         for (int i = 0; i < GameData.AnswerCount; i++) {

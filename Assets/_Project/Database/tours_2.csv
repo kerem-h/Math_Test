@@ -1,0 +1,819 @@
+"Un avion part de l'aéroport de cognac vers Avord à hm({A}) avec un vent de face de {B} km/h et vole à une vitesse de {C} km/h. hm({D}) plus tard un avion décolle de Avord vers Cognac, il vole à {E} km/h et à un vent de dos de {F} km/h. À quelle heure se rencontront ils sachant que la distance entre Cognac et avord est de {G} km?",3:({A}+{D});{D}/3600;{D}/3600;({G}-({C}-{B})*({J}))/({C}-{B}+{E}+{F});{H}+{K}*3600,"{A}:(3600,43200,60);{B}:(5,60,5);{C}:(200,500,10);{D}:(300,3600,300);{E}:(200,500,5);{F}:(5,60,5);{G}:(1000,3000,100)","Étape 1 : Calcul des vitesses effectives
+Premier avion (Cognac vers Avord) :
+Vitesse propre = {C} km/h
+Vent de face = {B} km/h
+Vitesse effective = {C} km/h - {B} km/h = [{C}-{B}] km/h
+
+Second avion (Avord vers Cognac) :
+Vitesse propre = {E} km/h
+Vent de dos = {F} km/h
+Vitesse effective = {E} km/h + {F} km/h = [{E}+{F}] km/h
+
+Étape 2 : Calcul du délai avant le départ du second avion
+Départ du premier avion à hm({A})
+Départ du second avion à hm({H}) ( hm({D}) plus tard)
+
+Étape 3 : Détermination de la distance parcourue par chaque avion avant qu'ils ne se rencontrent:
+Nous devons trouver le temps t après hm({H}) auquel les deux avions se rencontrent. À ce moment, la somme des distances parcourues par les deux avions doit être égale à {G} km.
+
+La distance parcourue par chaque avion peut être exprimée comme suit :
+
+Premier avion parcourt [{C}-{B}] km/h × (t + {J}) heures (car il a commencé hm({D}) heure plus tôt).
+Second avion parcourt [{E}+{F}] km/h × t heures.
+La somme de ces distances doit être {G} km, donc :
+[{C}-{B}] x (t + {J}) + [{E}+{F}] t = {G}
+
+Étape 4 : Résolution de l'équation
+[{C}-{B}]t + [({C}-{B})*{J}] + [{E}+{F}]t = {G}
+[{C}-{B}+{E}+{F}]t = [{G}-({C}-{B})*({J})]
+t = [{G}-({C}-{B})*({J})] / [{C}-{B}+{E}+{F}] ≈ [({G}-({C}-{B})*({J}))/({C}-{B}+{E}+{F})] heures
+
+Étape 5 : Calcul de l'heure de la rencontre
+Le temps total depuis hm({H}) est environ {K}. Donc, l'heure de la rencontre est approximativement à hm({L}) .",0;Round:hms([{L}]); hms([{L}+-1]);hms([{L}+-2]);hms([{L}+-4]);hms([{L}+-7]),
+"Un drone décolle de la base aérienne à hm({A}) et vole à la vitesse de {B} km/h. hm({C}) après, le pilatus immatriculé F-GMVS décolle pour le rattraper et il vole à {D} km/h. A quelle heure le pilatus va t’il rattraper le drone ?",3:{A}+{C};{B}*{C}/3600;{D}-{B};{E}/{G};{H}*3600;{A}+{I},"{A}:(3600,43200,60);{B}:(200,300,10);{C}:(300,7200,300);{D}:(300,500,10)","Étape 1 : Détermination de l'avance du drone
+Le drone décolle à hm({A}) et vole à une vitesse de {B} km/h. Lorsque le Pilatus décolle hm({C}) plus tard soit à hm({E}), le drone aura parcouru :
+Distance = Vitesse du drone × Temps = {B} km/h × [{C}/3600] ( hm({C}) ) = {F} km
+
+Étape 2 : Calcul de la vitesse relative
+La vitesse relative du Pilatus par rapport au drone est la différence entre leur vitesse, car ils se dirigent dans la même direction :
+Vitesse relative = Vitesse du Pilatus - Vitesse du drone = {D} km/h - {B} km/h = {G} km/h
+
+Étape 3 : Calcul du temps nécessaire pour rattraper le drone
+Le temps nécessaire pour que le Pilatus rattrape le drone peut être calculé en divisant la distance initiale par la vitesse relative :
+Temps de rattrapage = Distance initiale / Vitesse relative = {E} km / {G} km/h = {H} heures soit hm([{I}])
+
+Étape 4 : Détermination de l'heure de la rencontre
+Le Pilatus rattrape le drone hm({I}) après son départ à hm({A}), donc à hm({J}).",0;Round:hm([{J}]); hm([{J}+-120]);hm([{J}+-300]);hm([{J}+-360]);hm([{J}+-420]),
+"2 Rafales volent en formation. Le premier rafale consomme {A} kg/mn et doit se faire ravitailler par la perche du A330MRTT qui verse {B} kg/mn. Sachant que le Rafale a reçu {C} L et que le carburant à une densité de {D} kg/l, combien de kg de carburant a consommé l'autre rafale s’il a la même consommation ?",2:(({C}*{D})/{B})*{A},"{A}:(10,720,10);{B}:(50,300,10);{C}:(1000,10000,100);{D}:(0.10,0.99,0.01)","Étape 1 : Calcul de la masse de carburant reçue par le premier Rafale
+Masse de carburant reçue = Capacité du réservoir × Densité = {C} L × {D} kg/L = [{C}*{D}] kg
+
+Étape 2 : Détermination du temps nécessaire pour transférer cette quantité de carburant
+Temps de transfert = Masse de carburant reçue / Taux de transfert = [{C}*{D}] kg / {B} kg/min = [({C}*{D})/{B}] min
+
+Étape 3 : Calcul de la consommation de carburant du second Rafale pendant ce temps
+Consommation du second Rafale = Taux de consommation × Temps de transfert = {A} kg/min × [({C}*{D})/{B}] min = [(({C}*{D})/{B})*{A}] kg
+Ainsi, le second Rafale a consommé [(({C}*{D})/{B})*{A}] kg de carburant pendant le temps que le premier Rafale se faisait ravitailler.",0;None:[{E}] Kg; [{E}+-3] Kg;[{E}+-7] Kg;[{E}+-10] Kg;[{E}+-14] Kg,
+"2 Mirage volent en formation. Le premier mirage consomme {A} kg/mn et doit se faire ravitailler par la perche du A330MRTT qui verse {B} kg/mn. Sachant que le Mirage a reçu {C} L et que le carburant à une densité de {D} kg/l, combien de kg de carburant a consommé l'autre Mirage s’il consomme {E} L/min en plus ?",2:(({E}*{D})*(({C}*{D})/{B}))+((({C}*{D})/{B})*{A}),"{A}:(10,720,10);{B}:(50,300,10);{C}:(1000,10000,100);{D}:(0.10,0.99,0.01);{E}:(2,15,0.1)","Étape 1 : Calcul de la masse de carburant reçue par le premier Mirage
+Masse de carburant reçue = Capacité du réservoir × Densité = {C} L × {D} kg/L = [{C}*{D}] kg
+
+Étape 2 : Détermination du temps nécessaire pour transférer cette quantité de carburant
+Temps de transfert = Masse de carburant reçue / Taux de transfert = [{C}*{D}] kg / {B} kg/min = [({C}*{D})/{B}] min
+
+Étape 3 : Calcul de la consommation de carburant du second Mirage pendant ce temps
+Consommation du second Mirage sans surconsommation = Taux de consommation × Temps de transfert = {A} kg/min × [({C}*{D})/{B}] min = [(({C}*{D})/{B})*{A}] kg
+
+Étape 4 : Calcul de la sur-consommation du Mirage avec {E} L/min soit [{E}*{D}] kg/min ( {E} x {D} )
+Sur-consommation = Taux de sur-consommation × Temps de transfert = [{E}*{D}] x [({C}*{D})/{B}] = [({E}*{D})*(({C}*{D})/{B})] kg
+
+Consommation totale = sur-consommation + consommation standard = [({E}*{D})*(({C}*{D})/{B})] + [(({C}*{D})/{B})*{A}] = [(({E}*{D})*(({C}*{D})/{B}))+((({C}*{D})/{B})*{A})]",2;None:[{F}]; [{F}+-1];[{F}+-2];[{F}+-4],
+"Un avion réalise un trajet entre 4 points, il réalise le trajet de A à B qui fait {A} km à {B} km/h, il se rend ensuite au point C situé à {C} km du point B. Une panne moteur l'oblige ensuite à diminuer sa vitesse de {D}%, pour finir jusqu'au point D à {E} km. Quelle est sa vitesse moyenne ?",0:({A}+{C}+{E})/(({A}/{B})+({C}/{B})+({E}/({B}*(1-({D}/100))))),"{A}:(100,400,10);{B}:(100,400,5);{C}:(100,500,10);{D}:(10,80,5);{E}:(100,800,5)","Pour calculer la vitesse moyenne de l'avion sur l'ensemble du trajet, nous devons d'abord déterminer le temps total qu'il a mis pour parcourir chaque segment du trajet, puis calculer la distance totale parcourue et diviser par le temps total. Voici comment procéder :
+
+Calcul du temps pour le trajet de A à B :
+Temps AB = Distance AB / Vitesse AB = {A} km / {B} km/h = [{A}/{B}] heures
+
+Calcul du temps pour le trajet de B à C :
+Temps BC = Distance BC / Vitesse BC = {C} km / {B} km/h = [{C}/{B}] heures
+
+Calcul du temps pour le trajet de C à D :
+Pour calculer le temps CD, nous devons tenir compte de la diminution de vitesse due à la panne moteur.
+Nouvelle vitesse CD = Vitesse CD * (1 - D/100) = {B} km/h * (1 - {D}/100) = [{B}*(1-({D}/100))] km/h
+
+Temps CD = Distance CD / Nouvelle vitesse CD = {E} km / [{B}*(1-({D}/100))] km/h = [{E}/({B}*(1-({D}/100)))] heures
+
+Maintenant, nous additionnons tous ces temps pour obtenir le temps total de voyage :
+Temps total = Temps AB + Temps BC + Temps CD = [{A}/{B}] + [{C}/{B}] + [{E}/({B}*(1-({D}/100)))] = [({A}/{B})+({C}/{B})+({E}/({B}*(1-({D}/100))))]
+
+Ensuite, nous calculons la distance totale parcourue :
+Distance totale = Distance AB + Distance BC + Distance CD = {A} + {C} + {E} = [{A}+{C}+{E}]
+
+Enfin, la vitesse moyenne est donnée par :
+Vitesse moyenne = Distance totale / Temps total = [{A}+{C}+{E}] / [({A}/{B})+({C}/{B})+({E}/({B}*(1-({D}/100))))] = [({A}+{C}+{E})/(({A}/{B})+({C}/{B})+({E}/({B}*(1-({D}/100)))))]",0;None:[{F}] km; [{F}+-1] km;[{F}+-2] km;[{F}+-5] km;[{F}+-8] km,
+"Suite à une dépressurisation, un {[A400M,rafale,A330MRTT]} est contraint de descendre en urgence à la vitesse de {A}m/s. Il était à {B}m et il doit descendre à {C}m. Sachant que le temps de réaction du pilote est de {D}mn et le temps de mettre les procédures d'urgence en place est de {E}mn, combien de temps va t il prendre pour sa chute ?",2:((({B}-{C})/{A})/60)+{D}+{E},"{A}:(5,50,1);{B}:(10000,40000,100);{C}:(1000,9000,100);{D}:(1,5,1);{E}:(1,15,1)","Étape 1: Calculer la hauteur totale de descente
+Hauteur de descente = B - C = {B} m - {C} m = [{B}-{C}] m
+
+Étape 2: Calculer le temps de chute
+Le temps de chute est le temps nécessaire pour descendre de [{B}-{C}] mètres à la vitesse de {A} m/s :
+Temps de chute = Hauteur de descente / Vitesse de descente = [{B}-{C}] m / {A} m/s = [({B}-{C})/{A}] s
+
+Convertir ce temps en minutes :
+Temps de chute en minutes = [({B}-{C})/{A}] s / 60 ≈ [(({B}-{C})/{A})/60] mn
+
+Étape 3: Calculer le temps total
+Ajouter les temps de réaction du pilote et de mise en place des procédures d'urgence :
+Temps total = Temps de chute en minutes + temps de réaction du pilote + mise en place des procédures = [(({B}-{C})/{A})/60] mn + {D} mn + {E} mn = [((({B}-{C})/{A})/60)+{D}+{E}] mn",2;None:[{F}] min; [{F}+-1] min;[{F}+-2] min;[{F}+-4] min,
+"Un {[avion,rafale,airbus,hélicoptère]} vole à {A} km/h, et un {[drone, boing, planeur]} à {B} km/h, ils décollent d'un aérodrome distant chacun de {C} km. Ils volent hm({D}) dans un sens opposé puis font demi tour. Combien de temps vont-ils prendre après leurs décollages pour se retrouver ?",0:{D}+{D};({C}/({A}+{B}))*3600;{E}+{F},"{A}:(200,400,10);{B}:(100,300,10);{C}:(100,300,10);{D}:(3600,14400,300)","Les aéronefs volent dans un premier temps dans un sens opposé pendant {D}. Cela veut dire qu'ils repasseront par leur aéroport de départ et mettront le meme temps pour revenir.
+On sait donc d’ores et déjà que nous aurons au minimum hm({D}) + hm({D}) = hm({E})
+
+Calculons ensuite le temps de rapprochement entre les avions. 
+Temps de rapprochement = distance / vitesse relative = {C} / ({A} + {B}) = [{C}/({A}+{B})] h soit hms({F})
+
+Le temps total pour que les deux aéronefs se rencontrent après leurs décollages est donc hm({E}) + hms({F}) = hms({G})",0;Round:hms([{G}]);hms([{G}+-60]);hms([{G}+-90]);hms([{G}+-180]);hms([{G}+-360]),
+"Un A330 MRTT a dans ses ailes {A} t de fuel. Il doit ravitailler un awacs et lui délivrer {B} L ; sachant que {C}/{D} du fuel de l'A330 MRTT sont réservés au ravitaillemnt, le carburant a une densité de {E}kg/1, combien peut il donner a chaque avion sachant qu'il en reste {F} à ravitailler ?",2:((({C}*{A}/{D}*1000)-({B}*{E}))/{F})/{E},"{A}:(100,200,10);{B}:(10000,60000,5000);{C}:(100,30,1);{D}:(100,30,1);{E}:(0.60,0.90,0.01);{F}:(2,10,1)","Étape 1 : Calcul de la quantité de carburant disponible pour le ravitaillement
+Quantité de carburant disponible = ({C}/{D}) × {A} tonnes = [{C}*{A}/{D}] t
+
+Étape 2 : Détermination de la quantité de carburant pour chaque avion AWACS
+Pour chaque avion AWACS, la quantité nécessaire est de {B} L × {E} kg/L = [{B}*{E}] kg.
+
+Le Carburant restant pour les {F} avions restant est :
+[{C}*{A}/{D}*1000] - [{B}*{E}] = [({C}*{A}/{D}*1000)-({B}*{E})] kg
+
+Sachant qu'il y a {F} avions, l'A300 MRTT pourra ravitailler équitablement les avions avec:
+[({C}*{A}/{D}*1000)-({B}*{E})] / {F} = [(({C}*{A}/{D}*1000)-({B}*{E}))/{F}] kg soit [((({C}*{A}/{D}*1000)-({B}*{E}))/{F})/{E}] l",2;None:[{G}] L; [{G}+-5] L;[{G}+-7] L;[{G}+-20] L;[{G}+-40] L,
+"Pour un défilé officiel, la PAF est en patrouille en circuit d'attente à {C}km de la place d'une ville, l'objectif étant de passer au-dessus de la place exactement en même temps que des militaires à pied pour un défilé officiel. Les militaires marchent à {A} m/s et sont à {B} km la place. Les alphajets volent à {D} m/min, sachant que la PAF doit survoler la place à hm({E}) et ce en meme temps que les fantassins, combien de temps après les fantassins la PAF doit elle partir de son circuit d'attente ?",0:{B}*1000/{A};({C}*1000)/({D}/60);{F}-{G},"{A}:(1,10,1);{B}:(7,20,1);{C}:(10,100,1);{D}:(1000,6000,100);{E}:(50400,57600,600)","Convertir les distances en mètres :
+
+La distance des militaires à la place est obtenue en multipliant {B} par 1000 = [{B}*1000] m
+La distance de la PAF à la place est obtenue en multipliant {C} par 1000 = [{C}*1000] m
+
+Convertir la vitesse des alphajets en mètres par seconde :
+Diviser la vitesse des alphajets {D} par 60 pour obtenir la vitesse en mètres par seconde: [{D}/60] m/s
+
+
+Calculer le temps nécessaire aux militaires pour atteindre la place :
+Diviser la distance en mètres (obtenue à l'étape 1) par la vitesse des militaires : [{B}*1000] / {A} = [{B}*1000/{A}] s
+
+Calculer le temps nécessaire à la PAF pour atteindre la place :
+Diviser la distance en mètres (obtenue à l'étape 1) par la vitesse des alphajets en mètres par seconde : [{C}*1000] / [{D}/60] = [({C}*1000)/({D}/60)] s
+
+
+Calcul du moment où les avions de la PAF doivent partir de leur zone de stationnement
+Le moment où les avions de la PAF doivent partir de leur zone de stationnement est le temps nécessaire aux militaires pour rejoindre la place moins le temps nécessaire pour que les avions parcourent la distance  :
+Temps total = Temps des militaires - Temps des avions = {F} s - {G} s soit hms({H})",0;Round:hms([{H}+-60]); hms([{H}+-30]);hms([{H}+-10]);hms([{H}+-80]);hms([{H}+-45]),
+"Un avion avec {F} moteur commence un vol avec {A} tonnes de carburant, sachant que la densité du carburant est {B} kg/l. Si la distance totale du vol est de {C} km et que l'avion vole à {D} m/s, combien de kilogrammes de carburant resteront dans les réservoirs à l'atterrissage s'il consomme {E} L/h par moteur ?",2:({A}*1000)-(({E}*{F}*{B})*({C}/({D}*3.6))),"{A}:(70,200,5);{B}:(0.1,0.90,0.01);{C}:(2000,6000,500);{D}:(100,300,10);{E}:(100,500,10);{F}:(1,4,1)","Étape 1: Calculer la consommation totale de carburant par heure pour les 3 moteurs
+Pour les {F} moteurs, la consommation totale de carburant par heure est de :
+Consommation totale par heure = {E} L/h × {F} = [{E}*{F}] L/h
+
+Étape 2: Convertir la consommation de carburant par heure en kilogrammes
+Pour convertir la consommation de carburant en litres en kilogrammes, nous utilisons la densité du carburant, qui est de {B} kg/L :
+Consommation totale par heure (en kg/h) = [{E}*{F}] L/h × {B} kg/L = [{E}*{F}*{B}] kg/h
+
+Étape 4: Calculer le temps total de vol
+Pour trouver le temps total de vol, nous divisons la distance totale du vol par la vitesse de l'avion :
+Temps de vol total = {C} km / [{D}*3.6] hm/h ( {D} m/s) = [{C}/({D}*3.6)] heures
+
+Étape 5: Calculer la quantité totale de carburant consommée pendant le vol
+La quantité totale de carburant consommée pendant le vol est égale à la consommation totale par heure multipliée par le temps total de vol :
+Quantité totale de carburant consommée = [{E}*{F}*{B}] kg/h × [{C}/({D}*3.6)] h = [({E}*{F}*{B})*({C}/({D}*3.6))] kg
+
+Étape 6: Soustraire la quantité totale de carburant consommée de la quantité initiale de carburant
+La quantité de carburant restante est égale à la quantité initiale de carburant moins la quantité totale de carburant consommée :
+Quantité de carburant restante = [{A}*1000] kg - [({E}*{F}*{B})*({C}/({D}*3.6))] kg = [({A}*1000)-(({E}*{F}*{B})*({C}/({D}*3.6)))] kg",2;None:[{G}]; [{G}+-1];[{G}+-2];[{G}+-4],
+"Un A400M est conçu pour voler à une vitesse de {A} km/h avec une consommation de carburant standard de {B} L/h. Le pilote décide d'augmenter la vitesse de {C}% pour atteindre sa destination plus rapidement, mais cela entraîne une augmentation de {D}% de la consommation de carburant par heure.
+Sachant que ca mission est de récupérer des troupes à {E} km de sa base, combien va t'il consommer pour l'aller retour ?",2:{B}*(1+({D}/100));{A}*(1+({C}/100));{E}/{G};{H}*{F};{I}*2,"{A}:(300,700,10);{B}:(3000,5000,100);{C}:(10,80,5);{D}:(10,90,5);{E}:(1500,3000,100)","Étape 1: Calcul de la consommation de carburant par heure à la vitesse augmentée
+La consommation de carburant par heure à la vitesse augmentée est de {B} L/h + {D}% de {B} L/h.
+Consommation de carburant par heure à la vitesse augmentée = {B} L/h + [{D}/100] × {B} L/h = {F}
+
+Étape 2: Calcul du temps nécessaire pour atteindre la destination à la vitesse augmentée
+La vitesse augmentée est de 10% de plus que la vitesse normale, donc :
+Vitesse augmentée = {A} km/h + [{C}/100] × {A} km/h = {A} km/h + [{C}/100] × {A} km/h = {G}
+
+Le temps nécessaire pour atteindre la destination à la vitesse augmentée est :
+Temps nécessaire à la vitesse augmentée = Distance / Vitesse augmentée = {E} / {G}  = {H}
+
+Étape 3: Calcul de la consommation de carburant pour un aller simple:
+Temps nécessaire à la vitesse augmentée x Consommation de carburant par heure à la vitesse augmentée = {H} x {F} = {I}
+
+Étape 4: Calcul de la consommation de carburant pour l'aller-retour:
+{I} x 2 = {J}",2;None:[{J}] L; [{J}+-3.52];[{J}+-6.63] L;[{J}+-10.58] L;[{J}+-15.11] L,
+"Un avion parcours {A} cm sur une carte ayant pour échelle 1/{B} en hm({C}). S'il consomme {D}L par tranche de {E}km/h, combien a t'il consommé ?",2:((({A}*{B}/100000)/({C}/3600))/{E})*{D},"{A}:(10,40,1);{B}:(100000,2000000,100000);{C}:(6000,24000,300);{D}:(10,90,1);{E}:(50,150,5)","Étape 1: Conversion de la distance parcourue sur la carte en kilomètres
+La distance parcourue sur la carte est de {A} cm et l'échelle de la carte est de 1/{B}. Donc, la distance réelle parcourue est :
+Distance réelle = {A} cm × {B} cm = [{A}*{B}] cm = [{A}*{B}/100000] km
+
+Étape 2: Calcul de la vitesse de l'avion
+La vitesse de l'avion peut être calculée en divisant la distance parcourue par le temps de vol :
+Vitesse = Distance parcourue / Temps de vol
+
+Vitesse = [{A}*{B}/100000] km / [{C}/3600] heures
+
+Vitesse ≈ [({A}*{B}/100000)/({C}/3600)] km/h
+
+Étape 3: Calcul de la consommation de carburant
+Maintenant que nous avons la vitesse de l'avion, nous pouvons calculer la consommation de carburant. La consommation est de {D} litres par tranche de {E} km/h. Comme la vitesse de l'avion est de [({A}*{B}/100000)/({C}/60)] km/h, nous divisons cette vitesse par {E} pour obtenir le nombre de tranches de {E} km/h parcourues :
+Tranches de {E} km/h = [({A}*{B}/100000)/({C}/3600)] km/h / {E} km/h = [(({A}*{B}/100000)/({C}/3600))/{E}]
+
+Ensuite, nous multiplions ce nombre de tranches par la consommation par tranche pour obtenir la consommation totale de carburant :
+Consommation de carburant = [(({A}*{B}/100000)/({C}/3600))/{E}] × {D} litres = [((({A}*{B}/100000)/({C}/3600))/{E})*{D}] litres",2;None:[{F}] L; [{F}+-1] L;[{F}+-2] L;[{F}+-4] L,
+"Une voiture de course poursuit un objet s'éloignant à une vitesse de {A} m/s, initiallement à {B} km de distance. Sa phase de départ dure {C} minutes à une vitesse moyenne de {D} km/h. Pour le reste du trajet, elle accélère à une vitesse moyenne de {E} km/h. Combien de temps lui faudra-t-il pour atteindre l'objet ?",0:(((({B}*1000)+({A}*{C}*60))-(({C}*60)*({D}/3.6)))/(({E}/3.6)-{A}))+({C}*60),"{A}:(10,50,1);{B}:(100,400,100000);{C}:(5,20,1);{D}:(100,200,1);{E}:(300,500,1)","La distance initiale entre la voiture et l'objet est de {B} km, soit [{B}*1000] mètres. La voiture commence par une phase de départ de {C} minutes ([{C}*60] secondes) à une vitesse de {D} km/h, ce qui équivaut à [{D}/3.6] m/s ({D} x 1000 / 3600). Pendant cette phase, elle parcourt [{D}/3.6] m/s x [{C}*60] s = [({C}*60)*({D}/3.6)] mètres.
+
+Pendant ce temps, l'objet s'éloigne à {A} m/s. Il parcourt donc {A} m/s x [{C}*60] s = [{A}*{C}*60] mètres supplémentaires. La distance totale à rattraper devient [{B}*1000] m + [{A}*{C}*60] m = [({B}*1000)+({A}*{C}*60)] mètres.
+
+Après la phase de départ, la voiture accélère à {E} km/h, soit [{E}/3.6] m/s ({E} x 1000 / 3600). 
+La distance restante est de [({B}*1000)+({A}*{C}*60)] m - [({C}*60)*({D}/3.6)] m = [(({B}*1000)+({A}*{C}*60))-(({C}*60)*({D}/3.6))] mètres. 
+La vitesse relative pour rattraper l'objet est de [{E}/3.6] m/s - {A} m/s = [({E}/3.6)-{A}] m/s. 
+Le temps pour cela est de [(({B}*1000)+({A}*{C}*60))-(({C}*60)*({D}/3.6))] m / [({E}/3.6)-{A}] m/s ≈ [((({B}*1000)+({A}*{C}*60))-(({C}*60)*({D}/3.6)))/(({E}/3.6)-{A})] secondes.
+
+Le temps total, incluant la phase de départ, est de [((({B}*1000)+({A}*{C}*60))-(({C}*60)*({D}/3.6)))/(({E}/3.6)-{A})] s + [{C}*60] s = [(((({B}*1000)+({A}*{C}*60))-(({C}*60)*({D}/3.6)))/(({E}/3.6)-{A}))+({C}*60)] secondes. 
+Converti en heures, minutes et secondes, cela donne hms({F})",0;Round:hms([{F}]) ; hms([{F}+-60]) ;hms([{F}+-30]) ;hms([{F}+-100]) ;hms([{F}+-45]),
+"Un avion avec {A} moteur(s) consommant chacun {B} litres par heure à une vitesse de croisière de {C} km/h doit effectuer un vol de {D} km. À mi-chemin, l'un des moteurs tombe en panne, ce qui oblige l'avion à augmenter la consommation du moteur restant de {E}% tout en diminuant sa vitesse de {F}%. Quelle quantité de carburant l'avion a-t-il consommée pendant le vol ?",2:({A}*{B}*(({D}/2)/{C}))+(({A}-1)*({B}+({B}*{E}/100))*(({D}/2)/({C}-({C}*{F}/100)))),"{A}:(2,5,1);{B}:(1000,4000,100);{C}:(500,1200,100);{D}:(1000,3000,100);{E}:(10,90,1);{F}:(10,90,1)","La consommation totale de carburant est calculée en deux phases. 
+Pour la première moitié du vol ([{D}/2] km), l'avion utilise ses {A} moteur(s) à plein régime, consommant {B} litres par heure chacun. 
+Temps de vol pour la première moitier = [{D}/2] / {C} = [({D}/2)/{C}] heure(s)
+Consommation de carburant pour les {A} moteurs = {A} x {B} x [({D}/2)/{C}] = [{A}*{B}*(({D}/2)/{C})] L
+
+Après la panne, la consommation du moteur restant augmente de {E}% en raison de l'effort supplémentaire, tandis que la vitesse de l'avion diminue de {F}%.
+Nouvelle vitesse = {C} - {F}% x {C} = [{C}-({C}*{F}/100)]
+Nouvelle consommation = {B} + {B} x {E}% = [{B}+({B}*{E}/100)]
+Temps de vol pour la deuxieme phase = [{D}/2] / [{C}-({C}*{F}/100)] = [({D}/2)/({C}-({C}*{F}/100))]
+Consommation de carburant pour les {A} - 1 moteur = ({A} - 1) x [{B}+({B}*{E}/100)] x [({D}/2)/({C}-({C}*{F}/100))] = [({A}-1)*({B}+({B}*{E}/100))*(({D}/2)/({C}-({C}*{F}/100)))]
+
+Consommation totale = [{A}*{B}*(({D}/2)/{C})] + [({A}-1)*({B}+({B}*{E}/100))*(({D}/2)/({C}-({C}*{F}/100)))] = [({A}*{B}*(({D}/2)/{C}))+(({A}-1)*({B}+({B}*{E}/100))*(({D}/2)/({C}-({C}*{F}/100))))]",0;None:[{G}] L; [{G}+-2.5] L;[{G}+-4] L;[{G}+-6] L;[{G}+-7.5] L,
+"Un KC-135 Stratotanker décolle à hm({A}) avec {B} kg de carburant. Il consomme en moyenne {C} mètres cubes de carburant par heure. Au cours de son vol, il ravitaille {D} F-16 en leur donnant {E} litres de carburant chacun, puis {I} Eurofighter avec {F} litres de carburant. Le carburant a une densité de {G} kg/l et l'avion retourne à sa base à hm({H}). Quelle quantité de carburant lui reste-t-il à son retour ?",2:{H}-{A};{J}/3600;{B}-((({C}*1000*{G})*{K})+((({D}*{E})+({I}*{F}))*{G})),"{A}:(43200,54000,300);{B}:(70000,150000,1000);{C}:(2,10,1);{D}:(1,5,1);{E}:(1000,5000,100);{F}:(1000,5000,100);{G}:(0.10,0.99,0.01);{H}:(68400,82800,300);{I}:(1,5,1)","Le vol débute avec {B} kg de carburant. La consommation moyenne de l'avion est de {C} mètres cubes par heure, ce qui équivaut à [{C}*1000] litres par heure (car 1 mètre cube = 1000 litres). La densité du carburant est de {G} kg/l, donc la consommation horaire en poids est de [{C}*1000] litres/h x {G} kg/l = [{C}*1000*{G}] kg/h.
+
+Le temps total de vol est calculé à partir de l'heure de départ hm({A}) et de l'heure d'arrivée hm({H}). Cela donne une durée de vol de hm({J}), soit {K} heures. La consommation totale de carburant pendant le vol est donc de [{C}*1000*{G}] kg/h x {K} h = [({C}*1000*{G})*{K}] kg.
+
+En plus de la consommation de vol, l'avion ravitaille {D} F-16 (chacun recevant {E} litres) et {I} Eurofighter ({F} litres). 
+Le carburant total distribué aux avions est donc de ({D} x {E} + {I} x {F}) litres x {G} kg/l = [(({D}*{E})+({I}*{F}))*{G}] kg.
+
+La quantité totale de carburant dépensée (consommation plus ravitaillement) est de [({C}*1000*{G})*{K}] kg + [(({D}*{E})+({I}*{F}))*{G}] kg = [(({C}*1000*{G})*{K})+((({D}*{E})+({I}*{F}))*{G})] kg. 
+
+Enfin, la quantité de carburant restante à l'arrivée est de {B} kg - [(({C}*1000*{G})*{K})+((({D}*{E})+({I}*{F}))*{G})] kg = [{B}-((({C}*1000*{G})*{K})+((({D}*{E})+({I}*{F}))*{G}))].",2;None:[{L}] ; [{L}+-1] ;[{L}+-2] ;[{L}+-4],
+"Un avion de ligne peut contenir {A} passagers et parcourt en moyenne une distance de {B} km. Chaque passager consomme en moyenne {C} litre d'eau pour chaque heure de vol. Sachant que la durée de vol est de {D} heures et que {E} litre d'eau pèse {F} kg, quelle quantité totale d'eau doit être embarquée pour le vol ?",2:{A}*{C}*{D}*{F}/{E},"{A}:(150,300,5);{B}:(1000,5000,10);{C}:(1,10,1);{D}:(2,10,1);{E}:(1,5,1);{F}:(1,5,1)","Si un avion de ligne peut contenir {A} passagers et que chaque passager consomme en moyenne {C} litre d'eau pour chaque heure de vol, la quantité totale d'eau nécessaire pour un vol de {D} heures est :
+
+{A} passagers x {C} litre d'eau par heure x {D} heures de vol = [{A}*{C}*{D}] litres d'eau
+
+Comme {E} litre d'eau pèse {F} kg, cela signifie que la quantité totale d'eau nécessaire pour le vol est:
+[{A}*{C}*{D}] x {F} / {E} = [{A}*{C}*{D}*{F}/{E}] kg",0;None:[{G}] Kg; [{G}+-1] Kg;[{G}+-2] Kg;[{G}+-4] Kg;[{G}+-6] Kg,
+"Un train transporte {A} passagers entre deux villes distantes de {B} km. Le train consomme {C} litres de diesel par km. Sachant que chaque passager emporte un bagage de {D} kg et qu'il pèse {E} lbs, et que le poids total du train, y compris les passagers et leurs bagages, ne doit pas dépasser {F} tonnes, quelle est la quantité  de diesel que le train peut embarquer en plus de la quantité requise pour ce voyage si la densité du carburant est de {H} kg/l?
+(1lbs = {G} kg)",2:(({F}*1000)-(({A}*{E}*{G})+({A}*{D}))-({B}*{C}*{H}))/{H},"{A}:(200,500,1);{B}:(500,1000,10);{C}:(2,10,1);{D}:(10,30,1);{E}:(90,100,1);{F}:(110,150,1);{G}:(0.10,0.99,0.01);{H}:(0.10,0.99,0.01)","Pour calculer la quantité maximale de diesel que le train peut embarquer pour ce voyage, nous devons d'abord déterminer le poids total des passagers et de leurs bagages.
+
+Le poids total de leurs bagages est :
+{A} passagers x {D} kg par bagage = [{A}*{D}] kg
+
+Le poids total des passagers est de :
+{A} passagers x [{E}*{G}] kg ({E} x {G}) = [{A}*{E}*{G}] kg
+
+Le nombre total de passagers est de {A}, donc le poids total de leurs bagages est :
+[{A}*{E}*{G}] + [{A}*{D}] = [({A}*{E}*{G})+({A}*{D})]
+
+Calculons ensuite la quantité de carburant requise:
+Distance entre les villes x consommation = {B} x {C} = [{B}*{C}] litres soit [{B}*{C}*{H}] kg
+
+Maintenant, pour déterminer la quantité de diesel que le train peut embarquer en plus de la quantité minimum:
+Masse maximum du train  -  Les passagers et leurs bagages - masse minimum du fuel =
+( {F} x 1000 ) - [({A}*{E}*{G})+({A}*{D})] - [{B}*{C}*{H}] = [({F}*1000)-(({A}*{E}*{G})+({A}*{D}))-({B}*{C}*{H})] kg soit [(({F}*1000)-(({A}*{E}*{G})+({A}*{D}))-({B}*{C}*{H}))/{H}] litres",0;None:[{I}] L; [{I}+-1] L;[{I}+-2] L;[{I}+-4] L,
+"Un cargo transporte des marchandises d'un port à un autre. La distance entre les deux ports est de {B} km et le navire se déplace à une vitesse moyenne de {C} km/h. Le navire consomme {D} litres de fioul par heure de navigation. Sachant que {E} m3 de marchandise pèse {F} tonne(s) et que le navire doit être chargé à {G}% de sa capacité maximale ( {H} kg) , quelle quantité de marchandise le navire peut-il embarquer pour ce voyage ?
+(densité du fioul est {A} kg/l)",2:(({H}*{G}/100)-({B}*{D}*{A}/{C}))*{E}/({F}*1000),"{A}:(0.10,1,0.01);{B}:(1000,2000,10);{C}:(10,20,1);{D}:(50,100,1);{E}:(1,10,1);{F}:(0.5,3,0.1);{G}:(10,90,1);{H}:(100000,200000,100)","Consommation de fioul totale = (Distance parcourue / Vitesse moyenne) x Consommation de fioul par heure
+Consommation de fioul totale = ({B} km / {C} km/h) x {D} litres/h = [{B}/{C}*{D}] litres de fioul
+Masse du fioul = [{B}/{C}*{D}] litres de fioul x densité du fioul = [{B}/{C}*{D}] x {A} = [{B}*{D}*{A}/{C}] kg
+
+Charge maximum du cargo = Masse du cargo x Pourcentage de charge / 100
+Charge maximum du cargo = {H} x {G} / 100 = [{H}*{G}/100]
+
+Charge autorisé pour les marchandise = Charge maximum du cargo - Consommation de fioul totale
+Charge autorisé pour les marchandise = [{H}*{G}/100] - [{B}/{C}*{D}] = [({H}*{G}/100)-({B}*{D}*{A}/{C})]
+
+On doit maintenant convertir en m3 les marchandises:
+Charge autorisé pour les marchandise x m3 / masse = [({H}*{G}/100)-({B}*{D}*{A}/{C})] x {E} / ({F} x 1000)  = [(({H}*{G}/100)-({B}*{D}*{A}/{C}))*{E}/({F}*1000)]",2;None:[{I}] m3; [{I}+-1] m3;[{I}+-2] m3;[{I}+-4] m3,
+"Un camion transporte des marchandises sur une distance de {A} km. Le camion consomme {B} litres de gazole pour chaque {C} km parcourus. Sachant que le camion peut transporter un maximum de {D} tonnes de marchandises et que chaque tonne de marchandise consomme {E} litre de gazole pour chaque {F} km parcourus, quelle quantité de gazole le camion doit-il emporter pour le voyage ?",2:({B}/{C}*{A})+({D}*{E}*{A}/{F}),"{A}:(200,500,10);{B}:(10,20,1);{C}:(10,100,1);{D}:(2,20,1);{E}:(1,20,1);{F}:(20,100,1)","Pour calculer la quantité de gazole que le camion doit emporter pour le voyage, nous devons prendre en compte deux facteurs : la distance à parcourir et le poids total que le camion transportera.
+
+Tout d'abord, nous devons calculer la consommation de gazole totale du camion pour parcourir les {A} km. On sait que le camion consomme {B} litres de gazole pour chaque {C} km parcourus, donc pour {A} km il consommera :
+
+{B} litres/{C} km x {A} km = [{B}/{C}*{A}] litres de gazole
+
+Ensuite, nous devons prendre en compte le poids total que le camion transportera. On sait que le camion peut transporter un maximum de {D} tonnes de marchandises, et que chaque tonne de marchandise consomme {E} litre de gazole pour chaque {F} km parcourus. Donc, pour les {A} km de voyage :
+
+{D} tonnes x {E} litre/{F} km x {A} km = [{D}*{E}*{A}/{F}] litres de gazole
+
+En combinant les deux, la quantité totale de gazole que le camion doit emporter pour le voyage est :
+
+[{B}/{C}*{A}] litres (consommation pour les 500 km) + [{D}*{E}*{A}/{F}] litres (consommation due aux marchandises) = [({B}/{C}*{A})+({D}*{E}*{A}/{F})] litres de gazole",2;None:[{G}] L; [{G}+-1] L;[{G}+-2] L;[{G}+-4] L,
+"Un soldat doit transporter des caisses de ravitaillement entre deux bases. La première étape de son voyage consiste à marcher {A} km à une vitesse de {B} km/h. Ensuite, il prend un hélicoptère pour parcourir {C} km, sachant que l'hélicoptère consomme {D} litre de carburant par kilomètre. Le carburant coûte {E} euro par litre. Une fois arrivé, il constate qu'il doit retourner à la base initiale pour récupérer {D} % de marchandises supplémentaires. Il fait le trajet retour de la même manière. Quel est le coût total du carburant pour l'ensemble du voyage aller-retour ?",2:{C}*{D}*{E}*4,"{A}:(20,50,1);{B}:(2,6,1);{C}:(50,150,1);{D}:(2,20,1);{E}:(1,5,0.01);{F}:(20,100,1)","Le temps pour marcher {A} km à {B} km/h est sans importance pour le calcul du coût du carburant, donc nous l'ignorons.
+La consommation de carburant pour {C} km est de {C}×{D}=[{C}*{D}] litres.
+Le coût pour [{C}*{D}] litres de carburant à {E} euro par litre est de [{C}*{D}] × {E} = [{C}*{D}*{E}] euros.
+Comme le trajet en hélicoptère est effectué deux fois à l'aller et deux fois au retour, le coût total du carburant pour l'ensemble du voyage est de [{C}*{D}*{E}] × 4 = [{C}*{D}*{E}*4] euros.",2;None:[{G}] €; [{G}+-1] €;[{G}+-2] €;[{G}+-4] €,
+"Une armée effectue une opération conjointe avec un avion et un sous-marin. L'avion doit transporter {A} kg de matériel à une base, et le sous-marin doit arriver en même temps à un point de rendez-vous.
+
+L'avion décolle avec un réservoir plein de carburant, mais consomme {B} % de plus chaque heure jusqu'à atteindre sa vitesse de croisière définitive au bout de 3h.
+L'avion vole à une vitesse de {C} km/h la première heure, augmente sa vitesse de {D} % la deuxième heure, puis réduit sa vitesse de {E} % la troisième heure. 
+
+Quelle est la quantité de carburant consommée par l'avion si la distance de vole de l'avion est de {K} et qu'il consomme initialement {G} L/h?",2:{C}*(1+{D}/100);{H}*(1-{E}/100);{C}+{H}+{I};{J}+{F}*{I};{G}*(1+{B}/100);{L}*(1+{B}/100);(({K}-{J})/{I})*{M};{G}+{L}+{M}+{N},"{A}:(100,500,1);{B}:(2,10,2);{C}:(50,150,10);{D}:(5,50,5);{E}:(5,60,5);{F}:(1.00,5.00,0.25);{G}:(50,100,10)","Calculer les vitesses:
+Première heure : {C} km/h
+Deuxième heure : {C} + {D}% de {C} = {H} km/h
+Troisième heure : [{C}*(1+{D}/100)] - {E}% de [{C}*(1+{D}/100)] = {I} km/h
+
+Calculer le temps de vol total:
+En examinant rapidement la situation et si {K} est > à {C} + {H} + {I}  = [{C}+{H}+{I}] on peut dire que l'avion volera au minimum 3 h 
+On peut donc déduite qu'en 3h il aura parcouru {C} + {H} + {I} et qu'il lui reste {K} - ({C} + {H} + {I} ) = [{K}-{J}] km à parcourir à {I} km/h
+
+Soit:
+[{K}-{J}] / {I} = [({K}-{J})/{I}] h
+
+L'avion aura donc volé au total : 
+
+Pour la calcul de sa consommation de carburant, nous utiliserons la formule :
+Etape 1: {G} L
+Etape 2: {G} * (1+{B}/100) = {L} L
+Etape 3: {L} * (1+{B}/100) = {M} L
+Etape(s) restante(s): [({K}-{J})/{I}] * {M} = {N} L
+
+Total de la consomasion:
+{G} + {L} + {M} + {N} = {O} L",2;None:[{O}] L; [{O}+-2.31] L;[{O}+-4.28] L;[{O}+-6.84] L;[{O}+-10.99] L,
+"Un hélicoptère militaire décolle d'une base avec une cargaison vitale destinée à un sous-marin qui se trouve à {A} km de la base. Une fois la cargaison récupérée, le sous-marin doit poursuivre sa route vers une autre destination à {B} miles de distance.
+
+L'hélicoptère peut voler à une vitesse constante de {C} miles par heure et consomme {D} gallons/h. Le sous-marin voyage à une vitesse de {E} miles par heure et consomme {F} L/h.
+Quelle est la quantité totale de carburant nécessaire pour cette mission, combinant l'avion et le sous-marin?
+( 1 km = {G} miles ) ; ( 1 Galon = {H} L )",2:(({A}/({C}/{G}))*{D})+((({B}/{E})*{F})/{H}),"{A}:(100,300,5);{B}:(2,10,1);{C}:(150,350,10);{D}:(2,50,1);{E}:(20,60,1);{F}:(10,100,1);{G}:(1.30,1.70,0.01);{H}:(2,4,0.01)","Temps de vol de l'hélicoptère = distance / vitesse = {A} / [{C}/{G}] km/h ( {C} miles/h ) = [{A}/({C}/{G})] heures.
+Temps de déplacement du sous-marin = distance / vitesse = {B} / {E} = [{B}/{E}] heures
+
+Carburant pour l'hélicoptère : [{A}/({C}/{G})] x {D} = [({A}/({C}/{G}))*{D}] gallons.
+Carburant pour le sous-marin : [{B}/{E}] x {F} = [({B}/{E})*{F}] L
+
+Carburant total = [({A}/({C}/{G}))*{D}] + [(({B}/{E})*{F})/{H}] = [(({A}/({C}/{G}))*{D})+((({B}/{E})*{F})/{H})] Gallons",2;None:[{I}] G; [{I}+-1] G;[{I}+-2] G;[{I}+-4] G;[{I}+-5] G,
+"Un pilote d'hélicoptère prévoit de voler entre deux villes. Sur une carte à l'échelle de 1/{A}, la distance est de {B} cm. L'hélicoptère consomme {C} litres de carburant tous les {D} km, chaque litre pesant {E} kg. Si le réservoir ne peut contenir plus de {F} kg de carburant, combien de lire devra t'il rajouter pour se rendre à destination ?",2:{B}*{A}/100000;{C}/{D};{G}*{H};{F}/{E};{I}-{J},"{A}:(1000000,3000000,50000);{B}:(30,50,1);{C}:(150,350,10);{D}:(100,150,5);{E}:(0.50,0.90,0.05);{F}:(100,300,10)","Étape 1: Distance réelle entre les deux villes
+La distance entre les deux villes sur la carte est de 35 cm. L'échelle de la carte est 1/{A}, ce qui signifie que 1 cm sur la carte représente {A} cm (ou [{A}/100000] km) dans la réalité.
+
+Distance réelle = {B} cm * [{A}/100000] km/cm = {G} km
+
+Étape 2: Consommation de carburant pour cette distance
+L'hélicoptère consomme {C} litres de carburant tous les {D} km. La consommation de carburant par kilomètre est donc :
+
+Consommation par km = {C} litres / {D} km = {H} litres/km
+
+Pour une distance de {G} km, la quantité de carburant nécessaire est :
+
+Carburant nécessaire = {G} km * {H} litres/km = {I} litres
+
+Étape 3: Capacité du réservoir et carburant nécessaire
+La capacité du réservoir est de {F} kg. Chaque litre de carburant pèse {E} kg. Donc, la capacité du réservoir en litres est :
+
+Capacité en litres = {F} kg / {E} kg/litre = {J} litres
+
+Étape 4: Calcul du carburant à ajouter
+Puisque le réservoir peut contenir au maximum {J} litres et que le pilote a besoin de {I} litres pour le voyage :
+
+Carburant supplémentaire nécessaire = {I} litres - {J} litres = {K} litres",2;None:[{K}] L; [{K}+-1] L;[{K}+-2] L;[{K}+-4] L;[{K}+-6] L,
+"Une recette nécessite que le four soit préchauffé à {A}°F, mais la température est donnée en degrés Celsius. En parallèle, le cuisinier doit se rendre au magasin à {B} km de distance à une vitesse de {C} km/h pour acheter un ingrédient manquant. Combien de temps aura-t-il pour faire les courses avant que le four n'atteigne la température souhaitée, sachant que le four chauffe à un rythme constant de {D}°C par minute ?
+Note: C = ( F - 32 ) x 0,55",2:({A}-32)*0.55;{E}/{D};{B}/{C};{G}*60;{H}*2;{F}-{I},"{A}:(300,500,5);{B}:(2,10,1);{C}:(15,50,5);{D}:(1,5,1)","Étape 1: Conversion de la température
+Pour convertir la température de Fahrenheit en Celsius, on utilise la formule suivante :
+C = ( F - 32 ) x 0.55 = ( {A} - 32 ) x 0,55 = {E} °C
+
+
+Étape 2: Calcul du temps de préchauffage
+Le four chauffe à un rythme constant de {D}°C par minute. Nous devons déterminer combien de temps il faut pour atteindre {E}°C :
+Temps = {E}°C / {D}°C par minute
+Temps = {F} minutes
+
+Étape 3: Calcul du temps nécessaire pour faire les courses
+Le cuisinier doit se rendre à un magasin situé à {B} km de distance à une vitesse de {C} km/h. Pour calculer le temps de trajet aller-retour, nous devons déterminer combien de temps il faut pour parcourir {B} km :
+Temps aller = {B} km / {C} km/h = {G} h = {H} min
+
+Comme il s'agit d'un aller-retour, nous devons doubler ce temps :
+Temps aller-retour = 2 * {H} minutes = {I} minutes
+
+Étape 4: Comparaison des temps
+Le four mettra environ {F} minutes pour atteindre {E}°C. Le cuisinier mettra {I} minutes pour faire l'aller-retour aux courses.
+
+Le cuisinier aura donc environ {J} minutes de marge avant que le four n'atteigne la température souhaitée de {A}°F ({E}°C).",2;None:[{H}] min; [{J}+-1] min;[{J}+-2] min;[{J}+-3] min;[{J}+-4] min,
+"Marie part en randonnée à 8h du matin et souhaite planifier son trajet sur une carte à l'échelle 1/{A}. Elle prévoit de suivre un chemin qui mesure {B} cm sur la carte, en marchant à une vitesse moyenne de {C} km/h. Le dénivelé du sentier, qui s'élève à {D} mètres, lui demandera un effort supplémentaire, ajoutant {E} minutes pour chaque {F} mètres grimpés. Lorsqu'elle arrive enfin à son point de destination, Marie découvre qu'elle a raté le bus précédent. Sachant que le premier bus du jour est aussi passé à 8h précises et que les bus suivants passent toutes les 30 minutes, combien de temps Marie devra attendre le prochain bus?
+(Si marie arrive à la même heure que le bus, elle devra prendre le prochain)",3:{B}*{A}/100000;{G}/{C};({G}/{C})*3600;{D}/{F}*{E};{J}*60;{I}+{K};28800+{L};{M}/3600;Dec{N};{O}*3600;{P};1800-{Q},"{A}:(50000,500000,50000);{B}:(2,10,1);{C}:(2,15,1);{D}:(300,600,50);{E}:(5,20,5);{F}:(50,200,50)","Étape 1: Calcul de la distance réelle
+La carte est à l'échelle 1/{A}. Donc, 1 cm sur la carte représente {A} cm (ou [{A}/100000] km) dans la réalité.
+
+Distance réelle = {B} cm * [{A}/100000] km/cm = {G} km
+
+Étape 2: Calcul du temps de marche sans tenir compte du dénivelé
+Marie marche à une vitesse moyenne de {C} km/h.
+
+Temps de marche (sans dénivelé) = Distance réelle / Vitesse = {G} km / {C} km/h = {H} heures = hm({I})
+
+Étape 3: Temps supplémentaire dû au dénivelé
+Le dénivelé est de {D} mètres. Chaque {F} mètres grimpés ajoutent {E} minutes.
+
+Temps supplémentaire dû au dénivelé = ({D} m / {F} m) * {E} minutes = {J} minutes
+
+Étape 4: Détermination de l'heure d'arrivée à la destination
+Marie part à 8h du matin. Le temps total de marche est la somme du temps de marche sans tenir compte du dénivelé et du temps supplémentaire dû au dénivelé.
+
+Temps total de marche = hm({I}) + hm({K}) = hm({L})
+
+Heure d'arrivée = 8h00 + hm({L}) = hm({M})
+
+Étape 5: Calcul du temps d'attente pour le prochain bus
+Les bus passent toutes les 30 minutes.
+Le prochain bus est dans hm({R})",0;Round:hm([{R}]);hm([{R}+-120]);hm([{R}+-360]);hm([{R}+-400]),{P}<1800;{P};{P};{P}-1800
+"Vous êtes un conducteur de camion qui doit livrer une commande de briques de construction. Chaque brique pèse {A} kg. Après vérification, vous réalisez que votre camion ne peux emporter que {B} livres de marchandise.
+
+A vide, votre destination, qui est à {C} km peut être atteinte en hm({D}). Sachant que pour {E} kg de brique pour perdez {F} km/h et que vous devez arriver sur votre chantier à hm({G}) , à quelle heure devez vous partir ?
+Note: 1 livre = 0.45kg",3:{B}*0.45;{H}/{E}*{F};{C}/({D}/3600);{J}-{I};{C}/{K};{L}*3600;{G}-{M},"{A}:(2.0,5.0,0.1);{B}:(20000,25000,100);{C}:(300,500,10);{D}:(3600,9000,300);{E}:(1000,1500,50);{F}:(1,8,1);{G}:(50400,72000,1800)","Étape 1: Conversion de la capacité de charge en kilogrammes
+La capacité de charge du camion est de {B} livres. Pour convertir ce poids en kilogrammes, nous utilisons la conversion suivante :
+1 livre = 0,45 kg
+
+Poids en kilogrammes = {B} livres x 0,45 kg/livre = {H} kg
+
+Étape 2: Calcul de la perte de vitesse due au poids des briques
+Pour chaque {E} kg de briques, vous perdez {F} km/h.
+
+Perte de vitesse = (Poids total des briques / {E} kg) * {F} km/h
+Perte de vitesse = ({H} kg / {E} kg) x {F} km/h = {I} km/h
+
+Étape 3: Calcul de la nouvelle vitesse moyenne
+La vitesse initiale à vide est de {C} km / [{D}/3600] heures = {J} km/h.
+
+La nouvelle vitesse moyenne, en tenant compte de la perte de vitesse, est :
+Nouvelle vitesse moyenne = Vitesse initiale - Perte de vitesse
+Nouvelle vitesse moyenne = {J} km/h - {I} km/h = {K} km/h
+
+Étape 4: Calcul du temps de trajet avec la nouvelle vitesse
+Temps de trajet = Distance / Nouvelle vitesse moyenne
+Temps de trajet = {C} km / {K} km/h ≈ {L} heures ≈ hm({M})
+
+Étape 5: Détermination de l'heure de départ
+Vous devez arriver à hm({G}). Nous soustrayons le temps de trajet de l'heure d'arrivée :
+
+Heure de départ = Heure d'arrivée - Temps de trajet
+Heure de départ = hm({G}) - hm({M})
+Heure de départ = hm({N})",0;Round:hm([{N}]);hm([{N}+-18000]);hm([{N}+-36000]);hm([{N}+-10800]);hm([{N}+-28800]),
+"Un jardinier dispose d'un terrain rectangulaire de {A} mètres sur {B} mètres. Il souhaite y planter des arbres en respectant une distance de {C} mètres entre chaque arbre. Sachant que le jardinier souhaite planter des arbres sur la moitié de la surface totale, combien lui faudra-t-il de terreau pour remplir les trous de plantation sachant qu'un sac de terreau contient {E} litres et que chaque trou mesure {F} centimètres de côté et {G} centimètres de profondeur ?
+
+Note: 1 mètre cube = 1000 litres",2:{A}/{C};{B}/{C};{H}*{I};{J}/2;({F}*{F}*{G})/1000000;{L}*1000;{M}/{E};{K}*{N},"{A}:(20,100,2);{B}:(20,200,2);{C}:(2,8,2);{D}:(3600,9000,300);{E}:(10,70,5);{F}:(20,50,1);{G}:(20,50,1)","Étape 1: Calcul du nombre d'arbres pouvant être plantés sur la totalité du terrain
+Les arbres doivent être plantés avec une distance de 5 mètres entre eux. Nous calculons d'abord le nombre d'arbres par rangée et par colonne :
+
+Nombre d'arbres par rangée = {A} mètres / {C} mètres = {H} arbres
+Nombre d'arbres par colonne = {B} mètres / {C} mètres = {I} arbres
+
+Donc, le nombre total d'arbres pouvant être plantés :
+
+Nombre total d'arbres = {H} x {I} = {J} arbres
+
+Étape 2: Calcul du nombre d'arbres sur la moitié du terrain:
+
+{J} arbres / 2 = {K} arbres
+
+Étape 3: Calcul du volume de terreau nécessaire pour chaque trou de plantation
+Chaque trou de plantation mesure {F} centimètres de côté et {G} centimètres de profondeur. Nous convertissons les dimensions en mètres pour calculer le volume :
+
+Dimensions du trou :
+
+Côté : [{F}/100] mètres
+Profondeur : [{G}/100] mètres
+Volume d'un trou = [{F}/100] mètres * [{F}/100] mètres * [{G}/100] mètres = {L} mètres cubes
+
+Volume d'un trou en litres = {L} mètres cubes * 1000 litres/mètre cube = {M} litres
+
+Étape 4: Déterminer le nombre de sacs de terreau nécessaires
+Un sac de terreau contient {E} litres.
+
+Nombre de sacs par trou = Volume d'un trou en litres / Volume d'un sac
+Nombre de sacs par trou = {N} litres / {E} litres = {N} sacs
+
+Pour {K} arbres :
+
+Nombre total de sacs = {K} arbres * {N} sacs = {O} sacs",0;Ceil:[{O}] sacs; [{O}+-1] sacs;[{O}+-2] sacs;[{O}+-4] sacs,
+"Un chasseur effectue un parcours triangulaire. Dans le premier tronçon, il vole à une vitesse de {A} km/h pendant hm({B}). Dans le deuxième tronçon, il vole à une vitesse de {C} km/h pendant hm({D}). Dans le troisième tronçon, il vole à une vitesse de {E} km/h pendant hm({F}). Quelle est sa vitesse moyenne sur toute la durée du trajet?",3:{A}*{B}/3600;{C}*{D}/3600;{E}*{F}/3600;{G}+{H}+{I};{B}/3600+{D}/3600+{F}/3600;{J}/{K},"{A}:(100,400,5);{B}:(3600,10800,300);{C}:(100,400,5);{D}:(3600,10800,300);{E}:(100,400,5);{F}:(3600,10800,300)","Étape 1: Calcul de la distance parcourue dans chaque tronçon
+
+Premier tronçon :
+Temps = hm({B}) = [{B}/3600]
+Distance = {A} km/h x [{B}/3600] heures = {G} km
+
+Deuxième tronçon :
+Temps = hm({D}) = [{D}/3600]
+Distance = {C} km/h x [{D}/3600] heures = {H} km
+
+Troisième tronçon :
+Temps = hm({F}) = [{F}/3600]
+Distance = {E} km/h x [{F}/3600] heures = {I} km
+
+Étape 2: Calcul de la distance totale parcourue
+Distance totale = Distance premier tronçon + Distance deuxième tronçon + Distance troisième tronçon
+Distance totale = {G} km + {H} km + {I} km = {J} km
+
+Étape 3: Calcul de la durée totale du trajet
+Durée totale = Temps premier tronçon + Temps deuxième tronçon + Temps troisième tronçon
+Durée totale = [{B}/3600] heures + [{D}/3600] heures + [{F}/3600] heures = {K} heures
+
+Étape 4: Calcul de la vitesse moyenne sur toute la durée du trajet
+Vitesse moyenne = {J} km / {K} heures = {L} km/h",3;None:[{L}] km/h;[{L}+-3] km/h;[{L}+-2] km/h;[{L}+-3.5] km/h;[{L}+-10.3] km/h,
+"Un hélicoptère de reconnaissance avance à une vitesse constante de {A} km/h par rapport au sol. Il effectue un aller-retour de {B} km avec, à l'aller, un vent de face de {C} km/h et au retour, un vent arrière de {D} km/h. Quelle est la vitesse moyenne de l'hélicoptère sur ce trajet?",2:{A}-{C};{A}+{D};{B}/{E};{B}/{F};{G}+{H};{B}*2;{J}/{I},"{A}:(100,400,5);{B}:(3600,10800,300);{C}:(10,40,5);{D}:(30,80,5)","Étape 1: Calcul de la vitesse effective à l'aller
+À l'aller, l'hélicoptère a un vent de face de {C} km/h.
+
+Vitesse effective à l'aller = {A} km/h - {C} km/h = {E} km/h
+
+Étape 2: Calcul de la vitesse effective au retour
+Au retour, l'hélicoptère a un vent arrière de {D} km/h.
+
+Vitesse effective au retour = {A} km/h + {D} km/h = {F} km/h
+
+Étape 3: Calcul du temps de trajet pour l'aller et le retour
+Temps de trajet à l'aller :
+Temps à l'aller = {B} km / {E} km/h = {G} heures
+
+Temps de trajet au retour :
+Temps au retour = {B} km / {F} km/h = {H} heures
+
+Étape 4: Calcul de la durée totale du trajet aller-retour
+Durée totale = Temps à l'aller + Temps au retour
+Durée totale = {G} heures + {H} heures = {I} heures
+
+Étape 5: Calcul de la vitesse moyenne sur toute la durée du trajet
+La distance totale aller-retour est :
+Distance totale = {B} km + {B} km = {J} km
+
+La vitesse moyenne est donnée par la formule :
+Vitesse moyenne = Distance totale / Durée totale
+Vitesse moyenne = {J} km / {I} heures = {K} km/h",3;None:[{K}] km/h;[{K}+-3] km/h;[{K}+-2] km/h;[{K}+-3.5] km/h;[{K}+-10.3] km/h,
+"Un avion ayant des réservoirs pouvant contenir {A} kg de carburant a une autonomie de {B} km. Il part en mission avec les réservoirs pleins. Après avoir parcouru {C} km, un avion ravitailleur lui transfère {D} L de carburant. quelle est son autonomie restante?
+Note: La densité du jour est {E}",2:{A}/{B};{C}*{F};{A}-{G};{H}+({D}*{E});{I}/{F},"{A}:(5000,9000,5);{B}:(2000,5000,100);{C}:(500,1500,10);{D}:(500,1500,100);{E}:(0.30,0.95,0.01)","Étape 1: Calcul de la consommation de carburant par kilomètre
+L'avion a une autonomie de {B} km avec {A} kg de carburant. Donc, la consommation de carburant par kilomètre est :
+
+Consommation par kilomètre = {A} kg / {B} km = {F} kg
+
+Étape 2: Calcul du carburant consommé après {C} km
+Carburant consommé = {C} km * {F} kg/km = {G} kg
+
+Étape 3: Calcul du carburant restant avant ravitaillement
+Le réservoir de l'avion était plein au départ, soit {A} kg. Après avoir consommé {G} kg, le carburant restant est :
+
+Carburant restant = {A} kg - {G} kg = {H} kg
+
+Étape 4: Calcul du carburant après ravitaillement
+L'avion ravitailleur lui transfère {D} L de carburant. Donc, le carburant total après ravitaillement est :
+
+Carburant total = {H} kg + ( {D} x {E} ) kg = {I}
+
+Étape 5: Calcul de l'autonomie restante
+L'avion a maintenant {I} kg de carburant. En utilisant la consommation de carburant par kilomètre calculée précédemment, l'autonomie restante est :
+
+Autonomie restante = Carburant total / Consommation par kilomètre = {I} / {F} = {J} km",3;None:[{J}] km;[{J}+-40] km;[{J}+-50] km;[{J}+-100] km;[({H}+{D})/{F}] km,
+"Un alpiniste commence son ascension à une altitude de {A} mètres. Il grimpe à une vitesse moyenne de {B} mètres par heure pendant les premières {C} heures. Ensuite, à cause de la difficulté du terrain, sa vitesse est réduite de {D} % pour les {E} heures suivantes. Enfin, pour atteindre le sommet, il doit encore grimper {F} km avec une vitesse réduite de moitié par rapport à sa vitesse initiale. Quelle est l'altitude finale atteinte par l'alpiniste et combien de temps a-t-il mis pour atteindre le sommet ?",2:{B}*{C};{A}+{G};{B}-((100-{D})/100);{I}*{E};{H}+{J};{B}/2;({F}*1000)/{L};{K}+{F}*1000;{C}+{E}+{M},"{A}:(200,500,5);{B}:(100,500,1);{C}:(2,10,1);{D}:(55,90,1);{E}:(2,5,1);{F}:(1.0,4.0,0.1)","Étape 1: Calcul de l'ascension pendant les premières {C} heures
+L'alpiniste grimpe à une vitesse moyenne de {B} mètres par heure pendant les premières {C} heures.
+
+Distance parcourue pendant les {C} premières heures = Vitesse * Temps
+Distance parcourue = {B} m/h * {C} h = {G} mètres
+
+Altitude après les {C} premières heures :
+Altitude = Altitude initiale + Distance parcourue
+Altitude = {A} m + {G} m = {H} mètres
+
+Étape 2: Calcul de l'ascension pendant les {E} heures suivantes avec une vitesse réduite de {D}%
+Sa vitesse est réduite de {D}%, donc il grimpe à [100-{D}]% de sa vitesse initiale.
+
+Nouvelle vitesse = {B} m/h * [100-{D}/100] = {I} m/h
+
+Distance parcourue pendant les {E} heures suivantes :
+Distance parcourue = {I} m/h * {E} h = {J} mètres
+
+Altitude après les {E} heures suivantes :
+Altitude = {H} m + {J} m = {K} mètres
+
+Étape 3: Calcul de l'ascension pour les {F} km restants avec une vitesse réduite de moitié
+Sa vitesse est réduite de moitié par rapport à sa vitesse initiale.
+
+Nouvelle vitesse = {B} m/h * 0.50 = {L} m/h
+
+Distance à parcourir = {F} km = [{F}*1000] mètres
+
+Temps nécessaire pour parcourir [{F}*1000] mètres :
+Temps = Distance / Vitesse = [{F}*1000] m / {L} m/h = {M} heures
+
+Altitude finale atteinte :
+Altitude = {K} m + [{F}*1000] m = {N} mètres
+
+Étape 4: Calcul du temps total mis pour atteindre le sommet
+Temps total = Temps pour les premières {C} heures + Temps pour les {E} heures suivantes + Temps pour les {F} km restants
+Temps total = {C} h + {E} h + {M} h = {O} heures",2;None:[{N}] m et [{O}] h;[{N}+-100] m et [{O}+-0.5] h;[{N}+-200] m et [{O}+-1] h;[{N}+-50] m et [{O}+-1] h;[{N}+-150] m et [{O}+-0.5] h,
+"Un bateau de plaisance consomme en moyenne {A} litres de carburant par heure lorsqu'il navigue à {B} nœuds. Il doit parcourir une distance de {C} miles nautiques. Après avoir navigué pendant {D} heures, il rencontre des courants contraires qui réduisent sa vitesse de {E} %, augmentant ainsi sa consommation de {F}%. Sachant que 1 mile nautique équivaut à 1,852 km et que le carburant a une densité de {G} kg/l, quelle quantité de carburant en tonnes a-t-il consommée à la fin de son voyage ?",3:{C}*1.852;{B}*{D};{I}*1.852;{H}-{J};{B}*(1-({E}/100));{A}*(1+{F}/100);{K}/1.852;{N}/{L};{A}*{D};{M}*{O};{P}+{Q};{R}*{G};{S}/1000,"{A}:(50,100,5);{B}:(20,40,5);{C}:(400,1000,100);{D}:(1,5,1);{E}:(10,40,5);{F}:(10,50,5);{G}:(0.50,0.90,0.01)","Étape 1: Conversion de la distance en kilomètres
+Distance totale en km = {C} miles nautiques * 1,852 km/mile nautique = {H} km
+
+Étape 2: Calcul de la distance parcourue en {D} heures à la vitesse initiale
+Distance parcourue en {D} heures = {B} miles nautiques/h * {D} h = {I} miles nautiques
+
+Convertissons cette distance en kilomètres :
+Distance en km = {I} miles nautiques * 1,852 km/mile nautique = {J} km
+
+Étape 3: Calcul de la distance restante après {D} heures de navigation
+Distance restante = Distance totale en km - Distance parcourue en km = {H} km - {J} km = {K} km
+
+Étape 4: Calcul de la nouvelle vitesse et consommation après {D} heures
+Les courants contraires réduisent la vitesse de {E}%, donc la nouvelle vitesse est :
+
+Nouvelle vitesse = {B} nœuds * (1 - [{E}/100]) = {B} nœuds * [1-({E}/100)] = {L} nœuds
+
+La consommation augmente de {F} %, donc la nouvelle consommation est :
+
+Nouvelle consommation = {A} litres/h * [1+{F}/100] = {M} litres/h
+
+Étape 5: Calcul du temps nécessaire pour parcourir la distance restante à la nouvelle vitesse
+Distance restante en miles nautiques = {K} km / 1,852 km/mile nautique = {N} miles nautiques
+
+Temps nécessaire = Distance restante / Nouvelle vitesse = {N} miles nautiques / {L} nœuds = {O} heures
+
+Étape 6: Calcul de la consommation totale de carburant
+Consommation pendant les premières {D} heures :
+Consommation en litres = {A} litres/h * {D} h = {P} litres
+
+Consommation pendant les {O} heures suivantes :
+Consommation en litres = {M} litres/h * {O} h = {Q} litres
+
+Consommation totale en litres :
+Consommation totale en litres = {P} litres + {Q} litres = {R} litres
+
+Étape 7: Conversion de la consommation de carburant en tonnes
+La densité du carburant est de {G} kg/litre.
+Consommation totale en kg = {R} litres * {G} kg/litre = {S} kg
+
+Convertissons cette consommation en tonnes :
+Consommation totale en tonnes = {S} kg / 1000 kg/tonne = {T} tonnes",3;None:[{T}] tonnes;[{T}+-0.2] tonnes;[{T}+-1] tonnes;[{T}+-0.5] tonnes;[{T}+-0.8] tonnes,
+"Une course de drones se déroule sur un circuit de [{B}+{E}+{F}] km. Les drones parcourent les {B} premiers kilomètres à une vitesse moyenne de {C} km/h. Ensuite, à cause des vents forts, leur vitesse est réduite de {D}% pour les {E} km suivants. Pour les {F} derniers kilomètres, ils peuvent augmenter leur vitesse de {G}% par rapport à leur vitesse initiale. Sachant qu'il y a un ravitaillement de {H} minutes à mi-parcours, quelle est la durée totale de la course, incluant le temps de ravitaillement ?",4:{B}/{C};{C}*(1-({D}/100));{E}/{J};{C}*(1+{G}/100);{F}/{L};{H}/60;{I}+{K}+{M}+{N};{O}*3600,"{A}:(50,100,5);{B}:(50,200,5);{C}:(100,200,1);{D}:(20,60,5);{E}:(50,200,10);{F}:(50,150,1);{G}:(20,50,1);{H}:(10,55,5)","Étape 1: Calcul du temps pour les {B} premiers kilomètres
+Les drones parcourent les {B} premiers kilomètres à une vitesse moyenne de {C} km/h.
+
+Temps pour les {B} premiers kilomètres = Distance / Vitesse = {B} km / {C} km/h = {I} heures
+
+Étape 2: Calcul du temps pour les {E} kilomètres suivants avec une vitesse réduite
+La vitesse est réduite de {D}%, donc la nouvelle vitesse est :
+
+Nouvelle vitesse = Vitesse initiale * (1 - [{D}/100] ) = {C} km/h * [1-{D}/100] = {J} km/h
+
+Temps pour les {E} kilomètres suivants = Distance / Vitesse
+Temps pour les {E} kilomètres suivants = {E} km / {J} km/h ≈ {K} heures
+
+Étape 3: Calcul du temps pour les {F} derniers kilomètres avec une vitesse augmentée
+La vitesse est augmentée de {G}%, donc la nouvelle vitesse est :
+
+Nouvelle vitesse = Vitesse initiale * (1 + [{G}/100]) = {C} km/h * [{G}/100] = {L} km/h
+
+Temps pour les {F} derniers kilomètres = Distance / Vitesse
+Temps pour les {F} derniers kilomètres = {F} km / {L} km/h = {M} heures
+
+Étape 4: Calcul du temps de ravitaillement
+Le temps de ravitaillement est de {F} minutes. Nous devons convertir ce temps en heures :
+
+Temps de ravitaillement = {H} minutes = {H} / 60 heures = {N} heures
+
+Étape 5: Calcul du temps total de la course
+Temps total de la course = Temps pour les {B} premiers kilomètres + Temps pour les {E} kilomètres suivants + Temps pour les {F} derniers kilomètres + Temps de ravitaillement
+Temps total de la course = {I} heures + {K} heures + {M} heures + {N} heures ≈ {O} heures soit hms({P})",0;Round:hms([{P}]);hms([{P}+-60]);hms([{P}+-30]);hms([{P}+-180]);hms([{P}+-3500]),
+"Un navire de guerre doit terminer sa patrouille avec au moins {A}% de sa capacité totale de carburant en réserve. Le navire consomme en moyenne {B} kg/min à une vitesse de croisière de {C} nœuds et possède une capacité de carburant de {D} litres. Le carburant utilisé a une densité de {E} kg/l. Compte tenu de la nécessité de conserver une réserve de carburant suffisante, quelle est la distance maximale que le navire peut parcourir avant de devoir retourner à son port d'attache ?",2:{D}*{A}/100;{D}-{F};{G}*{E};{H}/{B};{I}/60;{C}*{J},"{A}:(5,20,1);{B}:(50,200,5);{C}:(10,20,1);{D}:(15000,20000,200);{E}:(0.60,0.90,0.01)","Étape 1: Calcul de la quantité de carburant nécessaire à conserver en réserve
+La capacité totale de carburant est de {D} litres. Le navire doit conserver {A}% de cette capacité en réserve.
+
+Capacité en réserve = {D} litres * [{A}/100] = {F} litres
+
+Étape 2: Calcul de la quantité de carburant disponible pour la patrouille
+Carburant disponible = Capacité totale - Capacité en réserve
+Carburant disponible = {D} litres - {F} litres = {G} litres
+
+Étape 3: Conversion de la quantité de carburant disponible en kilogrammes
+Le carburant a une densité de {E} kg/l.
+
+Carburant disponible en kg = Carburant disponible en litres * Densité
+Carburant disponible en kg = {G} litres * {E} kg/l = {H} kg
+
+Étape 4: Calcul du temps de navigation possible avec le carburant disponible
+Le navire consomme {B} kg de carburant par minute.
+
+Temps de navigation possible = Carburant disponible en kg / Consommation par minute
+Temps de navigation possible = {H} kg / {B} kg/min = {I} minutes = {J} heure
+
+Étape 5: Calcul de la distance maximale parcourue
+
+Distance maximale parcourue = Vitesse de croisière * Temps de navigation possible en heures
+Distance maximale parcourue = {C} nœuds x {J} heures ≈ {K} miles nautiques","2;None:[{K}] Nm;[{K}+-1] Nm;[{K}+-2.5] Nm;[{K}+-4] Nm;[{K}+-7,2] Nm",
+"Un avion de ligne décolle de Paris à destination de New York, une distance de {A} kilomètres. L'avion vole à une vitesse moyenne de {B} km/h. Après avoir parcouru {C} kilomètres, il rencontre des vents contraires qui réduisent sa vitesse de {D}% pour les {E} kilomètres suivants. Ensuite, les vents faiblissent et l'avion peut augmenter sa vitesse de {F}% par rapport à sa vitesse initiale pour le reste du trajet. Par ailleurs, le décollage a été retardé de {G} minutes par rapport à l'horaire prévu. À quelle heure locale (heure de New York) l'avion atterrira-t-il, sachant qu'il y a un décalage horaire de hm({H}) en moins entre Paris et New York et qu'il a décolé à 10h00?",2:{C}/{B};{B}*(1-({D}/100));{E}/{J};{A}-{C}-{E};{B}*(1+({F}/100));{L}/{M};{I}+{K}+{N};{O}+({G}/60);(10+{P})*3600;{Q}-{H},"{A}:(7000,1000,500);{B}:(700,900,100);{C}:(2000,4000,100);{D}:(10,30,5);{E}:(1000,2000,100);{F}:(10,30,5);{G}:(10,55,5);{H}:(18000,28800,1800)","Étape 1: Calcul du temps de vol pour les {C} premiers kilomètres
+La vitesse moyenne initiale de l'avion est de {B} km/h.
+
+Temps pour parcourir {C} km = Distance / Vitesse = {C} km / {B} km/h  = {I} heures
+
+Étape 2: Calcul du temps de vol pour les {E} kilomètres suivants avec une vitesse réduite
+Les vents contraires réduisent la vitesse de {D}%, donc la nouvelle vitesse est :
+
+Nouvelle vitesse = Vitesse initiale * (1 - [{D}/100]) = {B} km/h * 0,80 = {J} km/h
+
+Temps pour parcourir {E} km = Distance / Nouvelle vitesse = {E} km / {J} km/h = {K} heures
+
+Étape 3: Calcul du temps de vol pour les {L} kilomètres restants avec une vitesse augmentée
+La distance totale de Paris à New York est de {A} km. Les distances déjà parcourues sont {C} km + {E} km = [{C}+{E}] km.
+
+Distance restante = {A} km - [{C}+{E}] km = {L} km
+
+Les vents faiblissent et l'avion peut augmenter sa vitesse de {F}% par rapport à sa vitesse initiale.
+
+Nouvelle vitesse = Vitesse initiale * (1 + 0,{F}) = {B} km/h * [1+({F}/100)] = {M} km/h
+
+Temps pour parcourir {L} km = Distance / Nouvelle vitesse = {L} km / {M} km/h = {N} heures
+
+Étape 4: Calcul du temps total de vol
+Temps total de vol = {I} heures + {K} heures + {N} heures = {O} heures
+
+Étape 5: Prendre en compte le retard au décollage
+Le décollage a été retardé de {G} minutes ([{G}/60] heures).
+
+Temps total de vol avec retard = Temps total de vol + Retard = {O} heures + [{G}/60] heures = {P} heures
+
+Étape {H}: Conversion du temps total de vol en heure locale de New York
+
+Heure d'arrivée à New York (heure de Paris) = Heure de départ réel + Temps total de vol avec retard
+Heure d'arrivée à New York (heure de Paris) = 10h00 + {P} heures = hm({Q}) (heure de Paris)
+
+Pour convertir cette heure en heure locale de New York, nous devons soustraire {H} heures :
+
+Heure d'arrivée à New York (heure locale) = hm({Q}) - hm({H}) heures = hm({R})",0;Round:hm([{R}]);hm([{R}+-3600]);hm([{R}+-{H}]);hm([{R}+-300]);hm([{R}+-600]),
+"Un agriculteur possède un champ rectangulaire de {A} mètres de longueur et {B} mètres de largeur. Il souhaite installer un système d'irrigation. Le coût d'installation est de {C} euros par mètre de tuyau posé. Il décide de placer les tuyaux de manière à ce qu'ils couvrent entièrement la longueur et la largeur du champ en formant une grille, avec des tuyaux espacés de {D} mètres à la fois en longueur et en largeur. Combien coûtera l'installation complète du système d'irrigation ?",2:({A}/{D})+1;Dec{E};{E}-{F};({B}/{D}+1);Dec{H};{H}-{I};{G}*{B};{J}*{A};{K}+{L};{M}*{C},"{A}:(100,500,50);{B}:(100,300,20);{C}:(5.0,10.0,0.1);{D}:(10,30,5)","Étape 1: Calculer la quantité de tuyaux nécessaires pour couvrir la longueur du champ
+Le champ a une longueur de {A} mètres et les tuyaux seront espacés de {D} mètres.
+
+Nombre de tuyaux nécessaires pour la longueur = (Longueur du champ / Espacement des tuyaux) + 1
+Nombre de tuyaux nécessaires pour la longueur = ({A} mètres / {D} mètres) + 1 = {E} tuyaux
+(Attention si {E} est un nombre à décimal, nous devons arrondir à la valeur inférieur soit {G} sinon nous ne respecterons pas la distance minimal de {D} mètres)
+
+Étape 2: Calculer la quantité de tuyaux nécessaires pour couvrir la largeur du champ
+Le champ a une largeur de {B} mètres et les tuyaux seront espacés de {D} mètres.
+
+Nombre de tuyaux nécessaires pour la largeur = (Largeur du champ / Espacement des tuyaux) + 1
+Nombre de tuyaux nécessaires pour la largeur = ({B} mètres / {D} mètres) + 1 = {H} tuyaux
+(Attention si {H} est un nombre à décimal, nous devons arrondir à la valeur inférieur soit {J} sinon nous ne respecterons pas la distance minimal de {D} mètres)
+
+Étape 3: Calculer la longueur totale des tuyaux nécessaires
+Chaque tuyau pour la longueur couvre la largeur du champ ({B} mètres) et chaque tuyau pour la largeur couvre la longueur du champ ({A} mètres).
+
+Longueur totale des tuyaux pour la longueur = Nombre de tuyaux pour la longueur * Largeur du champ
+Longueur totale des tuyaux pour la longueur = {G} * {B} mètres = {K} mètres
+
+Longueur totale des tuyaux pour la largeur = Nombre de tuyaux pour la largeur * Longueur du champ
+Longueur totale des tuyaux pour la largeur = {F} * {A} mètres = {L} mètres
+
+Longueur totale des tuyaux nécessaires = Longueur totale des tuyaux pour la longueur + Longueur totale des tuyaux pour la largeur
+Longueur totale des tuyaux nécessaires = {K} mètres + {L} mètres = {M} mètres
+
+Étape 4: Calculer le coût d'installation
+Coût total d'installation = Longueur totale des tuyaux nécessaires * Coût par mètre
+Coût total d'installation = {M} mètres * {C} euros/mètre = {N} euros",2;None:[{N}] €;[{N}+-5.21] €;[{N}+-8.21] €;[{N}+-10] €;[{N}+-13.25] €,
+"Un parc naturel décide de creuser un étang rectangulaire de {A} mètres de longueur, {B} mètres de largeur et {C} mètres de profondeur. Pour remplir l'étang, ils utilisent une pompe qui débite de l'eau à un débit constant de {D} litres par minute. Après {E} heures de remplissage, la pompe tombe en panne et le débit est réduit de {F}%. La pompe fonctionne à ce débit réduit pendant encore {G} heures avant d'être réparée et de reprendre son débit initial. À quelle heure le remplissage de l'étang sera-t-il terminé, si le remplissage commence à hm({H}) du matin ?",2:{A}*{B}*{C};{I}*1000;{E}*60;{D}*{K};{D}*(1-({F}/100));{G}*60;{M}*{N};{L}+{O};{J}-{P};{Q}/{D};{E}+{G}+({R}/60);{S}*3600;{H}+{T},"{A}:(20,100,10);{B}:(50,90,10);{C}:(5,10,1);{D}:(5000,10000,100);{E}:(5,15,5);{F}:(10,40,5);{G}:(5,20,5);{H}:(28800,43200,600)","Étape 1: Calculer le volume total de l'étang
+
+Le volume de l'étang est : 
+Volume = Longueur * Largeur * Profondeur. Donc, Volume = {A} m * {B} m * {C} m = {I} m³. 
+Sachant qu'un mètre cube équivaut à 1000 litres, le volume en litres est : Volume = {I} m³ * 1000 litres/m³ = {J} litres.
+
+Étape 2: Calculer le volume d'eau pompée pendant les {E} premières heures
+
+Le débit initial de la pompe est de {D} litres par minute. En {E} heures ({K} minutes), le volume d'eau pompée est : 
+Volume = {D} litres/minute * {K} minutes = {L} litres.
+
+Étape {G}: Calculer le volume d'eau pompée pendant les {G} heures de fonctionnement réduit
+
+Le débit est réduit de {F}%, donc le nouveau débit est : 
+Nouveau débit = {D} litres/minute * [1-({F}/100)] = {M} litres/minute. 
+En {G} heures ({N} minutes), le volume d'eau pompée est : Volume = {M} litres/minute * {N} minutes = {O} litres.
+
+Étape 4: Déterminer le volume restant à remplir et le temps nécessaire pour le remplir
+
+Le volume total d'eau pompée pendant les [{E}+{G}] premières heures ({E} heures + {G} heures) est : 
+Volume total = {L} litres + {O} litres = {P} litres. 
+Le volume restant à remplir est : 
+Volume restant = {J} litres - {P} litres = {Q} litres. 
+
+Le temps nécessaire pour remplir le volume restant est : 
+Temps = {Q} litres / {D} litres/minute = {R} minutes = [{R}/60] heures.
+
+Étape 5: Calculer l'heure à laquelle le remplissage sera terminé
+
+Le remplissage commence à hm({H}) du matin. 
+Temps de remplissage = {E} heures à plein débit + {G} heures à débit réduit) + [{R}/60] heures à plein débit = {S} heures 
+
+Heure de fin de remplissage = hm({H}) + hm({T}) = hm({U})",0;Round:hms([{U}]);hms([{U}+-({E}*3600)]);hms([{U}+-1800]);hms([{U}+-600]);hms([{U}+-3500]),
+"Une entreprise de transport doit livrer des marchandises à travers trois villes situées à des distances successives de {A} km, {B} km et {C} km. Le camion part à hm({D}) du matin. Il roule à une vitesse moyenne de {E} km/h. Après avoir parcouru les {A} premiers kilomètres, le chauffeur fait une pause de {F} minutes pour se reposer. Ensuite, il roule pendant {B} kilomètres supplémentaires à une vitesse moyenne de {G} kts en raison de travaux sur la route. Après avoir livré les marchandises dans la deuxième ville, il fait une pause déjeuner de {H} minutes. Pour le dernier segment de {C} kilomètres, la vitesse du camion augmente de {I}% par rapport à sa vitesse initiale. À quelle heure le camion atteindra-t-il la troisième ville ?
+Note: 1kt = 1,852 km/h",2:{A}/{E};{J}+{F}/60;{B}/({G}*1.852);{L}+{H}/60;{E}*(1+({I}/100));{C}/{N};{K}+{M}+{O};{P}*3600;{D}+{P},"{A}:(100,300,10);{B}:(100,300,10);{C}:(100,300,10);{D}:(28800,39600,300);{E}:(100,300,5);{F}:(5,55,1);{G}:(100,200,5);{H}:(5,55,1);{I}:(10,60,5)","Étape 1: Temps pour parcourir les {A} premiers kilomètres
+Temps pour parcourir {A} km = Distance / Vitesse = {A} km / {E} km/h = {J} heures 
+
+Étape 2: Ajouter le temps de pause de {F} minutes
+Temps total après la première pause = {J} heure + {F} minutes = {K} heures
+
+Étape 3: Temps pour parcourir les {B} kilomètres suivants
+Temps pour parcourir {B} km = Distance / Vitesse = {B} km / [{G}*1.852]({G} km/h) ≈ {L} heures
+
+Étape 4: Ajouter le temps de pause déjeuner de {H} minutes
+Temps total après la deuxième pause = {L} + {H} minutes = {M} heures
+
+Étape 5: Temps pour parcourir les {C} derniers kilomètres
+Augmentation de la vitesse de {I}% = {E} km/h * [1+({I}/100)] = {N} km/h
+
+Temps pour parcourir {C} km = Distance / Vitesse
+Temps pour parcourir {C} km = {C} km / {N} km/h ≈ {O} heure
+
+Étape 6: Calculer l'heure d'arrivée
+Temps total = {J} heures + {F} minutes + {L} heures + {H} minutes + {O} heures = {P} heures
+
+Heure d'arrivée = hm({D}) + hms({P}) = hms({Q})",0;Round:hms([{Q}]);hms([{Q}+-67]);hms([{Q}+-428]);hms([{Q}+-603]);hms([{Q}+-1082]),
+"Un étudiant doit réaliser une expérience chimique nécessitant un chauffage progressif d'un liquide. Il commence à chauffer le liquide à {A}°C à hm({B}). La température du liquide augmente de {C}°C par minute pendant les {D} premières minutes. Ensuite, la vitesse de chauffage ralentit de {E}% pour les {F} minutes suivantes. Enfin, pour atteindre une température cible de {G}°C, la vitesse de chauffage diminue encore de {H}% par rapport à la vitesse précédente. À quelle heure l'étudiant atteindra-t-il la température cible de {G}°C ?",2:{C}*{D};{A}+{I};{C}*(1-({E}/100));{K}*{F};{J}+{L};{K}*(1-({H}/100));{G}-{M};{O}/{N};{D}+{F}+{O};{B}+({Q}*60),"{A}:(10,30,1);{B}:(32400,43200,600);{C}:(1,5,1);{D}:(2,5,1);{E}:(10,40,5);{F}:(5,55,1);{G}:(200,300,5);{H}:(10,40,5)","Étape 1: Augmentation de température pendant les {D} premières minutes
+La température augmente de {C}°C par minute pendant les {D} premières minutes.
+
+Augmentation de température = {C}°C/min * {D} min = {I}°C
+
+Température atteinte après {D} minutes = {A}°C (initiale) + {I}°C = {J}°C
+
+Étape 2: Augmentation de température pendant les {F} minutes suivantes avec une vitesse réduite de {E}%
+
+Nouvelle vitesse = {C}°C/min * [1-({E}/100)] = {K}°C/min
+Augmentation de température pendant {F} minutes = {K}°C/min * {F} min = {L}°C
+Température atteinte après [{F}+{D}] minutes = {J}°C + {L}°C = {M}°C
+
+Étape 3: Augmentation de température nécessaire pour atteindre {G}°C avec la vitesse encore réduite
+La vitesse de chauffage diminue encore de {H}% par rapport à la vitesse précédente.
+
+Nouvelle vitesse = {K}°C/min * [1-({H}/100)] = {N}°C/min
+
+Augmentation de température nécessaire = {G}°C - {M}°C = {O}°C
+
+Temps nécessaire pour atteindre {G}°C = Augmentation de température nécessaire / Nouvelle vitesse
+Temps nécessaire = {O}°C / {N}°C/min ≈ {P} minutes
+
+Étape 4: Calcul du temps total nécessaire pour atteindre la température cible
+Temps total = {D} min + {F} min + {O} min ≈ {Q} minutes
+
+Étape 5: Déterminer l'heure à la quelle, la température atteindra {G} °C
+
+Heure d'arrivée = hm({B}) + {Q} minutes = hm({R})",0;Round:hm([{R}]);hm([{R}+-60]);hm([{R}+-120]);hm([{R}+-240]);hm([{R}+-600]),

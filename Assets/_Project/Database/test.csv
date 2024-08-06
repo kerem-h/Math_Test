@@ -1,4 +1,4 @@
-{A} {B} {C} ,3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,2,0.001);{B}:(0.001,1.000,0.001);{C}:(1,9,1);{D}:(100,300,1);{E}:(2.0,15.0,0.1);{F}:(50,200,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+"|1|{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
 Surface du toit : {D} m²
 Pluie : {H} mm = [{H}/1000] m
 Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
@@ -18,7 +18,7 @@ Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} li
 5. Calcul du nombre de jours d'arrosage possibles :
 Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
 Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
-"Un architecte paysagiste conçoit un jardin écologique alimenté par un système de récupération d'eau de pluie. La surface de toit disponible pour la collecte est de {D} m². Le système de filtration perd {E}% de l'eau collectée, et les plantes du jardin consomment quotidiennement {F} litres d'eau en moyenne. Si le jardin est arrosé tous les {G} jours, combien de jours peut-on arroser le jardin si il a plue {H}mm ?",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1.00,2.00,0.01);{B}:(0.01,1.00,0.01);{C}:(0.001,1.00,0.001);{D}:(100,300,1);{E}:(2.0,15.0,0.1);{F}:(50,200,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+"|2|{A},{B},{C},{D},{E},?",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
 Surface du toit : {D} m²
 Pluie : {H} mm = [{H}/1000] m
 Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
@@ -37,92 +37,564 @@ Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} li
 
 5. Calcul du nombre de jours d'arrosage possibles :
 Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
-Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,{A}!={B}:{B}!={C}
-"Un cycliste amateur se prépare pour une course de {D} km. Il prévoit de parcourir les {F}/{E} du trajet à une vitesse moyenne de {G} km/h. Une crevaison l'oblige à s'arrêter pendant {H} minutes. Pour rattraper le temps perdu, il augmente sa vitesse de {I}% sur le reste du parcours.  Quel sera son temps total de course ?",3:{D}*{F}/{E};{J}/{G};{H}/60;{D}-{J};{G}*(1+{I}/100);{M}/{N};{K}+{L}+{O};{P}*3600,"{A}:(60,600,60);{B}:(60,600,60);{C}:(60,600,60);{D}:(100,300,5);{E}:(5,20,1);{F}:(5,20,1);{G}:(5,50,5);{H}:(5,59,1);{I}:(2,40,5)","Calcul du temps pour parcourir les {F}/{E} du trajet :
-Distance totale du trajet : {D} km
-Distance parcourue à {G} km/h : {D} × ({F}/{E}) = {J} km
-Temps pour parcourir {J} km à {G} km/h : {J} ÷ {G} = {K} heures
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|3|{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
 
-Temps de crevaison :
-{H} minutes = {H} ÷ 60 = {L} heures
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
 
-Distance restante après crevaison :
-Distance restante : {D} - {J} = {M} km
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
 
-Vitesse augmentée pour le reste du trajet :
-Vitesse initiale : {G} km/h
-Augmentation de {I} % : {G} × [1+{I}/100] = {N} km/h
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
 
-Calcul du temps pour parcourir les {M} km à {N} km/h :
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|4|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
 
-Temps pour parcourir {M} km à {N} km/h : {M} ÷ {N} = {O} heures
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
 
-Temps total de course :
-Temps total = Temps pour {J} km + Temps perdu + Temps pour {M} km
-Temps total = {K} heures + {L} heures + {O} heures
-Temps total = {P} heures = hm({Q})",0;Round:hm({Q});hm([{Q}+-{A}]);hm([{Q}+-{B}]);hm([{Q}+-{C}]),{A}!={B}:{B}!={C}:{F}<{E}
-"Un drone de livraison, alimenté par une batterie lithium-ion de {D} kWh, doit effectuer une livraison urgente à une altitude de 150 mètres. La distance à vol d'oiseau est de {E} km, mais le drone doit contourner une zone réglementée, ajoutant {F}% à la distance totale. Le vent souffle de face à une vitesse de {G} km/h, réduisant la vitesse habituelle du drone de {H} km/h. La batterie se décharge à un taux de {I}% par heure de vol. Sachant que le colis pèse {J} kg et que chaque kilogramme supplémentaire réduit l'autonomie de {K}%, quelle est la marge d'autonomie restante en pourcentage une fois la livraison effectuée ?",3:{F}*{D}/100;{D}+{L};{H}-{G};{M}/{N};{I}*{O};{J}*{K};100-{P}-{Q},"{A}:(1.0,2.0,0.1);{B}:(1.00,5.00,0.01);{C}:(1,9,1);{D}:(4.0,10.0,0.1);{E}:(5.0,30.0,0.1);{F}:(5,60,1);{G}:(5,30,5);{H}:(40,100,1);{I}:(2,20,1);{J}:(2.0,10.0,0.1);{K}:(1,7,1)","Distance totale : Le drone doit contourner une zone réglementée, ce qui ajoute {E} % à la distance initiale de {D} km.
-Distance totale = {D} km + ({F}% de {D} km)
-Distance totale = {D} km + ([{F}/100] × {D} km)
-Distance totale = {D} km + {L} km = {M} km
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
 
-Vitesse du drone : Le vent souffle de face à une vitesse de {G} km/h, réduisant la vitesse habituelle du drone de {H} km/h.
-Vitesse réduite = {H} km/h - {G} km/h
-Vitesse réduite = {N} km/h
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
 
-Temps de vol : Le temps nécessaire pour parcourir la distance totale à la vitesse réduite.
-Temps de vol = Distance totale ÷ Vitesse réduite
-Temps de vol = {M} km ÷ {N} km/h
-Temps de vol = {O} heures 
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|5|{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
 
-Décharge de la batterie : Le taux de décharge de la batterie est de {I} % par heure de vol.
-Décharge pour {O} heures = {I}% × {O} heures
-Décharge pour {O} heures = {P}%
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
 
-Réduction due au poids : Chaque kilogramme supplémentaire réduit l'autonomie de {K} %. Le colis pèse {J} kg.
-Réduction due au poids = {J} kg × {K}%
-Réduction due au poids = {Q}%
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
 
-Autonomie restante : Calculer la marge d'autonomie restante en pourcentage après la décharge et la réduction due au poids.
-Autonomie restante = 100% - (Décharge de la batterie + Réduction due au poids)
-Autonomie restante = 100% - ({P}% + {Q}%)
-Autonomie restante = 100% - [{P}+{Q}]%
-Autonomie restante = {R}%",2;None:{R} %;[{R}+-{A}] %;[{R}+-{B}] %;[{R}+-{C}] %,{A}!={B}:{B}!={C}
-"Un train à grande vitesse relie deux villes distantes de {D} km. Il parcourt le premier tiers du trajet à une vitesse moyenne de {E} km/h. Suite à un incident technique, il doit réduire sa vitesse de {F}% pendant {G} minutes. Pour respecter l'horaire prévu, il accélère ensuite, augmentant sa vitesse initiale de {H}% sur le reste du trajet. Quelle est la durée totale du voyage en heures et minutes ?",3:{D}/3;{I}/{E};{E}*(1-{F}/100);{K}*{G}/60;{D}-{L}-{I};{E}*(1+{H}/100);{M}/{N};{J}+{G}/60+{O};{P}*3600,"{A}:(60,600,60);{B}:(60,600,60);{C}:(60,600,60);{D}:(700,1500,50);{E}:(200,400,10);{F}:(5,60,5);{G}:(5,59,1);{H}:(20,90,2)","Calcul du temps pour parcourir le premier tiers du trajet :
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
 
-Premier tiers du trajet : {D} / 3 = {I} km
-Temps pour parcourir {I} km à {E} km/h : {I} / {E} = {J} heures
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|6|{A},{B},{C},{D},{E},?",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
 
-Réduction de vitesse et temps de réduction :
-Réduction de vitesse de {F} % : {E} × [1-{F}/100] = {K} km/h
-Temps de réduction de vitesse : {G} minutes = [{G}/60] heures
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
 
-Calcul du temps pour parcourir le segment avec vitesse réduite :
-Distance parcourue avec vitesse réduite : ({K} x [{G}/60]) = {L} km
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
 
-Distance restante après le premier tiers + la vitesse reduite : {M} km
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
 
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|3|{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
 
-Augmentation de la vitesse pour le reste du trajet :
-Vitesse augmentée de {H} % : {E} × [1+{H}/100] = {N} km/h
-Temps pour parcourir les {M} km à {N} km/h : {M} / {N} = {O} heures
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
 
-Durée totale du voyage :
-Temps total = Temps pour le premier tiers + Temps avec réduction de vitesse + Temps avec vitesse augmentée
-Temps total = {J} heures + [{G}/60] heures + {O} heures
-Temps total = {P} heures ou hm({Q})",0;Round:hm({Q});hm([{Q}+-{A}]);hm([{Q}+-{B}]);hm([{Q}+-{C}]),{A}!={B}:{B}!={C}
-"Un fermier possède un champ rectangulaire de {D} mètres de long sur {E} mètres de large. Il souhaite y planter des pommiers en respectant une distance de {F} mètres entre chaque arbre et en laissant une bordure de {G} mètres sur tout le périmètre du champ. Sachant que chaque pommier produit en moyenne {H} kg de pommes par an, quelle sera la production totale annuelle de pommes du champ ?",3:{D}-{G};{E}-{G};({I}/{F})+1;({J}/{F})+1;Dec{K};Dec{L};{K}-{M};{L}-{N};{O}*{P};{Q}*{H},"{A}:(1,9,1);{B}:(1,9,1);{C}:(1,9,1);{D}:(70,150,5);{E}:(50,70,5);{F}:(1,6,1);{G}:(1,6,1);{H}:(100,200,1)","Dimensions du champ après avoir laissé une bordure :
-Longueur utilisable : {D} - {G} × {G} = {I} mètres
-Largeur utilisable : {E} - {G} × {G} = {J} mètres
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
 
-Calcul du nombre d'arbres plantés en longueur :
-Nombre d'arbres en longueur : {I} / {F} + 1 = {K} arbres soit {O}
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
 
-Calcul du nombre d'arbres plantés en largeur :
-Nombre d'arbres en largeur : {J} / {F} + 1 = {L} arbres soit {P}
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|7|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
 
-Calcul du nombre total d'arbres :
-Nombre total d'arbres = {O} arbres en longueur × {P} arbres en largeur = {Q} arbres
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
 
-Calcul de la production totale annuelle de pommes :
-Production totale = {Q} arbres × {H} kg par arbre = {R} kg de pommes",0;None:{R} kg;[{R}+-{A}] kg;[{R}+-{B}] kg;[{R}+-{C}] kg,{A}!={B}:{B}!={C}
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|8|{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|9|{A},{B},{C},{D},{E},?",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|10|{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|11|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|12|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|13|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|14|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|15|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|16|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|17|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|18|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|19|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|20|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|21|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|22|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|23|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|24|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|25|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|26|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|27|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"|28|{A},{B},{C},{D},{E},{F},{A},{B},{C},{D},{E},{F}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,9,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,
+"{A}  ,   {B}  ,  {C}",3:{D}*{H}/1000;{I}*1000;{J}*(1-({E}/100));{K}/{F};Dec{L};{L}-{M};{N}*{G},"{A}:(1,5,1);{B}:(1,5,1);{C}:(1,5,1);{D}:(10,30,1);{E}:(1,53,1);{F}:(5,20,5);{G}:(2,10,1);{H}:(2.00,10.00,0.01)","1.Calcul de la quantité d'eau collectée :
+Surface du toit : {D} m²
+Pluie : {H} mm = [{H}/1000] m
+Quantité d'eau collectée = {D} m² × [{H}/1000] m = {I} m³
+
+2. Conversion de la quantité d'eau en litres :
+1 m³ = 1000 litres
+Quantité d'eau en litres = {I} m³ × 1000 = {J} litres
+
+3. Calcul de la quantité d'eau après filtration :
+Perte due à la filtration : {E}%
+Quantité d'eau après filtration = {J} litres × (1 - [{E}/100]) = {J} litres × [1-{E}/100] = {K} litres
+
+4. Consommation d'eau pour l'arrosage :
+Consommation quotidienne : {F} litres
+Le jardin est arrosé tous les {G} jours, donc chaque arrosage nécessite {F} litres
+
+5. Calcul du nombre de jours d'arrosage possibles :
+Nombre d'arrosages possibles = {K} litres ÷ {F} litres/arrosage ≈ {L} arrosages soit {N} arrosages car le dernier ne serait pas complet
+Nombre de jours d'arrosage = {N} arrosages × {G} jours/arrosage = environ {O} jours",0;None:{O} jours;[{O}+-{A}] jours;[{O}+-{B}] jours;[{O}+-{C}] jours,{A}!={B}!={C}
