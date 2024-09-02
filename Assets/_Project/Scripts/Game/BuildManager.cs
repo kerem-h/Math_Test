@@ -49,7 +49,7 @@ public class BuildManager : MonoBehaviour
                 GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=tours_2.csv" };
 
                 GameData.TestTimes = new[] { 2700f };
-                GameData.QuestionCount = new[] {15};
+                GameData.QuestionCount = new[] {25};
                 break;
             case BuildType.Eopan:
                 GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=eopan.csv" };

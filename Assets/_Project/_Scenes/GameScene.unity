@@ -2571,7 +2571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionDatabaseUrls:
   - https://storage.googleapis.com/math-database/tours_1.csv
-  IsDataOnline: 0
+  IsDataOnline: 1
   csvFile: {fileID: 4900000, guid: f7e12fd95ec3c7741be68ee11ff7a5d8, type: 3}
 --- !u!4 &657707224
 Transform:
@@ -4655,7 +4655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc7c1ad146e09541b513f0ebeef9bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildType: 5
+  buildType: 0
 --- !u!1 &1460489852
 GameObject:
   m_ObjectHideFlags: 0

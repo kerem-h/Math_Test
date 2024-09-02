@@ -13,6 +13,11 @@ public class Pattern : MonoBehaviour
         {
             for (int i = 0; i < Texts.Length; i++)
             {
+                if (texts.Length <= i)
+                {
+                    Texts[i].text = "";
+                    continue;
+                }
                 if (texts[i] == "?" && GameData.IsSolution)
                 { 
                     Texts[i].color = Color.red;
@@ -40,7 +45,7 @@ public class Pattern : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError(e);
+            Debug.Log(e);
         }
     }
 
