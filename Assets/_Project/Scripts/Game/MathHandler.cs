@@ -968,7 +968,21 @@ public class MathHandler : MonoBehaviour
         // This part is for the range of values
         else
         {
+            List<float> discard_values = new List<float>(); 
             string input = _[1].Trim();
+            if (input.Contains('|'))
+            {
+                var discards = input.Split('-')[1];
+                input = input.Split('-')[0];
+                discards = discards.Trim();
+                discards = discards.Trim('|');
+                var discard = discards.Split(',');
+                foreach (var dc in discard)
+                {
+                    int val = int.Parse(dc);
+                    discard_values.Add(val);
+                }
+            }
             string[] rangeParts = input.Split(',');
             float min = float.Parse(rangeParts[0].Trim('('), CultureInfo.InvariantCulture);
             float max = float.Parse(rangeParts[1], CultureInfo.InvariantCulture);
@@ -981,11 +995,13 @@ public class MathHandler : MonoBehaviour
             {
                 stepCount++;
             }
-
-            int randomIndex = UnityEngine.Random.Range(0, stepCount);
-            randomValue = min + randomIndex * iter;
-            var random = Delete9sAnd01s(randomValue.ToString(CultureInfo.InvariantCulture));
-            randomValue = float.Parse(random, CultureInfo.InvariantCulture);
+            do
+            {
+                int randomIndex = UnityEngine.Random.Range(0, stepCount);
+                randomValue = min + randomIndex * iter;
+                var random = Delete9sAnd01s(randomValue.ToString(CultureInfo.InvariantCulture));
+                randomValue = float.Parse(random, CultureInfo.InvariantCulture);    
+            } while (discard_values.Contains(randomValue));
         }
 
         return randomValue;
