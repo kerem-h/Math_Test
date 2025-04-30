@@ -866,73 +866,108 @@ public class MathHandler : MonoBehaviour
                           question.Variables[base_val] = b_val;
                           question.Variables[comp_val] = c_val;
                       }
-                      else if (condit.Contains("!="))
-                      {
-                          // >
-                          var statement_split = condit.Split("!=");
-                          var base_val= statement_split[0].Trim();
-                          var comp_val = statement_split[1].Trim();
+                    else if (condit.Contains("!=")) //Here is the section to re-roll variables to not make them the same. 
+                    {
+                        var statement_split = condit.Split("!=");
+                        var base_val = statement_split[0].Trim();
+                        var comp_val = statement_split[1].Trim();
 
-                          var b_val = question.Variables[base_val];
-                          var c_val = question.Variables[comp_val];
-                          if (statement_split.Length > 2)
-                          {
-                              string other_val = statement_split[2].Trim();
-                              var d_val = question.Variables[other_val];
-                              var counter = 0;
-                              while (b_val == c_val || b_val == d_val || c_val == d_val) {
-                                  counter++;
-                                  foreach (var variable in question.Ranges) {
-                                      var _ = variable.Split(":");
-                                      var match = _[0].Trim();
-                                      if (match == base_val) {
-                                          b_val = GetRandomValueFromRange(_);
-                                      }
-                                      else if (match == comp_val) {
-                                          c_val = GetRandomValueFromRange(_);
-                                      }
-                                      else if (match == other_val) {
-                                          d_val = GetRandomValueFromRange(_);
-                                      }
-                                  }
-                                  if (counter > 2000)
-                                  {
-                                      DebugManager.Instance.AddLogs("Infinite Loop"); 
-                                      break;
-                                  }
-                              }
-                                question.Variables[base_val] = b_val;
-                                question.Variables[comp_val] = c_val;
-                                question.Variables[other_val] = d_val;
-                          }
+                        float b_val = question.Variables[base_val];
+                        float c_val = question.Variables[comp_val];
 
-                          else
-                          {
-                              var counter = 0;
-                              while (b_val == c_val) {
-                                  counter++;
-                                  foreach (var variable in question.Ranges) {
-                                      var _ = variable.Split(":");
-                                      var match = _[0].Trim();
-                                      if (match == base_val) {
-                                          b_val = GetRandomValueFromRange(_);
-                                      }
-                                      else if (match == comp_val) {
-                                          c_val = GetRandomValueFromRange(_);
-                                      }
-                                  }
-                                  if (counter > 2000)
-                                  {
-                                      DebugManager.Instance.AddLogs("Infinite Loop"); 
-                                      break;
-                                  }
-                              }
-                              question.Variables[base_val] = b_val;
-                              question.Variables[comp_val] = c_val;
-                          }
-                      }
-                  }
-              }
+                        // ---- NEW: 4-variable case ----
+                        if (statement_split.Length > 3)
+                        {
+                            var third_val = statement_split[2].Trim();
+                            var fourth_val = statement_split[3].Trim();
+                            float d_val = question.Variables[third_val];
+                            float e_val = question.Variables[fourth_val];
+                            int counter = 0;
+
+                            while (
+                                b_val == c_val || b_val == d_val || b_val == e_val ||
+                                c_val == d_val || c_val == e_val ||
+                                d_val == e_val
+                            )
+                            {
+                                counter++;
+                                foreach (var variable in question.Ranges)
+                                {
+                                    var parts = variable.Split(':');
+                                    var name = parts[0].Trim();
+                                    if (name == base_val) b_val = GetRandomValueFromRange(parts);
+                                    else if (name == comp_val) c_val = GetRandomValueFromRange(parts);
+                                    else if (name == third_val) d_val = GetRandomValueFromRange(parts);
+                                    else if (name == fourth_val) e_val = GetRandomValueFromRange(parts);
+                                }
+                                if (counter > 2000)
+                                {
+                                    DebugManager.Instance.AddLogs("Infinite loop re-rolling 4 vars");
+                                    break;
+                                }
+                            }
+
+                            question.Variables[base_val] = b_val;
+                            question.Variables[comp_val] = c_val;
+                            question.Variables[third_val] = d_val;
+                            question.Variables[fourth_val] = e_val;
+                        }
+                        // ---- existing 3-variable case ----
+                        else if (statement_split.Length > 2)
+                        {
+                            string other_val = statement_split[2].Trim();
+                            float d_val = question.Variables[other_val];
+                            int counter = 0;
+
+                            while (b_val == c_val || b_val == d_val || c_val == d_val)
+                            {
+                                counter++;
+                                foreach (var variable in question.Ranges)
+                                {
+                                    var parts = variable.Split(':');
+                                    var name = parts[0].Trim();
+                                    if (name == base_val) b_val = GetRandomValueFromRange(parts);
+                                    else if (name == comp_val) c_val = GetRandomValueFromRange(parts);
+                                    else if (name == other_val) d_val = GetRandomValueFromRange(parts);
+                                }
+                                if (counter > 2000)
+                                {
+                                    DebugManager.Instance.AddLogs("Infinite Loop re-rolling 3 vars");
+                                    break;
+                                }
+                            }
+
+                            question.Variables[base_val] = b_val;
+                            question.Variables[comp_val] = c_val;
+                            question.Variables[other_val] = d_val;
+                        }
+                        // ---- existing 2-variable case ----
+                        else
+                        {
+                            int counter = 0;
+                            while (b_val == c_val)
+                            {
+                                counter++;
+                                foreach (var variable in question.Ranges)
+                                {
+                                    var parts = variable.Split(':');
+                                    var name = parts[0].Trim();
+                                    if (name == base_val) b_val = GetRandomValueFromRange(parts);
+                                    else if (name == comp_val) c_val = GetRandomValueFromRange(parts);
+                                }
+                                if (counter > 2000)
+                                {
+                                    DebugManager.Instance.AddLogs("Infinite Loop re-rolling 2 vars");
+                                    break;
+                                }
+                            }
+                            question.Variables[base_val] = b_val;
+                            question.Variables[comp_val] = c_val;
+                        }
+                    }
+
+                }
+            }
           }
 
 
@@ -1169,96 +1204,7 @@ private static string FormatTime(float seconds, bool showSeconds, bool showDays)
     
     
     
-    //
-    // private static void ChangeClocks(QuestionData question)
-    // {
-    //     string pattern = @"hms\((.*?)\)|hm\((.*?)\)|dhm\((.*?)\)";
-    //     MatchCollection matches = Regex.Matches(question.Question, pattern);
-    //     
-    //     question.Question = CalculateMatches(matches, question.Question);
-    //     
-    //     MatchCollection matches2 = Regex.Matches(question.Explanation, pattern);
-    //     question.Explanation = CalculateMatches(matches2, question.Explanation);
-    //     
-    //
-    //     for (int i = 0; i < question.AnswerStrings.Length; i++)
-    //     {
-    //         var answerString = question.AnswerStrings[i];
-    //         MatchCollection matches5 = Regex.Matches(answerString, pattern);
-    //         question.AnswerStrings[i] = CalculateMatches(matches5, question.AnswerStrings[i]);
-    //     }
-    // }
-    //
-    // private static string CalculateMatches(MatchCollection matches, string expression)
-    // {
-    //     foreach (Match match in matches)
-    //     {
-    //         // Extract the value inside the brackets
-    //         string innerValue = match.Groups[1].Value;
-    //         bool isHms = !string.IsNullOrEmpty(innerValue);
-    //
-    //         if (!isHms)
-    //         {
-    //             innerValue = match.Groups[2].Value;
-    //         }
-    //         innerValue = innerValue.Split(",")[0];
-    //         innerValue = innerValue.Split(".")[0];
-    //         // Parse the value as a float
-    //         if (float.TryParse(innerValue, out float value))
-    //         {
-    //             // Convert the value to clock format
-    //             value = float.Parse(value.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
-    //             string clockFormat = GetClockFromSecond((int) value, isHms);
-    //             expression = expression.Replace(match.Value, clockFormat.ToString(CultureInfo.InvariantCulture));
-    //         }
-    //         else
-    //         {
-    //             Debug.Log(expression);
-    //             Debug.LogWarning("Unable to parse value inside brackets: " + innerValue);
-    //         }
-    //     }
-    //     return expression;
-    // }
-    // private static string GetClockFromSecond(float value, bool showSeconds)
-    // {
-    //     // Ensure value is within 24 hours (86400 seconds)
-    //     if (value < 0) value = 86400 + value;
-    //     
-    //     if (value == 0 && showSeconds) return "00h00m00s";
-    //     if (value < 60 && !showSeconds) return "00h00m";
-    //
-    //     value = value % 86400;
-    //
-    //     // Convert seconds to clock format
-    //     string clock = "";
-    //     int hours = (int)(value / 3600);
-    //     int minutes = (int)((value % 3600) / 60);
-    //     int seconds = (int)(value % 60);
-    //
-    //     // ADD = to the > to get the 00h method
-    //     if (hours > 0)
-    //     {
-    //         clock += hours < 10 ? "0" + hours + "h" : hours + "h";
-    //     }
-    //     
-    //     // ADD = to the > to get the 00h method
-    //     if (minutes > 0 || hours > 0) // Show minutes if there are hours or minutes
-    //     {
-    //         clock += minutes < 10 ? "0" + minutes + "m" : minutes + "m";
-    //         // Deplicated due to customer request
-    //         // if (!showSeconds && (hours > 0 && minutes > 0)) clock= clock.Substring(0, clock.Length - 1);
-    //     }
-    //
-    //     if (showSeconds && (seconds > 0 || minutes > 0 || hours > 0)) // Show seconds if there are hours or minutes or seconds
-    //     {
-    //         clock += seconds < 10 ? "0" + seconds + "s" : seconds + "s";
-    //         
-    //         // Deplicated due to customer request   
-    //         // if (minutes > 0 && seconds > 0) clock= clock.Substring(0, clock.Length - 1);
-    //     }
-    //     return clock;
-    // }
-
+ 
     
     
     

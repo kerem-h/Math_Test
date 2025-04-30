@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -9,15 +10,7 @@ public class FinishManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI wrongText;
     [SerializeField] private TextMeshProUGUI notAnsweredText;
     
-    //[SerializeField] private TextMeshProUGUI correctText2;
-    //[SerializeField] private TextMeshProUGUI wrongText2;
-    //[SerializeField] private TextMeshProUGUI notAnsweredText2;
-    
-    //[SerializeField] private TextMeshProUGUI correctText3;
-    //[SerializeField] private TextMeshProUGUI wrongText3;
-    //[SerializeField] private TextMeshProUGUI notAnsweredText3;
 
-    public DatabaseHandler databaseHandler;
     private int[] correct;
     private int[] wrong;
     private int[] blank;
@@ -29,22 +22,16 @@ public class FinishManager : MonoBehaviour
         wrong = results[1];
         blank = results[2];
         SetTexts();
-        FirebaseSender.SendData(databaseHandler, correct[0], wrong[0], blank[0]);
     }
 
     private void SetTexts()
     {
         correctText.text = correct[0].ToString();
         wrongText.text = wrong[0].ToString();
-        notAnsweredText.text = blank[0].ToString();        
-        
-        // correctText2.text = correct[1].ToString();
-        // wrongText2.text = wrong[1].ToString();
-        // notAnsweredText2.text = blank[1].ToString();        
+        notAnsweredText.text = blank[0].ToString();
+        SendData();
 
-        // correctText3.text = correct[2].ToString();
-        // wrongText3.text = wrong[2].ToString();
-        // notAnsweredText3.text = blank[2].ToString();        
+
     }
     
     public void Solution()
@@ -57,4 +44,42 @@ public class FinishManager : MonoBehaviour
         GameData.IsSolution = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.GameScene.ToString());
     }
+
+    public void SendData()
+    {
+        Debug.Log("Trying To Save");
+        if (string.IsNullOrEmpty(MailManager.Instance.Email))
+        {
+            Debug.Log("Returned Empty");
+            return;
+
+        }
+
+
+        Debug.Log("Calc Score");
+        float testScore = (correct[0] + wrong[0] + blank[0]) > 0
+            ? ((float)correct[0] / (correct[0] + wrong[0] + blank[0])) * 100f
+            : 0f;
+
+        string timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
+        string testName = "Math Test";
+
+        // Safely get elapsedTime
+        float elapsed = 0f;
+        if (Timer.Instance != null)
+        {
+            elapsed = Timer.Instance.elapsedTime;
+        }
+
+        Application.ExternalCall(
+            "saveTestData",
+            MailManager.Instance.Email,
+            testName,
+            timestamp,
+            elapsed,
+            testScore
+        );
+        Debug.Log("Made External Call");
+    }
+
 }

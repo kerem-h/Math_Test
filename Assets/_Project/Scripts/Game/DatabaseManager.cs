@@ -106,7 +106,7 @@ public class DatabaseManager : MonoBehaviour
                         questionData.Ranges = values[2].Trim().Split(';');
                         questionData.Explanation = values[3].Trim();
                         questionData.Answers = values[4].Trim();
-                        if (values.Count > 5) {
+                    if (values.Count > 5) {
                             questionData.Conditions = values[5].Trim();
                         }
                         questions.Add(questionData); 

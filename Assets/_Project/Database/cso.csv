@@ -1,0 +1,779 @@
+"La surface d'un carré initial est de [{D}*{D}] m². Quelle serait la longueur des côtés d'un second carré si cette longueur était de {E} m de moins que celle du carré initial ?","0:{D}-{E}","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(15,30,1);{E}:(2,14,1)","L’aire d’un carré est L x l. On dispose ici de son aire ( [{D}*{D}] m2 ). 
+Il faut donc trouver la racine carré de [{D}*{D}] soit {D} puis retrancher {E} afin d’obtenir [{D}-{E}]","0;None:[{F}] m; [{F}+-{A}] m;[{F}+-{B}] m;[{F}+-{C}] m","{A}!={B}!={C}"
+"La surface d'un carré initial est de [{D}*{D}] m². Quelle serait la longueur des côtés d'un second carré si cette longueur était de {E} m de plus que celle du carré initial ?","0:{D}+{E}","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(15,30,1);{E}:(2,14,1)","L’aire d’un carré est L x l. On dispose ici de son aire ( [{D}*{D}] m2 ). 
+Il faut donc trouver la racine carré de [{D}*{D}] soit {D} puis ajouter {E} afin d’obtenir [{D}+{E}]","0;None:[{F}] m; [{F}+-{A}] m;[{F}+-{B}] m;[{F}+-{C}] m","{A}!={B}!={C}"
+"Dans une usine de fabrication de voitures, l'usine A produit {E} voitures et l'usine B en produit {F} . Quel pourcentage représente la production de l'usine B par rapport à celle de l'usine A ?","1:({F}/{E})*100","{A}:(3.0,20.0,1.0);{B}:(3.0,20.0,1.0);{C}:(3.0,20.0,1.0);{D}:(3.0,20.0,1.0);{E}:(2,99,1);{F}:(2,99,1)","Pourcentage = (Production de l'usine B / Production de l'usine A) × 100
+Pourcentage = ({F} / {E}) × 100
+Pourcentage = [{F}*{E}] × 100
+Pourcentage = {G}%
+
+La production de l'usine B représente donc {G} % de celle de l'usine A.","1;None:[{G}] %; [{G}+-{A}] %;[{G}+-{B}] %;[{G}+-{C}] %;[{G}+-{D}] %","{A}!={B}!={C}"
+"🚨 Christian a {E} ans de plus que Gilles. A eux deux, ils ont {F} ans.
+Quel est l'âge de Gilles ?","1:{F}-{E};{G}/2","{A}:(3.0,20.0,1.0);{B}:(3.0,20.0,1.0);{C}:(3.0,20.0,1.0);{D}:(3.0,20.0,1.0);{E}:(20,99,1);{F}:(70,120,1)","Soit l'âge d'Eva = x  
+L'âge de Michel = x + {E}  
+Ensemble, ils cumulent {F} ans :  
+
+x + (x + {E}) = {F}  
+2x + {E} = {F}  
+2x = {F} - {E}  
+2x = {G}  
+x = {G} / 2  
+x = {H}  
+
+L'âge d'Eva est donc {H} ans.","1;None:[{H}]; [{H}+-{A}];[{H}+-{B}];[{H}+-{C}];[{H}+-{D}]","{A}!={B}!={C}:{F}>{E}"
+"{E} peintres peignent une surface de {F}m2 en {G} min. Combien de temps est nécessaire pour peindre {H}m2 avec {I} peintres ?","2:{F}/{E};{G}/{J};{K}/{I};{H}*{L}","{A}:(10,25,1);{B}:(10,25,1);{C}:(10,25,1);{D}:(10,25,1);{E}:(2,15,1);{F}:(4,10,1);{G}:(30,59,1);{H}:(11,30,1);{I}:(2,15,1)","1. Calcul de la capacité individuelle de peinture par minute :
+   {E} peintres peignent {F} m² en {G} minutes donc 1 peintre peut peindre :
+  {F} m² / {E} min = {J} m².
+Donc, le temps nécessaire pour peindre 1 m² est donné par : {G} ÷ {J} m² = {K} min par peintre / m².
+
+2. Calcul de la capacité de {I} peintres pour 1 m²:
+   {I} peintres = {K} / {I} = {L} min/m².
+
+3. Temps nécessaire pour peindre {H} m² avec {I} peintres :
+   Temps = Surface / Capacité collective
+   Temps = {H} m² x {L} min/m² = {M} minutes.","0;None:[{M}] min; [{M}+-{A}] min;[{M}+-{B}] min;[{M}+-{C}] min;[{M}+-{D}] min","{A}!={B}!={C}:{E}>{I}"
+"Quelle est la distance réelle de Bordeaux à Paris, sachant qu'elle représente {A} cm sur une carte à l'échelle 1/{B} ?","0:({A}*{B})/100000","{A}:(3,50,1);{B}:(50000,5000000,50000)","{A} cm sur la carte correspond en réelle à {A} x {B} = [{A}*{B}] cm soit [{A}*{B}/100] m = [{A}*{B}/100000] km","2;None:[{C}] km;[{C}*/10] km;[{C}*/100] km;[{C}*/1000] km",""
+"II y a {A} km de distance entre la ville A et la ville B. Quelle sera cette distance ( en cm ) sur une carte au 1/{B}e ?","4:({A}/{B})*100000","{A}:(3,50,1);{B}:(50000,5000000,50000)","{A} km en réelle correspond en réelle à {A} / {B} = [{A}/{B}] km soit [{A}/{B}*1000] m = [{A}/{B}*100000] cm","3;None:[{C}] cm;[{C}*/10] cm;[{C}*/100] cm;[{C}*/1000] cm",""
+"Une voiture roule à {A} Km/heure. Quelle distance parcourt-elle en {B} heure et {C} minutes ?","1:{A}*({B}+{C}/60)","{A}:(30,240,10);{B}:(1,20,1);{C}:(0,54,6);{D}:(1,5,0.2);{E}:(5.2,10,0.2)","Distance parcouru = {A} km/h x [{B}+{C}/60] h = {F} km.","1;None:[{F}] km;[{F}+-{D}] km;[{F}+-{E}] km;[{F}+-({A}/10)] km","{D}!={E}"
+"Pour former {D} recrues, un instructeur a besoin de {E} jours. Combien de jours lui faudra-t-il pour former {F} recrues, sachant qu'il est {G} % plus efficace avec des groupes plus importants ?","2:{F}*{E}/{D};{H}*((100-{G})/100)","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:([10,15,20,25,30]);{E}:([5,10,15,20,25]);{F}:([40,50,60,70,80]);{G}:([10,20,30,40,50])","Étape 1 : Jours pour {F} recrues sans efficacité :
+({F} recrues x {E} jours) ÷ {D}  recrues = {H} jours.
+
+Étape 2 : Réduction due à l'efficacité :
+{H} jours x [(100-{G})/100] = {I} jours","0;None:[{I}] jours;[{I}+-{A}] jours;[{I}+-{B}] jours;[{I}+-{B}] jours","{A}!={B}!={C}"
+"🚨 Arnaud compte les lapins et les canards de son élevage personnel. Il dénombre au total [{D}+{E}] têtes et [{D}*2+{E}*4] pattes.
+Combien a-t-il de lapins?","0:{E}","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(1,40,1);{E}:(1,40,1);{F}:(2,3,1)","Pour résoudre ce problème, nous pouvons utiliser un système d'équations pour représenter le nombre de canards (C) et de lapins (L) que le fermier possède, en tenant compte du nombre total de têtes et de pattes.
+Nous savons que le fermier a [{D}+{E}] têtes au total, ce qui signifie que C + L = [{D}+{E}] (équation 1, représentant le nombre total de têtes).
+
+Nous savons également que le fermier a [{D}*2+{E}*4] pattes au total, et chaque canard a 2 pattes et chaque lapin en a 4. Donc, 2C + 4L = [{D}*2+{E}*4] (équation 2, représentant le nombre total de pattes).
+
+Maintenant, nous pouvons résoudre ce système d'équations. Tout d'abord, nous pouvons réorganiser l'équation 1 pour obtenir C = [{D}+{E}] - L.
+
+Ensuite, nous pouvons substituer cette expression dans l'équation 2 :
+2([{D}+{E}] - L) + 4L = [{D}*2+{E}*4]
+
+Maintenant, distribuons le 2 dans la première partie de l'équation :
+[2*({D}+{E})] - 2L + 4L = [{D}*2+{E}*4]
+
+Maintenant, combinons les termes similaires :
+[2*({D}+{E})] + 2L = [{D}*2+{E}*4]
+
+Soustrayez [2*({D}+{E})] des deux côtés de l'équation :
+2L = [{D}*2+{E}*4] - [2*({D}+{E})]
+2L = [({D}*2+{E}*4) - (2*({D}+{E}))]
+
+Divisez les deux côtés par 2 pour résoudre pour C :
+L = [({D}*2+{E}*4) - (2*({D}+{E}))] / 2
+L = {E}
+
+Le fermier a donc {E} lapins.","0;None:[{E}];[{E}+-{A}];[{E}+-{B}];[{E}+-{C}]","{A}!={B}!={C}"
+"🚨 Arnaud compte les lapins et les canards de son élevage personnel. Il dénombre au total [{D}+{E}] têtes et [{D}*2+{E}*4] pattes.
+Combien a-t-il de canards ?","0:{D}","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(1,40,1);{E}:(1,40,1);{F}:(2,3,1)","Pour résoudre ce problème, nous pouvons utiliser un système d'équations pour représenter le nombre de canard (C) et de lapins (L) que le fermier possède, en tenant compte du nombre total de têtes et de pattes.
+Nous savons que le fermier a [{D}+{E}] têtes au total, ce qui signifie que C + L = [{D}+{E}] (équation 1, représentant le nombre total de têtes).
+
+Nous savons également que le fermier a [{D}*2+{E}*4] pattes au total, et chaque poule a 2 pattes et chaque cheval en a 4. Donc, 2C + 4L = [{D}*2+{E}*4] (équation 2, représentant le nombre total de pattes).
+
+Maintenant, nous pouvons résoudre ce système d'équations. Tout d'abord, nous pouvons réorganiser l'équation 1 pour obtenir C = [{D}+{E}] - L.
+
+Ensuite, nous pouvons substituer cette expression dans l'équation 2 :
+2([{D}+{E}] - L) + 4L = [{D}*2+{E}*4]
+
+Maintenant, distribuons le 2 dans la première partie de l'équation :
+[2*({D}+{E})] - 2L + 4L = [{D}*2+{E}*4]
+
+Maintenant, combinons les termes similaires :
+[2*({D}+{E})] + 2L = [{D}*2+{E}*4]
+
+Soustrayez [2*({D}+{E})] des deux côtés de l'équation :
+2L = [{D}*2+{E}*4] - [2*({D}+{E})]
+2L = [({D}*2+{E}*4) - (2*({D}+{E}))]
+
+Divisez les deux côtés par 2 pour résoudre pour C :
+L = [({D}*2+{E}*4) - (2*({D}+{E}))] / 2
+C = {E}
+
+Le fermier a donc {E} canards.","0;None:[{D}];[{D}+-{A}];[{D}+-{B}];[{D}+-{C}]","{A}!={B}!={C}"
+"Un fermier a des poules et des chevaux. Il compte [{A}+{B}] têtes et [{A}*2+{B}*4] pattes. Combien a-t-il de chevaux?","0:{B}","{A}:(1,40,1);{B}:(1,40,1);{C}:(2,3,1)","Pour résoudre ce problème, nous pouvons utiliser un système d'équations pour représenter le nombre de poules (P) et de chevaux (C) que le fermier possède, en tenant compte du nombre total de têtes et de pattes.
+Nous savons que le fermier a [{A}+{B}] têtes au total, ce qui signifie que P + C = [{A}+{B}] (équation 1, représentant le nombre total de têtes).
+
+Nous savons également que le fermier a [{A}*2+{B}*4] pattes au total, et chaque poule a 2 pattes et chaque cheval en a 4. Donc, 2P + 4C = [{A}*2+{B}*4] (équation 2, représentant le nombre total de pattes).
+
+Maintenant, nous pouvons résoudre ce système d'équations. Tout d'abord, nous pouvons réorganiser l'équation 1 pour obtenir P = [{A}+{B}] - C.
+
+Ensuite, nous pouvons substituer cette expression dans l'équation 2 :
+2([{A}+{B}] - C) + 4C = [{A}*2+{B}*4]
+
+Maintenant, distribuons le 2 dans la première partie de l'équation :
+[2*({A}+{B})] - 2C + 4C = [{A}*2+{B}*4]
+
+Maintenant, combinons les termes similaires :
+[2*({A}+{B})] + 2C = [{A}*2+{B}*4]
+
+Soustrayez [2*({A}+{B})] des deux côtés de l'équation :
+2C = [{A}*2+{B}*4] - [2*({A}+{B})]
+2C = [({A}*2+{B}*4) - (2*({A}+{B}))]
+
+Divisez les deux côtés par 2 pour résoudre pour C :
+C = [({A}*2+{B}*4) - (2*({A}+{B}))] / 2
+C = {B}
+
+Le fermier a donc {B} chevaux.","0;None:[{D}];[{D}+-1];[{D}+-{C}];[{D}+-4]",""
+"Un fermier a des poules et des chevaux. Il compte [{A}+{B}] têtes et [{A}*2+{B}*4] pattes. Combien a-t-il de poules?","0:{A}","{A}:(1,40,1);{B}:(1,40,1);{C}:(2,3,1)","Pour résoudre ce problème, nous pouvons utiliser un système d'équations pour représenter le nombre de poules (P) et de lapins (C) que le fermier possède, en tenant compte du nombre total de têtes et de pattes.
+Nous savons que le fermier a [{A}+{B}] têtes au total, ce qui signifie que P + C = [{A}+{B}] (équation 1, représentant le nombre total de têtes).
+
+Nous savons également que le fermier a [{A}*2+{B}*4] pattes au total, et chaque poule a 2 pattes et chaque cheval en a 4. Donc, 2P + 4C = [{A}*2+{B}*4] (équation 2, représentant le nombre total de pattes).
+
+Maintenant, nous pouvons résoudre ce système d'équations. Tout d'abord, nous pouvons réorganiser l'équation 1 pour obtenir C = [{A}+{B}] - P.
+
+Ensuite, nous pouvons substituer cette expression dans l'équation 2 :
+2P + 4([{A}+{B}] - P) = [{A}*2+{B}*4]
+
+Maintenant, distribuons le 2 dans la première partie de l'équation :
+2P + [4*({A}+{B})] - 4P = [{A}*2+{B}*4]
+
+Maintenant, combinons les termes similaires :
+[4*({A}+{B})] - 2P = [{A}*2+{B}*4]
+
+Soustrayez [2*({A}+{B})] des deux côtés de l'équation :
+2P = [4*({A}+{B}) - [{A}*2+{B}*4]]
+2P = [(4*({A}+{B})) - ({A}*2+{B}*4)]
+
+Divisez les deux côtés par 2 pour résoudre pour C :
+C = [({A}*2+{B}*4) - (2*({A}+{B}))] / 2
+C = {A}
+
+Le fermier a donc {A} poules.","0;None:[{D}]; [{D}+-1];[{D}+-{C}];[{D}+-4]",""
+"Un transporteur a {A} bouts de bois dans son camion, il en dépose {B} chez A, puis {C} chez B, puis {D} chez C, et en récupère {E} chez D, combien lui en reste-t-il à la fin ?","0:{A}-{B}-{C}-{D}+{E}","{A}:(800,1000,1);{B}:(200,300,5);{C}:(100,300,3);{D}:(100,300,2);{E}:(200,500,1)","{A} - {B} - {C} - {D} + {E} = {F}","0;None:[{F}]; [{F}+-10];[{F}+-15];[{F}-{E}]",""
+"Un marchand a du cafe de deux qualités.
+Quand il prend {D} Kg de la première qualité et {E} Kg de la seconde, le mélange vaut [{D}*{F}+{E}*{G}] €.
+Quand il prend {H} Kg de la première qualité et {I} Kg de la seconde, le mélange vaut [{H}*{F}+{I}*{G}] €.
+
+Quel est le prix de la première qualité ?","1:{D}*{F}+{E}*{G};{H}*{F}+{I}*{G};{E}*{H};{I}*({D}*{F}+{E}*{G});{I}*{D};{M}-{O};({H}*{F}+{I}*{G})*{E};{Q}-{N}","{A}:(2,10,1);{B}:(2,10,1);{C}:(2,10,1);{D}:(2,10,2);{E}:(2,14,2);{F}:(10,30,2);{G}:(10,30,2);{H}:(2,12,2);{I}:(2,12,2);{J}:(2,3,1)","Note : La résolution est donnée ici de manière générique. À vous de l'adapter par la suite si vous souhaitez trouver X ou Y.
+On part du système :
+(1) {D}x + {E}y = {K}
+(2) {H}x + {I}y  = {L}
+
+**Étape 1 : Isoler y dans (1)**  
+De (1) :  
+{E}y = {K} − {D}x  
+y = ({K} − {D}x) / {E}
+
+**Étape 2 : Substituer y dans (2)**  
+Remplaçons y dans (2) par l'expression trouvée :  
+{H}x + {I} * ( ({K} − {D}x) / {E} ) = {L}
+
+**Étape 3 : Éliminer le dénominateur**  
+Multiplions l'équation par {E} pour se débarrasser du dénominateur :  
+{E} * {H}x + {I} * ({K} − {D}x) = {L} * {E}  
+{M}x + {I} * {K} − {I} * {D}x = {Q}
+
+**Étape 4 : Simplifier l'équation**  
+Calculons {I} * {K} et {I} * {D}x :  
+{I} * {K} = {N}  
+{I} * {D}x = {O}x  
+
+Maintenant, l'équation devient :  
+{M}x + {N} − {O}x = {Q}  
+({M}x − {O}x) + {N} = {Q}  
+{P}x + {N} = {Q}
+
+**Étape 5 : Isoler x**  
+Soustrayons {N} des deux côtés :  
+{P}x = {Q} − {N}  
+{P}x = [{Q}-{N}]
+x = {R} / {P}  
+
+x = {F}
+y = {G}","0;None:[{F}]; [{F}+-{A}];[{F}+-{B}];[{F}+-{C}]","{A}!={B}!={C}:{D}!={E}:{H}!={I}"
+"Un marchand a du cafe de deux qualités.
+Quand il prend {D} Kg de la première qualité et {E} Kg de la seconde, le mélange vaut [{D}*{F}+{E}*{G}] €.
+Quand il prend {H} Kg de la première qualité et {I} Kg de la seconde, le mélange vaut [{H}*{F}+{I}*{G}] €.
+
+Quel est le prix de la deuxième qualité ?","1:{D}*{F}+{E}*{G};{H}*{F}+{I}*{G};{E}*{H};{I}*({D}*{F}+{E}*{G});{I}*{D};{M}-{O};({H}*{F}+{I}*{G})*{E};{Q}-{N}","{A}:(2,10,1);{B}:(2,10,1);{C}:(2,10,1);{D}:(1,10,2);{E}:(1,14,2);{F}:(10,30,2);{G}:(10,30,2);{H}:(1,12,2);{I}:(1,12,2);{J}:(2,3,1)","Note : La résolution est donnée ici de manière générique. À vous de l'adapter par la suite si vous souhaitez trouver X ou Y.
+On part du système :
+(1) {D}x + {E}y = {K}
+(2) {H}x + {I}y  = {L}
+
+**Étape 1 : Isoler y dans (1)**  
+De (1) :  
+{E}y = {K} − {D}x  
+y = ({K} − {D}x) / {E}
+
+**Étape 2 : Substituer y dans (2)**  
+Remplaçons y dans (2) par l'expression trouvée :  
+{H}x + {I} * ( ({K} − {D}x) / {E} ) = {L}
+
+**Étape 3 : Éliminer le dénominateur**  
+Multiplions l'équation par {E} pour se débarrasser du dénominateur :  
+{E} * {H}x + {I} * ({K} − {D}x) = {L} * {E}  
+{M}x + {I} * {K} − {I} * {D}x = {Q}
+
+**Étape 4 : Simplifier l'équation**  
+Calculons {I} * {K} et {I} * {D}x :  
+{I} * {K} = {N}  
+{I} * {D}x = {O}x  
+
+Maintenant, l'équation devient :  
+{M}x + {N} − {O}x = {Q}  
+({M}x − {O}x) + {N} = {Q}  
+{P}x + {N} = {Q}
+
+**Étape 5 : Isoler x**  
+Soustrayons {N} des deux côtés :  
+{P}x = {Q} − {N}  
+{P}x = [{Q}-{N}]
+x = {R} / {P}  
+
+x = {F}
+y = {G}","0;None:[{G}]; [{G}+-{A}];[{G}+-{B}];[{G}+-{C}]","{A}!={B}!={C}:{D}!={E}:{H}!={I}"
+"🚨 Le réservoir de l'avion de transport 'C160' contient  {E} litres de kérosène. Lors d'une première escale, l'avion a consommé {F}/{G}ème du contenu de départ du réservoir ; lors d'une seconde escale, il a consommé {H}/{I}ème du contenu de départ et, lors d'une troisième escale, il en a consommé {J}/{K}ème.
+Combien de litres de kérosène reste-t-il dans le réservoir à l'issue des trois escales ?","1:({E}*{F}/{G})+({E}*{H}/{I})+({E}*{J}/{K});{E}-{L}","{A}:(100,500,50);{B}:(100,500,50);{C}:(100,500,50);{D}:(100,500,50);{E}:(5000,20000,500);{F}:(1,10,1);{G}:(2,10,1);{H}:(1,5,1);{I}:(2,5,1);{J}:(1,20,1);{K}:(2,20,1)","La premiere chose à noter est que l’on parle ici du carburant total.
+On doit donc venir soustraire à {E} L, {F}/{G} + {H}/{I} + {J}/{K} de {E} soit {E} - {L}= {M} L","0;None:[{M}] L;[{M}+-{A}] L;[{M}+-{B}] L;[{M}+-{C}] L;[{M}+-{D}] L","{A}!={B}!={C}!={D}:{F}<{G}:{H}<{I}:{J}<{K}"
+"Un hélicoptère consomme {E} litres de carburant par heure en vol stationnaire. Quelle quantité de carburant consommera-t-il après hm({F}) ?","1:{E}*{F}/3600","{A}:(10,80,1);{B}:(10,80,1);{C}:(10,80,1);{D}:(10,80,1);{E}:(1000,400,10);{F}:(3600,14400,360)","Consommation = {E} litres/h x [{F}/3600] h = {G} litres.","0;None:[{G}];[{G}+-{A}];[{G}+-{B}];[{G}+-{C}];[{G}+-{D}]","{A}!={B}!={C}!={D}"
+"Un avion est à une altitude de {A} mètres et monte à une vitesse de {B} mètres par minute pendant {C} minutes. À quelle altitude se trouve-t-il à la fin?","0:{A}+{B}*{C}","{A}:(500,5000,100);{B}:(100,3000,100);{C}:(1,30,1)","Si un avion monte de {B} m par minute et qu’il se trouve à {A} m. Il faut alors multiplier le taux de montée soit {B} par le nombre de minute {C} et additionner le résultat à l’altitude initiale {A} pour obtenir {D}","0;None:[{D}];[{D}+-{B}];[{D}+-100];[{D}+-(2*{B})]",""
+"Un tireur d'élite utilise en moyenne {A} munitions pour toucher une cible. Si lors d'une mission il doit neutraliser {B} cibles, combien de munitions devra-t-il prévoir?","0:{A}*{B}","{A}:(1,20,1);{B}:(5,30,1)","Si le tireur d’élite utilise {A} munitions pour toucher {B} cible. Il faut donc simplement multiplier le nombre de munitions par le nombre de cible soit :
+{A} x {B} = [{A}*{B}]","0;None:[{C}];[{C}+-1];[{C}+-2];[{C}+-3]",""
+"Sophie veut acheter un vélo à {A}€. Après négociations, le marchand lui accorde {B}% de remise. Combien Sophie paye-t-elle le vélo?","1:{A}-({A}*{B}/100)","{A}:(10,500,1);{B}:(3,80,1);{C}:(2,3,1)","Il faut calculer le pourcentage de remise. Soit {A} x {B} / 100 = [{A}*{B}/100] on soustrait ensuite [{A}*{B}/100] de {A}","0;None:[{D}];[{D}+-1];[{D}+-{C}];[{D}+-4]",""
+"Lucas souhaite acquérir une montre à {A} €. Suite à sa demande, le vendeur lui fait une ristourne de {B}%. Combien Lucas débourse-t-il pour la montre?","1:{A}-({A}*{B}/100)","{A}:(10,500,1);{B}:(3,80,1);{C}:(2,3,1)","Il faut calculer le pourcentage de remise. Soit {A} x {B} / 100 = [{A}*{B}/100] on soustrait ensuite [{A}*{B}/100] de {A}
+[{A}*{B}/100] - {A} = {D}","1;None:[{D}];[{D}+-1];[{D}+-{C}];[{D}+-4]",""
+"Marie envisage d'acheter une paire de chaussures à {A}€. Après discussion, le commerçant lui offre {B}% de réduction. Combien Marie paie-t-elle la paire de chaussures?","1:{A}-({A}*{B}/100)","{A}:(10,500,1);{B}:(3,80,1);{C}:(2,3,1)","Il faut calculer le pourcentage de remise. Soit {A} x {B} / 100 = [{A}*{B}/100] on soustrait ensuite [{A}*{B}/100] de {A}","1;None:[{D}];[{D}+-1];[{D}+-{C}];[{D}+-4]",""
+"Pierre possède un verger composé de {A} pommiers et {B} poiriers. Sachant qu'il abat {C}% de poiriers et {D}% de pommiers, combien d'arbres a-t-il abattu au total ?","2:({A}*{D}/100)+({B}*{C}/100)","{A}:(10,500,2);{B}:(10,500,2);{C}:(2,80,1);{D}:(3,80,1);{E}:(2,3,1)","Pour trouver le nombre total d'arbres abattus, vous pouvez calculer le nombre d'arbres abattus pour chaque type d'arbre (poiriers et pommiers) séparément, puis les additionner.
+
+Pour les poiriers, Pierre abat {C}% d'entre eux :
+Nombre de poiriers abattus = {C}% de {B} = [{C}/100] x {B} = [{C}*{B}/100] poiriers abattus.
+Pour les pommiers, Pierre abat {D}% d'entre eux :
+Nombre de pommiers abattus = {D}% de {A} = [{D}/100] x {A} = [{A}*{D}/100] pommiers abattus.
+Maintenant, additionnons les deux chiffres pour obtenir le nombre total d'arbres abattus :
+Nombre total d'arbres abattus = [{C}*{B}/100] poiriers abattus + [{A}*{D}/100] pommiers abattus = {F} arbres abattus au total.
+Attention, vous ne pouvez pas avoir de demi arbre, il convient donc d’arrondir à la valeur supérieure.
+Le jour J pour le CSO, le calcul tombe normalement rond.","0;Ceil:[{F}];[{F}+-1];[{F}+-{E}];[{F}+-4]",""
+"Clément a un jardin où il a planté {A} rosiers et {B} tulipes. Si il arrache {C}% de tulipes et {D}% de rosiers, combien de plantes a-t-il retirées en tout ?","2:({A}*{D}/100)+({B}*{C}/100)","{A}:(10,500,2);{B}:(10,500,2);{C}:(2,80,1);{D}:(3,80,1);{E}:(2,3,1)","Pour trouver le nombre total de plantes abattus, vous pouvez calculer le nombre de plantes abattus pour chaque type de plante (tulipes et rosiers) séparément, puis les additionner.
+
+Pour les tulipes, Pierre abat {C}% d'entre eux :
+Nombre de tulipes abattus = {C}% de {B} = [{C}/100] x {B} = [{C}*{B}/100] tulipes abattus.
+Pour les rosiers, Pierre abat {D}% d'entre eux :
+Nombre de pommiers abattus = {D}% de {A} = [{D}/100] x {A} = [{A}*{D}/100] rosiers abattus.
+Maintenant, additionnons les deux chiffres pour obtenir le nombre total de plantes abattus :
+Nombre total d'arbres abattus = [{C}*{B}/100] tulipes abattus + [{A}*{D}/100] rosiers abattus = {F} plantes abattus au total.
+Attention, vous ne pouvez pas avoir de demi plante, il convient donc d’arrondir à la valeur supérieure.
+Le jour J pour le CSO, le calcul tombe normalement rond.","0;Ceil:[{F}]; [{F}+-1];[{F}+-{E}];[{F}+-4]",""
+"Pierre possède un verger composé de {A} pommiers et {B} poiriers. Sachant qu'il abat {C}% de poiriers et {D}% de pommiers, combien d'arbres restent ils au total ?","2:({A}+{B})-({A}*{D}/100)-({B}*{C}/100)","{A}:(10,500,2);{B}:(10,500,2);{C}:(2,80,1);{D}:(3,80,1);{E}:(2,3,1)","Pour trouver le nombre total d'arbres restant, vous pouvez calculer le nombre d'arbres abattus pour chaque type d'arbre (poiriers et pommiers) séparément, puis les soustraire au nombre d’arbres total.
+
+Pour les poiriers, Pierre abat {C}% d'entre eux :
+Nombre de poiriers abattus = {C}% de {B} = [{C}/100] x {B} = [{C}*{B}/100] poiriers abattus.
+Pour les pommiers, Pierre abat {D}% d'entre eux :
+Nombre de pommiers abattus = {D}% de {A} = [{D}/100] x {A} = [{A}*{D}/100] pommiers abattus.
+Maintenant, additionnons les deux chiffres pour obtenir le nombre total d'arbres abattus :
+Nombre total d'arbres abattus = [{C}*{B}/100] poiriers abattus + [{A}*{D}/100] pommiers abattus = [({A}*{D}/100)+({B}*{C}/100)]
+Nombre total d’arbres rentant = {A} + {B} - [({A}*{D}/100)+({B}*{C}/100)] = [{A}+{B}] - [({A}*{D}/100)+({B}*{C}/100)] = {F} arbres restant au total.
+Attention, vous ne pouvez pas avoir de demi arbre, il convient donc d’arrondir à la valeur inférieure.
+Le jour J pour le CSO, le calcul tombe normalement rond.","0;Floor:[{F}]; [{F}+-1];[{F}+-{E}];[{F}+-4]",""
+"Un sac de blé de {A} litres pèse {B} kg. Quand on réduit le blé en farine, il perd {C}% de son poids. De plus, pour fabriquer {D} kg de pain, il faut utiliser {E} kg de farine.
+
+Combien de kg de pain peut-on préparer avec {F}  hl de blé ?","0:(((({F}*100)/{A})*{B})*(1-{C}/100))*{D})/{E}","{A}:(100,500,10);{B}:(100,400,10);{C}:(5,80,5);{D}:(2,10,1);{E}:(2,10,1);{F}:(2,10,1)","Le processus débute par la conversion du volume de blé en poids, utilisant le fait qu'{A} litres de blé pèsent {B} kg. 
+Si nous voulons savoir combien pèse {F} hectolitres (hl) de blé, nous multiplions {F} par 100 pour convertir en litres (car 1 hl = 100 litres) et utilisons ensuite la proportionnalité pour trouver le poids correspondant en kg soit:
+
+(({F} x 100) / {A}) x {B} = [(({F}*100)/{A})*{B}]
+Ensuite, nous prenons en compte la perte de poids due à la transformation du blé en farine, qui est de {C}%. Pour ajuster le poids à cette perte, nous multiplions le poids initial par 1 - {C}/100, donnant le poids réel de la farine obtenue après réduction :
+
+[(({F}*100)/{A})*{B}] x (1 - {C}/100) = [(({F}*100)/{A})*{B}] x [1-{C}/100] = [(({F}*100)/{A})*{B})*(1-({C}/100))]
+
+La dernière étape consiste à déterminer combien de kg de pain peut être préparé avec cette farine. Sachant que {D} kg de pain nécessitent {E} kg de farine, nous utilisons le poids de la farine calculé précédemment pour trouver combien de pain peut être fait. 
+Le rapport final pour calculer le poids du pain produit est obtenu en divisant le poids de la farine par {E} (kg de farine par kg de pain) et en multipliant par {D}, représentant la quantité de pain produite.
+La formule finale pour calculer le nombre de kg de pain que l'on peut préparer avec {F} hl de blé est alors : 
+[(({F}*100)/{A})*{B})*(1-({C}/100))] / {D} )x {E} = [(({F}*100)/{A})*{B})*(1-({C}/100))] x {D} / {E} = {G}","0;None:[{G}]; [{G}+-1];[{G}+-2];[{G}+-4]",""
+"En 2023, un article coûtait {A} francs français (FRF). En 2024, ce même article vaut désormais {B} euros . En considérant que {C} FRF = {D} euros, déterminer une valeur approchée de la hausse du prix intervenue entre ces deux années, en pourcentage.","1:(({B}/({A}*{D}/{C}))-1)*100","{A}:(5,50,5);{B}:(10,40,2);{C}:(5,15,5);{D}:(1,3,0.01)","Vous devez dans un premier temps calculer le prix en euro tel qu’il était en 2023 soit:
+{A} x {D} / {C} = [{A}*{D}] / {C} = [{A}*{D}/{C}]
+Calculez ensuite combien de fois plus chère vaut l’article:
+{B} / [{A}*{D}/{C}] = [{B}/({A}*{D}/{C})] soit [(({B}/({A}*{D}/{C}))-1)*100] %
+
+Attention de ne pas confondre le nombre de fois par lequel l’article a été multiplié et le pourcentage d’augmentation.","2;None:[{E}]; [{B}/({A}*{D}/{C})*100]; [{B}/({A}*{D}/{C})]; [({B}/({D}*{A}/{C})+1)*100]",""
+"Un coureur de longue distance complète {A} km en {B} minutes. Quelle durée lui sera nécessaire pour achever un parcours de {C} km ?","2:{C}*{B}/{A}","{A}:(2,20,1);{B}:(5,90,5);{C}:(10,70,1);{D}:(1,9,1);{E}:(1,9,1);{F}:(1,9,1)","Un simple produit en croix suffit à résoudre le problème:
+
+Temps pour faire {C} km =  {C} x {B} /{A} = {G} min","2;Round:[{G}] min;[{G}+-{D}] min;[{G}+-{E}] min;[{G}+-{E}] min","{D}!={E}!={F}"
+"{A} fruits coûtent {B} euros. Combien devrait-on payer pour en acquérir {C} ?","1:{C}*{B}/{A}","{A}:(2,15,1);{B}:(2,20,1);{C}:(15,70,1);{D}:(1,4,1);{E}:(0.3,0.9,0.1)","Ici un simple produit en croix suffit.
+{A} fruits coûte {B} euros
+{C} fruits coûte X euros
+X = {C} x {B} / {A} = {F}","2;Round:[{F}];[{F}+-{D}] ; [{F}+-{E}];[{A}*{B}/{C}]",""
+"Lors d'un achat de {A} ouvrages à {B} euros l'unité dans une boutique de livres, Thomas règle avec un billet de {C} euros. Quel est le montant de sa monnaie ?","2:{C}-({A}*{B})","{A}:(2,10,1);{B}:(2,5,0.05);{C}:(50,80,1);{D}:(1,4,0.05);{E}:(4,10,0.05)","Calculez dans un premier temps le prix des livres achetés soit {A} x {B} = [{A}*{B}]
+Puis soustraire le résultat à l’argent en poche : {C} - [{A}*{B}] = [{C}-({A}*{B})]","2;None:[{F}];[{F}+-{D}] ; [{F}+-{E}];[{F}+-0.25]",""
+"Avec un salaire horaire de {A} euros, Julien cumule un total de {B} heures de travail. Si Lola est rémunérée à {C} euros de l'heure, quel volume d'heures doit-elle fournir pour obtenir une rémunération équivalente à celle de Julien ?","2:{A}*{B}/{C}","{A}:(5,15,0.1);{B}:(10,39,1);{C}:(5,15,0.01);{D}:(1,4,0.01);{E}:(4,10,0.02)","Calculez dans un premier temps le salaire du premier employé soit {A} x {B} = [{A}*{B}]
+Pour déduire le temps de travail du deuxième employé divisez simplement le salaire du premier par le taux horaire du deuxième soit:
+[{A}*{B}] / {C} = [{A}*{B}/{C}]","2;None:[{F}];[{F}+-{D}] ; [{F}+-{E}];[{F}+-0.25]",""
+"Un {[hotel,établissement,restaurant]} dispose de 2 équipements pour cuire des pizzas, le premier pouvant en préparer {A} fois plus que le second. Si [{A}*{B}+{B}] pizzas ont été vendues lors d'une soirée, quel est le nombre cuites par le second équipement ?","0:{B}","{A}:(2,15,1);{B}:(2,40,1);{C}:(1,2,1);{D}:(3,4,1)","Pour déterminer combien de pizzas ont été cuites par le second équipement, on peut poser l'équation suivante, en considérant que le premier équipement prépare {A} fois plus de pizzas que le second :
+Soit x le nombre de pizzas cuites par le second équipement. Alors, le premier équipement peut cuire {A}x pizzas.
+La somme des pizzas cuites par les deux équipements est égale au total des pizzas vendues : 
+x + {A} x = [{B}+{A}*{B}]
+En résolvant cette équation, on trouve la valeur de x
+[{A}+1] x = [{B}+{A}*{B}]
+X = [{B}+{A}*{B}] / [{A}+1] = {E}
+Le second équipement a cuit {E} pizzas lors de cette soirée.","0;None:[{E}];[{E}+-{C}] ; [{E}+-{D}]; [{A}*{B}+{A}]",""
+"{[Un réservoir,Un bidon,Une gourde]}  est à {A} % de sa capacité totale avec {B} litres. Quelle est sa contenance totale ?","2:100*{B}/{A}","{A}:(2,93,1);{B}:(2,100,1);{C}:(1,3,1);{D}:(4,6,1);{E}:(1.1,3.9,0.3)","Si {A} % correspond à {B} L alors 
+100 % = 100 x {B} / {A} = [100*{B}/{A}]","0;None:[{F}];[{F}+-{C}];[{F}+-{D}];[{F}+-{E}]",""
+"Pour remplir sa piscine, un particulier passe par 3 tuyaux. Le débit du premier (tuyau A) est de {A} L/m. Celui du deuxième, le tuyau B est de {B}/{C} de A et le dernier (tuyau C) a un débit égal aux {D}/{E} du tuyau B, quel est le débit du tuyau C ?","1:({D}/{E})*({B}/{C}*{A})","{A}:(2,99,1);{B}:(2,20,1);{C}:(2,15,1);{D}:(2,20,1);{E}:(2,15,1)","Étape 1: Calculer le débit du tuyau B
+Le début du tuyau B est égal à {B}/{C} de A soit {B}/{C} x {A} = [{B}/{C}*{A}]
+
+Étape 2: Calculer le débit du tuyau C
+Le début du tuyau C est égal à {D}/{E} de B soit {D}/{E} x [{B}/{C}*{A}] = [({D}/{E})*({B}/{C}*{A})]
+
+Ainsi, le débit du tuyau C est [({D}/{E})*({B}/{C}*{A})]","1;None:[{F}];[{F}+-1];[{F}+-2];[{F}+-3]",""
+"Un abonnement de streaming coûte {A}€ par mois pour les {B} premières heures de visionnage, puis {C}€ par heure supplémentaire. Quel sera le coût total pour {D} heures de visionnage en un mois ?","1:{D}-{B};{E}*{C};{A}+{F}","{A}:(2,40,1);{B}:(2,20,1);{C}:(2,15,1);{D}:(25,100,1)","Étape 1: Coût des {B} premières heures de visionnage
+Le coût pour les {B} premières heures de visionnage est fixe à {A}€.
+
+Étape 2: Calcul du nombre d'heures supplémentaires
+Heures supplémentaires = Heures totales - Heures incluses dans l'abonnement = {D} heures - {B} heures = {E} heures
+
+Étape 3: Calcul du coût des heures supplémentaires
+Coût des heures supplémentaires = Nombre d'heures supplémentaires * Coût par heure = {E} heures * {C}€/heure = {F}€
+
+Étape 4: Calcul du coût total
+Coût total = Coût des {B} premières heures + Coût des heures supplémentaires = {A}€ + {F}€ = {G}€","1;None:[{G}] €;[{F}+-1] €;[{F}+-2] €;[{F}+-3] €",""
+"Dans une librairie, les {A} premiers crayons coûtent {B}€, puis {C}€ l'unité jusqu'à {D} crayons ? Au dela de {D} crayons, une majoration de {E}% est appliqué, combien coûteront {F} crayons après l'augmentation ?","1:({D}-{A})*{C};{B}+{G};{C}*(1+({E}/100));({F}-{D})*{I};{H}+{J}","{A}:(2,5,1);{B}:(2,10,1);{C}:(2,7,1);{D}:(8,15,1);{E}:(10,40,5);{F}:(30,100,1)","Étape 1: Calculer le coût des premiers {D} crayons:
+Les premiers {A} crayons coûtent {B}€.
+
+Les [{D}-{A}] crayons restants (jusqu'à {D} crayons) coûtent {C}€ par crayon.
+Coût pour les [{D}-{A}] crayons restants = [{D}-{A}] * {C}€ = {G}€
+
+Coût total pour les premiers {D} crayons = {B}€ + {G}€ = {H}€
+
+Étape 2: Calculer le coût des crayons restants ([{F}-{D}] crayons) avec le prix augmenté de {E}%
+Nouveau prix pour chaque crayon après {D} crayons = {C}€ * [(1+({E}/100))] = {I} €
+
+Coût pour les [{F}-{D}] crayons restants = [{F}-{D}] * {I}€ = {J}€
+
+Étape 3: Calculer le coût total
+Coût total pour {F} crayons = Coût des premiers {D} crayons + Coût des [{D}-{A}] crayons restants + Coût des [{F}-{D}] crayons restants = {H} € + {J} € = {K}€","1;None:[{K}] €;[{K}+-2] €;[{K}+-4] €;[{K}+-6] €",""
+"Dans un magasin de jouets, Alice achète {A} peluches qui coûtent {B} € chacune. Elle donne un billet de {C}$ au caissier, combien de monnaie va-t-elle recevoir ?
+Note: 1$ = {D} €","1:{A}*{B};{C}*{D};{F}-{E}","{A}:(2,15,1);{B}:(2.00,20.00,0.01);{C}:(250,400,1);{D}:(1.50,3.00,0.01)","Étape 1: Calculer le coût total des peluches
+Coût total des peluches = {A} * {B} € = {E} €
+
+Étape 2: Convertir le montant du billet de {C}$ en euros
+Montant en euros pour {C}$ = {C}$ * {D} €/$ = {F} €
+
+Étape {A}: Calculer la monnaie qu'Alice recevra
+Monnaie = Montant en euros - Coût total des peluches = {F} € - {E} € = {G} €","1;None:[{G}] €;[{G}+-1] €;[{G}+-2] €;[{G}+-3] €",""
+"Si une paire de {[chaussure,basquette,chausette]}  en promotion est affichée au prix de {A} € et que son prix d'origine était de {B} €, quel est le pourcentage de réduction appliqué à ce produit ?","1:{B}-{A};{C}/{B}*100","{A}:(20,50,1);{B}:(51,100,1)","Étape 1: Calculer la réduction en valeur absolue
+Réduction = Prix d'origine - Prix en promotion
+Réduction = {B} € - {A} € = {C} €
+
+Étape 2: Calculer le pourcentage de réduction
+Pourcentage de réduction = (Réduction / Prix d'origine) * 100
+Pourcentage de réduction = ({C} € / {B} €) * 100 = {D} %","1;None:[{D}] %;[{D}+-1] %;[{D}+-2] %;[{D}+-3] %",""
+"Un cycliste parcourt un kilomètre en {E} minutes. Si une pause de {F} minutes est ajoutée tous les {G} km, et qu'il parcourt {H} km combien de temps prendra-t-il au total avec les pauses ?","1:{H}*{E};{H}/{G};Dec{J};{J}-{K};{L}*{F};{I}+{M};{N}*60","{A}:(600,3600,60);{B}:(600,3600,60);{C}:(600,3600,60);{D}:(600,3600,60);{E}:(2,10,2);{F}:(5,20,1);{G}:(5,20,5);{H}:(30,80,10)","Étape 1: Calculer le temps de parcours pour {H} km sans pauses
+Temps pour {H} km = {H} km * {E} minutes/km = {I} minutes
+
+Étape 2: Calculer le nombre de pauses et leur durée totale
+Le cycliste fait une pause de {F} minutes tous les {G} km.
+
+Nombre de pauses pour {H} km = {H} km / {G} km/pause = {J} = {L} pauses car il ne peut pas faire {K} pause
+
+Durée totale des pauses = Nombre de pauses * {F} minutes/pause = {L} * {F} minutes = {M} minutes
+
+
+Étape 3: Calculer le temps total
+Temps total = Temps de parcours + Durée totale des pauses
+Temps total = {I} minutes + {M} minutes = {N} minutes = hm({O})","0;Round:hm([{O}]);hm([{O}+-{A}]);hm([{O}+-{B}]);hm([{O}+-{C}]);hm([{O}+-{D}])","{A}!={B}!={C}!={D}"
+"Si un bateau parcourt {A} kilomètres en {B} heures, combien de kilomètres parcourra-t-il en {C} heures s'il garde la même vitesse ? ","2:{A}/{B};{D}*{C};({A}*{C})/{B}","{A}:(100,300,10);{B}:(3,10,1);{C}:(11,20,1)","Étape 1: Calculer la vitesse du bateau
+Vitesse = Distance / Temps
+Vitesse = {A} km / {B} h = {D} km/h
+
+Étape 2: Utiliser la vitesse pour déterminer la distance parcourue en {C} heures
+Distance = Vitesse * Temps
+Distance = {D} km/h * {C} h = {F} km","1;Round:[{F}] km;[{F}+-5] km;[{F}+-10] km;[{F}+-15] km",""
+"Le prix d'un ordinateur portable est affiché à {A} €. Le prix de cet ordinateur a subi une hausse de {B}% puis une baisse de {C}%. Quel est son nouveau prix ?","1:(1+({B}/100))*{A};{D}*(1-({C}/100))","{A}:(50,100,10);{B}:(5,60,10);{C}:(5,60,10)","Étape 1: Calculer le prix après la hausse de {B}%
+Prix après la hausse = [1+({B}/100)] * {A} € = {D} €
+
+Étape 2: Calculer le prix après la baisse de {C}%
+
+Prix après la baisse = Prix après la hausse - Baisse de {C}%
+Prix après la baisse = {D} € x [1-({C}/100)] € = {E} €","1;Round:[{E}] €;[{E}+-5] €;[{E}+-10] €;[{E}+-15] €",""
+"Un phare émet une lumière toutes les {A} secondes. Si la fréquence est doublée au bout de {B}h, combien de signaux émettra-t-il en hm({C}) ?","1:3600/{A};{D}*{B};3600/({A}/2);{C}-({B}*3600);{G}/3600;{F}*{H};{E}+{I}","{A}:(2,50,1);{B}:(1,2,1);{C}:(10800,18000,600)","Étape 1: Calculer le nombre de signaux émis en {B} heure
+Nombre de signaux par heure = 3600 secondes / {A} secondes = {D} signaux par heure
+Nombre de signaux en {B}h = {D} x {B} = {E}
+
+Étape 2: Calculer le nombre de signaux émis après la fréquence doublée
+La fréquence est doublée après {B} heure, donc le phare émet une lumière toutes les [{A}/2] seconde ({A} secondes / 2).
+
+Nombre de signaux par heure avec la fréquence doublée = 3600 secondes / [{A}/2] seconde = {F} signaux par heure
+
+Étape 3: Calculer le nombre total de signaux émis en hm({C})
+Nombre de signaux dans les hm({G}) suivantes = {F} signaux par heure * {H} heures = {I} signaux
+
+Étape 4: Calculer le nombre total de signaux
+
+Nombre total de signaux = {E} + {I} = {J}","1;Round:[{J}] ;[{J}+-5];[{J}+-10];[{J}+-15]",""
+"Un abonnement pour le CSO sur devenez-pilote coûte {A} € par mois. Combien coûterait-il par an si une réduction de {B} % est appliquée ?","1:{A}*12;{C}*{B}/100;{C}-{D}","{A}:(2,30,1);{B}:(10,50,5)","Étape 1: Calculer le coût annuel sans réduction
+Le coût mensuel de l'abonnement est de {A} €.
+
+Le coût annuel sans réduction est :
+
+Coût annuel = {A} € * 12 mois = {C} €
+
+Étape 2: Calculer le montant de la réduction
+La réduction est de {B} % du coût annuel.
+
+Montant de la réduction = {B} % de {C} €
+Montant de la réduction = [{B}/100] * {C} € = {D} €
+
+Étape 3: Déduire le montant de la réduction du coût annuel
+Coût annuel avec réduction = Coût annuel sans réduction - Montant de la réduction
+Coût annuel avec réduction = {C} € - {D} € = {E} €","1;None:[{E}] €;[{E}+-5] €;[{E}+-7] €;[{E}+-10] €",""
+"Un réservoir doit être remplis d'eau. Il peut être rempli en {A} heures avec une seule pompe et peut être rempli en {B} heures avec une autre pompe. Combien de temps va-il mettre pour être remplis avec les deux pompes ?","2:{A}*{B};{A}+{B};{C}/{D};{C}/{D}*3600","{A}:(1,10,1);{B}:(1,10,1)","Étape 1: Calculer le taux de remplissage de chaque pompe
+Le taux de remplissage de la pompe pour le réservoir A est 1/{A} du réservoir par heure.
+Le taux de remplissage de la pompe pour le réservoir B est 1/{B} du réservoir par heure.
+
+Étape 2: Calculer le taux de remplissage combiné des deux pompes
+Le taux de remplissage combiné est (1/{A}) + (1/{B}).
+Pour additionner ces fractions, nous devons trouver un dénominateur commun. Le plus petit dénominateur commun de {A} et {B} est {C}.
+Donc, (1/{A}) = ({B}/{C}) et (1/{B}) = ({A}/{C}).
+Le taux de remplissage combiné est ({B}/{C}) + ({A}/{C}) = {D}/{C} du réservoir par heure.
+
+Étape {A}: Calculer le temps nécessaire pour remplir les deux réservoirs ensemble
+Pour remplir les deux réservoirs ensemble, nous avons un taux de remplissage combiné de {D}/{C} des réservoirs par heure.
+Le temps nécessaire pour remplir 1 réservoir complet (ou les deux réservoirs combinés) est 1 / ({D}/{C}) = {C}/{D} heures.
+{C}/{D} heures est environ {E} heures, ce qui représente hm({F})","0;Round:hm([{F}]);hm([{F}+-300]);hm([{F}+-600]);hm([{F}+-900])",""
+"Un randonneur a mis hm({E}) pour parcourir {F} km sur un sentier de montagne. Combien de temps lui faudra-t-il pour parcourir {G} km sur un terrain similaire ?","1:{E}/3600;{G}*{H}/{F}","{A}:(600,2100,60);{B}:(600,2100,60);{C}:(600,2100,60);{D}:(600,2100,60);{E}:(3600,10800,360);{F}:(50,100,5);{G}:(70,200,5)","Calculer le temps nécessaire pour parcourir {G} km
+Il faut ici faire un simple produit en croix : Temps = {G} x {H} / {F} ≈ {I} heure(s)","0;Round:hm([{I}]);hm([{I}+-{A}]);hm([{I}+-{B}]);hm([{I}+-{C}])","{A}!={B}!={C}:{F}!={G}"
+"Un réservoir de {E} litres a fourni {F} litres d'eau en une journée. Combien de litres d'eau un réservoir de {G} litres fournirait-il avec le même rendement ?","2:{G}*{F}/{E}","{A}:(5,20,0.1);{B}:(5,20,0.1);{C}:(5,20,0.1);{D}:(5,20,1);{E}:(50,100,5);{F}:(50,100,5);{G}:(50,200,10)","Quantité d'eau fournie par le réservoir de {G} litres:
+
+Quantité d'eau fournie par le réservoir de {G} litres = Capacité du réservoir * Rendement = {G} litres * {F} / {E} ≈ {H} litres
+
+( Rendement = Quantité d'eau fournie / Capacité du réservoir )","1;None:[{H}] L;[{H}+-{A}] L;[{H}+-{B}] L;[{H}+-{C}] L","{A}!={B}!={C}:{E}>{F}:{G}>{E}"
+"Un billet de concert coûtait {A}€ l'année dernière, il coûte maintenant {B}€. De quel pourcentage son prix a-t-il augmenté ?","1:{B}-{A};{C}/{A}*100","{A}:(10,20,1);{B}:(21,40,1)","Étape 1: Calculer l'augmentation en valeur absolue
+Augmentation = Prix actuel - Prix initial = {B} € - {A} € = {C} €
+
+Étape 2: Calculer le pourcentage d'augmentation
+Pourcentage d'augmentation = (Augmentation / Prix initial) * 100 = ({C} € / {A} €) * 100 ≈ {D} %","1;None:[{D}] %;[{D}+-2.5] %;[{D}+-5.3] %;[{D}+-7.4] %",""
+"Le volume d'eau que peut transporter une citerne a augmenté de {A} litres, soit {B}%, après avoir été modifiée. De combien de pourcent doit-elle augmenter sa nouvelle capacité pour atteindre une augmentation totale de {C}% ?","2:{A}/({B}/100);{D}+{A};{D}*({C}/100);{D}+{F};{G}-{E};({H}/{E})*100","{A}:(1.1,3.0,0.1);{B}:(5,35,5);{C}:(40,70,5)","Étape 1: Calculer la capacité initiale de la citerne
+Augmentation initiale de {A} litres correspond à {B}% de la capacité initiale, donc la capacité initiale est : 
+Capacité initiale = {A} litres / [{B}/100] = {D} litres.
+
+Étape 2: Calculer la nouvelle capacité de la citerne après la première augmentation
+Nouvelle capacité après {B}% d'augmentation = Capacité initiale + Augmentation initiale = {D} litres + {A} litres = {E} litres.
+
+Étape 3: Calculer le pourcentage d'augmentation nécessaire pour atteindre une augmentation totale de {C}%
+Augmentation totale souhaitée de {C}% sur la capacité initiale = Capacité initiale * [{C}/100] = {D} litres * [{C}/100] = {F} litres.
+
+Capacité cible après {C}% d'augmentation = Capacité initiale + Augmentation totale = {D} litres + {F} litres = {G} litres.
+
+Augmentation nécessaire à partir de la nouvelle capacité = Capacité cible - Nouvelle capacité = {G} litres - {E} litres = {H} litres.
+
+Pourcentage d'augmentation nécessaire = (Augmentation nécessaire / Nouvelle capacité) * 100 = ({H} litres / {E} litres) * 100 ≈ {I}.","1;None:[{I}] %;[{I}+-2.5] %;[{I}+-5.3] %;[{I}+-7.4] %",""
+"Un tuyau doit remplir une piscine de {A} litres en hm({B}). À quel débit doit-il fonctionner pour accomplir cela ?","1:{A}/({B}/60)","{A}:(100,200,10);{B}:(600,7200,600)","Calculer le débit en litres par minute
+Débit = Volume / Temps = {A} litres / [{B}/60] minutes ≈ {C} litres par minute.","1;None:[{C}] L/min;[{C}+-0.5] L/min;[{C}+-1] L/min;[{C}+-1.5] L/min",""
+"Deux équipes de travail ont mis {A} jours pour construire {B} maisons. Sachant que l'équipes A aurait pu construire ces {B} maisons en {C} jours, combien de temps aurait pris l'équipe B pour construire {D} maisons seule ?","1:{B}/{C};{B}/{A};{F}-{E};{D}/{G}","{A}:(2,10,1);{B}:(50,150,10);{C}:(11,30,1);{D}:(50,150,10)","Étape 1: Calculer le taux de travail de l'équipe A
+L'équipe A peut construire {B} maisons en {C} jours. Donc, le taux de travail de l'équipe A est :
+
+Taux de l'équipe A = {B} maisons / {C} jours = {E} maisons par jour.
+
+Étape 2: Calculer le taux de travail combiné des deux équipes
+Les deux équipes ensemble construisent {B} maisons en {A} jours. Donc, le taux de travail combiné est :
+
+Taux combiné = {B} maisons / {A} jours = {F} maisons par jour.
+
+Étape 3: Calculer le taux de travail de l'équipe B
+Taux de l'équipe B = Taux combiné - Taux de l'équipe A = {F} maisons par jour - {E} maisons par jour = {G} maisons par jour.
+
+Étape 4: Calculer le temps nécessaire pour que l'équipe B construise {D} maisons
+Temps pour l'équipe B = {D} maisons / {G} maisons par jour ≈ {H} jours.","1;None:[{H}] jour(s);[{H}+-0.5] jour(s);[{H}+-1] jour(s);[{H}+-1.5] jour(s)",""
+"Un agriculteur a arrosé ses cultures sur une superficie de {A} hectares en hm([{B}+{C}]). Combien de temps lui faudrait-il pour arroser {D} hectares ?","1:{B}+{C};{E}/3600;{A}/{F};{D}/{G}","{A}:(5,15,1);{B}:(3600,10800,3600);{C}:(0,3300,300);{D}:(20,40,5)","Étape 1: Convertir le temps d'arrosage en heures
+L'agriculteur a arrosé {A} hectares en hm({E}) . Convertissons hm({E}) en heures.
+hm({E}) = [{B}/3600] heures + ([{C}/60] minutes / 60 minutes par heure) = {F} heures.
+
+Étape 2: Calculer le taux d'arrosage par hectare
+Taux d'arrosage = Superficie arrosée / Temps d'arrosage
+Taux d'arrosage = {A} hectares / {F} heures ≈ {G} hectares par heure.
+
+Étape 3: Calculer le temps nécessaire pour arroser {D} hectares
+Temps nécessaire = Superficie à arroser / Taux d'arrosage
+Temps nécessaire = {D} hectares / {G} hectares par heure ≈ {H} heures.","1;None:[{H}] heures;[{H}+-0.5] heures;[{H}+-1] heures;[{H}+-1.5] heures",""
+"Un bateau a parcouru {A} miles nautiques lors d'un trajet en mer. Sachant qu'un mile terrestre mesure {B} mètres et qu'un mile nautique équivaut à {C} mile terrestre, quelle distance en kilomètres a été parcourue par le bateau ?","2:{A}*{C};{D}*{B};{E}/1000","{A}:(10,200,10);{B}:(1000,2000,1);{C}:(1.10,5.00,0.01)","Étape 1: Convertir les miles nautiques en miles terrestres
+1 mile nautique équivaut à {C} mile terrestre.
+
+Distance en miles terrestres = Distance en miles nautiques * {C}
+Distance en miles terrestres = {A} miles nautiques * {C} = {D} miles terrestres
+
+Étape 2: Convertir les miles terrestres en mètres
+1 mile terrestre mesure {B} mètres.
+
+Distance en mètres = Distance en miles terrestres * {B}
+Distance en mètres = {D} miles terrestres * {B} = {E} mètres
+
+Étape 3: Convertir les mètres en kilomètres
+1 kilomètre équivaut à 1000 mètres.
+
+Distance en kilomètres = Distance en mètres / 1000
+Distance en kilomètres = {E} mètres / 1000 = {F} kilomètres","2;None:[{F}] km;[{F}+-5] km;[{F}+-10] km;[{F}+-15] km",""
+"Trois programmeurs participent à un hackathon. Le premier termine son projet en hm({A}), le deuxième en hm({B}), et la moyenne de leur temps est de hm({C}). En combien de temps le troisième programmeur a-t-il terminé son projet ?","2:{A}/60;{B}/60;{C}/60;{D}+{E};{F}*3;{H}-{G};{I}*60","{A}:(1800,6000,300);{B}:(1800,6000,300);{C}:(3900,10800,300)","Étape 1: Convertir les temps en minutes
+Le premier programmeur a terminé en hm({A}).
+hm({A}) = {D} minutes.
+
+Le deuxième programmeur a terminé en hm({B}).
+hm({B}) = {E} minutes.
+
+Étape 2: Convertir la moyenne en minutes
+La moyenne des deux programmeurs est de hm({C})
+hm({C}) = {F} minutes.
+
+Étape 3: Utiliser la moyenne pour trouver le temps du troisième programmeur
+Moyenne des deux programmeurs = {F} minutes.
+
+
+Étape 4: Calculer le temps du troisième programmeur
+Puisque la moyenne des trois programmeurs est de {F} minutes :
+{F} * 3 = {H} minutes (temps total pour les trois programmeurs)
+
+Déduire le temps des deux premiers programmeurs :
+Temps du troisième programmeur = {H} - ({D} + {E}) = {H} - {G} = {I} minutes.
+
+Étape 5: Convertir le temps du troisième programmeur en heures et minutes
+{I} minutes = hm({J})","0;Round:hm([{J}]);hm([{J}+-300]);hm([{J}+-600]);hm([{J}+-840])",""
+"Une équipe de robots utilise des outils pour assembler des pièces. Le robot A utilise un outil qui travaille à {A}/{B} de la vitesse de l'outil du robot B. Le robot C utilise un outil qui travaille à {C}/{D} de la vitesse de l'outil du robot B. Le robot A assemble des pièces à une vitesse de {E} pièces par minute. À quelle vitesse le robot C assemble-t-il les pièces ?","2:{E}*{B}/{A};{F}*{C}/{D}","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(1,10,1);{E}:(10,30,1)","Étape 1: Déterminer la vitesse de l'outil du robot B
+Le robot A utilise un outil qui travaille à {A}/{B} de la vitesse de l'outil du robot B et assemble des pièces à une vitesse de {E} pièces par minute.
+
+Vitesse du robot B = {E} pièces/minute * ({B}/{A}) = {F} pièces/minute.
+
+Étape {C}: Déterminer la vitesse de l'outil du robot C
+Le robot C utilise un outil qui travaille à {C}/{D} de la vitesse de l'outil du robot B.
+
+Vitesse du robot C = {F} pièces/minute * ({C}/{D}) = {G} pièces/minute.","2;None:[{G}] pièces/minute;[{G}+-2.1] pièces/minute;[{G}+-4.4] pièces/minute;[{G}+-6.6] pièces/minute","{A}<{B}:{C}<{D}"
+"Un architecte crée une maquette d'un bâtiment. La maquette mesure {B} cm de hauteur. Si le bâtiment réel mesure {C} mètres de haut, quelle est l'échelle utilisée ?","2:{A}*{B}/100;{C}*100","{A}:(10,500,1);{B}:(1,20,1)","Étape 1: Convertir la hauteur réelle du bâtiment en centimètres
+Le bâtiment réel mesure {C} mètres de haut. Sachant qu'un mètre équivaut à 100 centimètres, la conversion est la suivante :
+
+Hauteur réelle en centimètres = {C} mètres * 100 = {D} centimètres.
+
+Étape 2: Calculer l'échelle utilisée
+L'échelle est le rapport entre la hauteur de la maquette et la hauteur réelle du bâtiment. L'échelle est exprimée sous la forme d'un ratio de la maquette à la réalité.
+
+Échelle = Hauteur de la maquette / Hauteur réelle
+Échelle = {B} cm / {D} cm
+
+Pour simplifier, nous pouvons diviser les deux termes par {B} :
+
+Échelle = 1 / ({D} / {B})
+Échelle = 1 / {A}","0;None:1/[{A}];1/[{A}+-{B}];1/[{A}+-5];1/[{A}+-10]",""
+"Un ingénieur doit convertir la longueur d'un pont mesurant {A} kilomètre en pieds pour un projet. Sachant qu'un pied mesure {B} cm, combien de pieds mesure le pont ?","1:{A}*100000;{C}/{B}","{A}:(1.0,10.0,0.1);{B}:(20.01,40.00,0.01)","Étape 1: Convertir la longueur du pont de kilomètres en centimètres
+{A} kilomètres = {A} * 100000 centimètres = {C} centimètres
+
+Étape 2: Convertir les centimètres en pieds
+Sachant qu'un pied mesure {B} centimètres :
+
+Nombre de pieds = {C} centimètres / {B} centimètres par pied
+
+Nombre de pieds ≈ {D} pieds","2;None:[{D}] Pieds;[{D}+-2.13] Pieds;[{D}+-4.52] Pieds;[{D}+-6.71] Pieds",""
+"Un marathonien utilise {A}% de son énergie pour parcourir {B} kilomètres. Combien de kilomètres peut-il encore courir avant d'être complètement épuisé ?","2:100-{A};{C}*{B}/{A}","{A}:(5,20,1);{B}:(50,100,1)","Calcul de l'énergie utilisée pour {B} km :
+Énergie utilisée = {A}% de l'énergie totale
+
+Calcul de l'énergie restante :
+Énergie restante = 100% - {A}% = {C}% de l'énergie totale
+
+Calcul de la distance maximale restante :
+Distance maximale restante = (Énergie restante x {B} km / Énergie utilisée pour {B} km
+Distance maximale restante = ({C} x {B}) / {A} km = {D} km","2;None:[{D}] km;[{D}+-2.13] km;[{D}+-4.52] km;[{D}+-6.71] km",""
+"Un agriculteur utilise un système d'irrigation pour arroser son champ. Il a fallu hm({E}) pour irriguer {F}% de la superficie du champ. Combien de temps faudra-t-il pour irriguer complètement le champ ?","2:{E}/60;{G}*100/{F};{H}*60","{A}:(300,3600,60);{B}:(300,3600,60);{C}:(300,3600,60);{D}:(300,3600,60);{E}:(1800,7200,300);{F}:(10,80,5)","hm({E}) = {G} minutes
+
+Il faut {G} min pour irriger {F} % du champ alors il faudra pour irriger les [100-{F}]% restant :
+
+{G} x 100 / {F} = {H} minutes = hm({I})","0;Round:hm([{I}]);hm([{I}+-{A}]);hm([{I}+-{B}]);hm([{I}+-{C}]);hm([{I}+-{D}])","{A}!={B}!={C}!={D}"
+"Un bateau à moteur a navigué à une vitesse de {D} km/h pendant hm({E}). Quelle distance a-t-il parcouru ?","2:{D}*{E}/3600","{A}:(20,100,5);{B}:(20,100,1);{C}:(20,100,2);{D}:(300,500,10);{E}:(1800,10800,360)","Calculer la distance parcourue en utilisant la vitesse et le temps : {D} km/h * [{E}/3600] = {F} kilomètres.","0;None:[{F}] km;[{F}+-{A}] km;[{F}+-{B}] km;[{F}+-{C}] km","{A}!={B}!={C}!={D}"
+"🚨 Dans le club d'athlétisme 'Athlé 2000', sur un total de [{F}+{G}] athlètes, {F} pratiquent le saut en hauteur, {G} pratiquent le saut en longueur, {H} pratiquent à la fois le saut en hauteur et le saut en longueur.
+Combien d'athlètes ne pratiquent que le saut en longueur ?","0:{G}-{H}","{A}:(4,10,1);{B}:(4,10,1);{C}:(4,10,1);{D}:(4,10,1);{E}:(60,100,1);{F}:(10,30,1);{G}:(10,30,1);{H}:(4,20,1)","{G} personnes pratiquent le saut en longueur, ici on parle bien de la totatité des personnes sur les {E}.
+Il faut donc faire {G}-{H}","0;None:[{I}] athlètes;[{I}+-{C}] athlètes;[{G}+{H}] athlètes;[{I}+-{A}] athlètes;[{I}+-{B}] athlètes","{G}>{H}:{A}!={B}"
+"Dans le club d'athlétisme 'Athlé 2000', sur un total de [{F}+{G}] athlètes, {F} pratiquent le saut en hauteur, {G} pratiquent le saut en longueur, {H} pratiquent à la fois le saut en hauteur et le saut en longueur.
+Combien d'athlètes ne pratiquent que le saut en hauteur ?","0:{F}-{H}","{A}:(4,10,1);{B}:(4,10,1);{C}:(4,10,1);{D}:(4,10,1);{E}:(60,100,1);{F}:(10,30,1);{G}:(10,30,1);{H}:(4,20,1)","{G} personnes pratiquent le saut en longueur, ici on parle bien de la totatité des personnes sur les [{F}+{G}].
+Il faut donc faire {F}-{H}","0;None:[{I}] athlètes;[{I}+-{C}] athlètes;[{F}+{H}] athlètes;[{I}+-{A}] athlètes;[{I}+-{B}] athlètes","{H}>{H}:{A}!={B}"
+"🚨 J'achète un lecteur MP3 à {E} €, j'ai {F}% de remise.
+Je paye donc :","0:{E}*(1-({F}/100))","{A}:(2,15,1);{B}:(2,15,1);{C}:(2,15,1);{D}:(2,15,1);{E}:(100,250,10);{F}:(5,50,5)","{E} x [1-{F}/100] = {G}","0;None:[{G}] €;[{G}+-{A}] €;[{G}+-{B}] €;[{G}+-{C}] €;[{G}+-{D}] €","{A}!={B}!={C}"
+"🚨 Un chauffeur de la société 'Douces Pommes' prend un chargement de {E} kilos de pommes. Il en livre {F} kilos à M. Lebrun, {G} kilos à M. Dupuit et {H} kilos à Mme Lemoine. Avant de continuer sa tournée, il retourne à la société et prend un autre chargement de {I} kilos de pommes.
+Quel est le nouveau poids de son chargement en pommes ?","0:{F}+{G}+{H};{E}-{J};{K}+{I}","{A}:(2,15,1);{B}:(2,15,1);{C}:(2,15,1);{D}:(2,15,1);{E}:(800,1000,50);{F}:(100,200,10);{G}:(40,200,10);{H}:(100,200,10);{I}:(200,400,5)","1. Poids initial du chargement :
+   Le chauffeur commence avec {E} kg.
+
+2. Pommes livrées :
+   - M. Lebrun : {F} kg
+   - M. Dupuit : {G} kg
+   - Mme Lemoine : {H} kg
+   Total des pommes livrées :
+   {F} + {G} + {H} = {J} kg
+
+3. Poids restant après les livraisons :
+   {E} - {J} = {K} kg
+
+4. Ajout d'un nouveau chargement :
+   Le chauffeur prend {I} kg supplémentaires.
+   Poids total du chargement :
+   {K} + {I} = {L} kg","0;None:[{L}] Kg;[{L}+-{A}] Kg;[{L}+-{B}] Kg;[{L}+-{C}] Kg;[{L}+-{D}] Kg","{A}!={B}!={C}"
+"🚨 Pour faire une photo lors d'un mariage, le photographe doit installer {E} personnes sur une estrade de {F} rangées.
+Le nombre de personnes par rangée sera :","0:{E}/{F}","{A}:(2,15,1);{B}:(2,15,1);{C}:(2,15,1);{D}:(2,15,1);{E}:(50,200,10);{F}:(5,10,5)","1. Nombre total de personnes :
+   Le photographe doit installer {E} personnes.
+
+2. Nombre de rangées :
+   L'estrade comporte {F} rangées.
+
+3. Calcul du nombre de personnes par rangée :
+   Nombre total de personnes ÷ Nombre de rangées :
+   {E} ÷ {F} = {F}
+
+Résultat : Il y aura {F} personnes par rangée.","0;None:[{G}] personnes;[{G}+-{A}] personnes;[{G}+-{B}] personnes;[{G}+-{C}] personnes;[{G}+-{D}] personnes","{A}!={B}!={C}"
+"🚨 Un navire arrive à proximité d'un port à hm({E}). Il met hm({F}) pour arriver à quai. Son amarrage dure hm({G}).
+Les passagers pourront sortir du bateau à:","0:{E}+{F};{H}+{G}","{A}:(300,1800,300);{B}:(300,1800,300);{C}:(300,1800,300);{D}:(600,3600,300);{E}:(43200,57600,300);{F}:(600,3300,300);{G}:(600,3300,300)","1. Heure d'arrivée à proximité du port :
+   Le navire arrive à hm({E})
+
+2. Temps pour arriver à quai :
+   Il met hm({F}) minutes pour atteindre le quai.
+   Heure d'arrivée à quai :
+   hm({E}) + hm({F}) = hm({H})
+
+3. Temps pour l'amarrage :
+   L'amarrage dure hm({G}) minutes.
+   Heure de fin d'amarrage :
+   hm({H}) + hm({G}) = hm({I})","0;Round:hm([{I}]);hm([{I}+-{A}]);hm([{I}+-{B}]);hm([{I}+-{C}]);hm([{I}+-{D}])","{A}!={B}!={C}:{F}!={G}"
+"🚨 {E} kilos de café décaffiné KfE-D-Kf' de la marque Hiné coutent {F} pesos colombiens en Colombie, {G} méticals au Mozambique et {H} bahts en Thatlande.
+Combien coûte un kilo de café 'Kfe-D-Kfé' en Thailande ?","0:{H}/{E}","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(1,10,1);{E}:(30,50,5);{F}:(500,1000,100);{G}:(300,500,50);{H}:(400,600,5)","Calcul du prix par kilo :
+  {H} ÷ {E} = {I}","0;None:[{I}] baths;[{I}+-{A}] baths;[{I}+-{B}] baths;[{I}+-{C}] baths;[{I}+-{D}] baths","{A}!={B}!={C}"
+"🚨 {E} mineurs peuvent creuser une galerie en {F} jours.
+Combien faudra-t-il de mineurs pour creuser la même galerie en une demi-journée ?","1:{E}*{F};{G}*2","{A}:(1,10,1);{B}:(1,10,1);{C}:(1,10,1);{D}:(1,10,1);{E}:(3,7,1);{F}:(4,7,1)","Calcul du travail total en mineur-jours :
+  {E} mineurs × {F} jours = {G} mineur-jours
+
+Nombre de mineurs nécessaires pour faire le même travail en 0,5 jour :
+  {G} ÷ 0.5 = {H}","0;None:[{H}] mineur(s);[{H}+-{A}] mineur(s);[{H}+-{B}] mineur(s);[{H}+-{C}] mineur(s);[{H}+-{D}] mineur(s)","{A}!={B}!={C}"
+"🚨 Combien coûtent {E} ananas, sachant qu'on en obtient deux pour {F} euros?","2:{F}/2;{E}*{G}","{A}:(1.0,10.0,0.5);{B}:(1.0,10.0,0.5);{C}:(1.0,10.0,0.5);{D}:(1.0,10.0,0.5);{E}:(20,40,5);{F}:(2.00,7.00,0.50)","Calcul du prix d'un ananas :
+  {F} ÷ 2 = {G} €
+
+Calcul du prix pour {E} ananas :
+  {E} × {G} = {H} €","0;None:[{H}] €;[{H}+-{A}] €;[{H}+-{B}] €;[{H}+-{C}] €;[{H}+-{D}] €","{A}!={B}!={C}"
+"🚨 Un hangar à avions, de forme carrée, aurait une surface de {G} m2 si chacun de ses côtés avait {F} m de plus.
+Quelle est la longueur actuelle d'un côté du hangar ?","0:({E}+{F})*({E}+{F});{F}*{F};2*{F};{G}-{H}","{A}:(2,14,2);{B}:(2,14,2);{C}:(2,14,2);{D}:(2,14,2);{E}:(20,40,2);{F}:(2,10,1)","Équation :
+  Augmentation de surface : S2 - S1 = {G}
+  (x + {F})² = {G}
+
+Développement :
+  x + {F} = √{G}
+  x + {F} = [{E}+{F}]
+  x = [{E}+{F}] - {F}
+  x = {E}","0;None:[{E}] m;[{E}+-{A}] m;[{E}+-{B}] m;[{E}+-{C}] m;[{E}+-{D}] m","{A}!={B}!={C}"
+"🚨 Dans une propriété privée, on dénombre {E} chênes et {F} charmes. Le propriétaire décide de couper {G} % des chênes et {H}% des charmes.
+Combien d'arbres en tout seront abattus ?","1:{G}*{E}/100;{H}*{F}/100;{I}+{J}","{A}:(10,100,10);{B}:(10,100,10);{C}:(10,100,10);{D}:(10,100,10);{E}:(700,1000,100);{F}:(300,500,100);{G}:(10,40,10);{H}:(10,40,10)","Calcul des chênes abattus :
+  {G}% de {E} = ({G} ÷ 100) × {E} = {I}
+
+Calcul des charmes abattus :
+  {H}% de {F} = ({H} ÷ 100) × {F} = {J}
+
+Calcul du total d'arbres abattus :
+  {I} + {J} = {K} arbres","0;None:[{K}] arbres;[{K}+-{A}] arbres;[{K}+-{B}] arbres;[{K}+-{C}] arbres;[{K}+-{D}] arbres","{A}!={B}!={C}"
+"🚨 Un boulanger utilise quotidiennement {E} sacs de farine pour produire {F} baguettes.
+Sachant qu'un sac de farine pèse {G} kilos, quel est le poids total de farine utilisé quotidiennement ?","1:{E}*{G}","{A}:(5,50,5);{B}:(5,50,5);{C}:(5,50,5);{D}:(5,50,5);{E}:(35,60,5);{F}:(300,1500,100);{G}:(10,40,5)","Calcul du poids total de farine utilisé quotidiennement :
+  {E} sacs × {G} kg/sac = {H} kg","0;None:[{H}] kg;[{H}+-{A}] kg;[{H}+-{B}] kg;[{H}+-{C}] kg;[{H}+-{D}] kg","{A}!={B}!={C}"
+"🚨 {E} élèves ont passé un examen, {H}% d'entre eux l'ont réussi.
+Le nombre d'élèves ayant échoué est de :","2:{E}-{F};{G}*100/{E}","{A}:(5,25,1);{B}:(5,25,1);{C}:(5,25,1);{D}:(5,25,1);{E}:(100,150,1);{F}:(30,95,1)","Calcul du nombre d'élèves ayant échoué :
+  ((100 - {H}) ÷ 100) × {E} = {F}","0;None:[{F}] élèves;[{F}+-{A}] élèves;[{F}+-{B}] élèves;[{F}+-{C}] élèves;[{F}+-{D}] élèves","{A}!={B}!={C}"
+"🚨 Un client de la librairie 'Polarscope' paye {E} romans policiers {F} euros.
+Combien valent {G} romans policiers ?","2:{F}/{E};{G}*{H}","{A}:(5,10,0.1);{B}:(5,10,0.1);{C}:(5,10,0.1);{D}:(5,10,0.1);{E}:(20,45,5);{F}:(50,150,10);{G}:(5,15,1)","Calcul du prix d'un roman :
+  {F} ÷ {E} = {H} €
+
+Calcul du prix pour {G} romans :
+  {G} × {H} = {I} €","1;None:[{I}] €;[{I}+-{A}] €;[{I}+-{B}] €;[{I}+-{C}] €;[{I}+-{D}] €","{A}!={B}!={C}"
+"🚨 Dans une propriété privée, on dénombre {E} chênes et {F} charmes. Le propriétaire décide de couper {G}% des chênes et {H}% des charmes.
+Combien de chênes restera-t-il sur la propriété ?","1:{G}*{E}/100;{E}-{I}","{A}:(10,100,10);{B}:(10,100,10);{C}:(10,100,10);{D}:(10,100,10);{E}:(500,1000,100);{F}:(500,1000,100);{G}:(10,80,10);{H}:(10,80,10)","Calcul des chênes abattus :
+  {G}% de {E} = ({G} ÷ 100) × {E} = {I}
+
+Calcul du nombre de chênes restants :
+  {E} - {I} = {J}","0;None:[{J}] chênes;[{J}+-{A}] chênes;[{J}+-{B}] chênes;[{J}+-{C}] chênes;[{J}+-{D}] chênes","{A}!={B}!={C}:{G}!={H}:{E}!={F}"
+"Dans une propriété privée, on dénombre {E} chênes et {F} charmes. Le propriétaire décide de couper {G}% des chênes et {H}% des charmes.
+Combien de charmes restera-t-il sur la propriété ?","1:{F}*{H}/100;{F}-{I} ","{A}:(10,100,10);{B}:(10,100,10);{C}:(10,100,10);{D}:(10,100,10);{E}:(500,1000,100);{F}:(500,1000,100);{G}:(10,80,10);{H}:(10,80,10) ","Calcul des charmes abattus :
+  {H}% de {F} = ({H} ÷ 100) × {F} = {I}
+
+Calcul du nombre de charmes restants :
+  {F} - {I} = {J} ","0;None:[{J}] charmes;[{J}+-{A}] charmes;[{J}+-{B}] charmes;[{J}+-{C}] charmes;[{J}+-{D}] charmes ","{A}!={B}!={C}:{G}!={H}:{E}!={F}"
+"🚨 Six personnes ont obtenu à un examen les notes suivantes :
+Marie : {E} ; Catherine : {F} ; Odile : {G} 
+Laurence : {H} ; Valérie : {I} ; Adeline : {J}
+Quel est le pourcentage de points obtenu par Adeline par rapport à Marie ?","2:({J}/{E})*100","{A}:(5,20,0.01);{B}:(5,20,0.01);{C}:(5,20,0.01);{D}:(5,20,0.01);{E}:(5,40,1);{F}:(5,40,1);{G}:(5,40,1);{H}:(5,40,1);{I}:(5,40,1);{J}:(5,40,1)","Calcul du pourcentage de points obtenus par Adeline par rapport à Marie :
+  ({J} ÷ {E}) × 100 = {K}%","2;None:[{K}] %;[{K}+-{A}] %;[{K}+-{B}] %;[{K}+-{C}] %;[{K}+-{D}] %"," {A}!={B}!={C}"
+"Six personnes ont obtenu à un examen les notes suivantes :
+Marie : {E} ; Catherine : {F} ; Odile : {G} 
+Laurence : {H} ; Valérie : {I} ; Adeline : {J}
+Quel est le pourcentage de points obtenu par Odile par rapport à Catherine ?","2:({G}/{F})*100","{A}:(5,20,0.01);{B}:(5,20,0.01);{C}:(5,20,0.01);{D}:(5,20,0.01);{E}:(5,40,1);{F}:(5,40,1);{G}:(5,40,1);{H}:(5,40,1);{I}:(5,40,1);{J}:(5,40,1)","Calcul du pourcentage de points obtenus par Odile par rapport à Catherine :
+  ({G} ÷ {F}) × 100 = {K}%","2;None:[{K}] %;[{K}+-{A}] %;[{K}+-{B}] %;[{K}+-{C}] %;[{K}+-{D}] %"," {A}!={B}!={C}"
+"Six personnes ont obtenu à un examen les notes suivantes :
+Marie : {E} ; Catherine : {F} ; Odile : {G} 
+Laurence : {H} ; Valérie : {I} ; Adeline : {J}
+Quel est le pourcentage de points obtenu par Valérie par rapport à Laurence ?","2:({I}/{H})*100","{A}:(5,20,0.01);{B}:(5,20,0.01);{C}:(5,20,0.01);{D}:(5,20,0.01);{E}:(5,40,1);{F}:(5,40,1);{G}:(5,40,1);{H}:(5,40,1);{I}:(5,40,1);{J}:(5,40,1)","Calcul du pourcentage de points obtenus par Valérie par rapport à Laurence :
+  ({I} ÷ {H}) × 100 = {K}%","2;None:[{K}] %;[{K}+-{A}] %;[{K}+-{B}] %;[{K}+-{C}] %;[{K}+-{D}] %"," {A}!={B}!={C}"
+"Six personnes ont obtenu à un examen les notes suivantes :
+Marie : {E} ; Catherine : {F} ; Odile : {G} 
+Laurence : {H} ; Valérie : {I} ; Adeline : {J}
+Quel est le pourcentage de points obtenu par Odile par rapport à Laurence ?","2:({G}/{H})*100","{A}:(5,20,0.01);{B}:(5,20,0.01);{C}:(5,20,0.01);{D}:(5,20,0.01);{E}:(5,40,1);{F}:(5,40,1);{G}:(5,40,1);{H}:(5,40,1);{I}:(5,40,1);{J}:(5,40,1)","Calcul du pourcentage de points obtenus par Odile par rapport à Laurence :
+  ({G} ÷ {H}) × 100 = {K}%","2;None:[{K}] %;[{K}+-{A}] %;[{K}+-{B}] %;[{K}+-{C}] %;[{K}+-{D}] %"," {A}!={B}!={C}"
+"🚨 Pendant les soldes d'été, une table de salon de jardin réduite de {E}% de son prix initial, coûte {F} €.
+Quel était son prix initial ?","2:{F}/((100-{E})/100)","{A}:(5,20,0.01);{B}:(5,20,0.01);{C}:(5,20,0.01);{D}:(5,20,0.01);{E}:(5,40,5);{F}:(50,100,1)","Équation :
+  [100-{E}]% de P = {F}
+  ([100-{E}] ÷ 100) × P = {F}
+  [(100-{E})/100] × P = {F}
+
+Résolution :
+  P = {F} ÷ [(100-{E})/100]
+  P = {G} €","2;None:[{G}] €;[{G}+-{A}] €;[{G}+-{B}] €;[{G}+-{C}] €;[{G}+-{D}] €"," {A}!={B}!={C}"
+"🚨 Deux nombres A et B (A étant la plus petite valeur) se situent entre 5 et 20; leur somme est égale à {G} et leur produit à {H}.
+Quelle est la valeur de B ?","2:{E}+{F};{E}*{F};{G}*{G};4*{H};{I}-{J}","{A}:(1,4,1);{B}:(1,4,1);{C}:(1,4,1);{D}:(1,4,1);{E}:(5,20,1);{F}:(5,20,1)","1. A + B = {G}
+2. A × B = {H}
+
+Résolution :
+- Exprimons B en fonction de A : B = {G} - A
+- Remplaçons dans la deuxième équation :
+  A × ({G} - A) = {H}
+  {G}A - A² = {H}
+  A² - {G}A + {H} = 0
+
+Résolvons l'équation quadratique :
+  Δ = (-{G})² - 4 × 1 × {H}
+  Δ = {I} - {J}
+  Δ = {K}
+
+Racines :
+  A  = ({G} - √{K}) / 2 = ({G} - [{G}-({E}*2)]) / 2 = [{E}*2] / 2 = {E}
+  B  = ({G} + √{K}) / 2 = ({G} + [{G}-({E}*2)]) / 2 = [{F}*2] / 2 = {F}
+
+Comme A est la plus petite valeur, on prend A = {E}.
+Donc, B = {G} - {A} = {F}.","0;None:[{F}];[{F}+-{A}];[{F}+-{B}];[{F}+-{C}]"," {A}!={B}!={C}:{E}<{F}"
+"🚨 La vitesse par rapport au sol d'un avion volant avec fort vent debout est égale aux {E}/{F} de sa vitesse de croisière normale, moins {G} km/h. La vitesse perdue par rapport au sol, à cause du vent, est égale aux {H}/{I} de la vitesse de croisière normale, moins {G} km/h.
+Quelle est sa vitesse de croisière normale ?","2:{F}*{I};{G}+{G};({H}*{F})-({I}*({F}-{E}));{K}*{J}/{L}","{A}:(10,50,1);{B}:(10,50,1);{C}:(10,50,1);{D}:(10,50,1);{E}:(1,10,1);{F}:(1,10,1);{G}:(5,40,5);{H}:(1,10,1);{I}:(1,10,1)","Équation 1 : 
+  Vitesse au sol avec vent debout :
+  ({E}/{F}) V - {G}
+
+Équation 2 :
+  Vitesse perdue à cause du vent :
+  ({H}/{I}) V - {G}
+
+On sait que :
+  Vitesse perdue = Vitesse de croisière - Vitesse au sol avec vent debout
+
+Donc :
+  ({H}/{I}) V - {G} = V - [({E}/{F}) V - {G}]
+
+Développons :
+  ({H}/{I}) V - {G} = V - ({E}/{F}) V + {G}
+  ({H}/{I}) V - {G} = ([{F}-{E}]/{F}) V + {G}
+  ({H}/{I}) V - ([{F}-{E}]/{F}) V = {G} + {G}
+  ([{H}*{F}]/{J}) V - ([{I}*({F}-{E})]/{J}) V = {K}
+  ({L}/{J}) V = {K}
+
+Résolvons pour V :
+  V = {K} × {J} / {L}
+  V = {M}","0;None:[{M}];[{M}+-{A}];[{M}+-{B}];[{M}+-{C}];[{M}+-{D}]"," {A}!={B}!={C}:{E}<{F}:{H}<{I}"
+"🚨 A et B ensemble peuvent installer tous les signaux d'avertissement sur une piste en {E} min.
+Sachant que A seul peut les installer en {F} min, combien de temps mettrait B pour les installer seul ?","1:{F}-{E};{F}*{E};{H}/{G}","{A}:(4,15,1);{B}:(4,15,1);{C}:(4,15,1);{D}:(4,15,1);{E}:(12,25,1);{F}:(30,50,5)","Définition des vitesses de travail :
+- Vitesse de A seul : 1 installation en {F} min → 1/{F} de l’installation par minute.
+- Vitesse de A et B ensemble : 1 installation en {E} min → 1/{E} de l’installation par minute.
+- Vitesse de B seul : 1/x de l’installation par minute.
+
+Équation :
+  Travail de A + Travail de B = Travail ensemble
+  (1/{F}) + (1/x) = (1/{E})
+
+Résolution :
+  (1/x) = (1/{E}) - (1/{F})
+  (1/x) = ({F} - {E}) / ({F} × {E})
+  (1/x) = {G} / {H}
+  (1/x) = 1 / {I}
+
+Donc :
+  x = {I}","0;None:[{I}] min;[{I}+-{A}] min;[{I}+-{B}];[{I}+-{C}] min;[{I}+-{D}] min"," {A}!={B}!={C}"
