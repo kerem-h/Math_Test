@@ -23,6 +23,7 @@ public class BuildManager : MonoBehaviour
      Tours2,
      Eopan,
      Debug,
+     Alat,
      Suites
     }
     public BuildType buildType;
@@ -70,7 +71,13 @@ public class BuildManager : MonoBehaviour
                 GameData.QuestionCount = new[] {20};
                 GameData.TestTimes = new[] { 720f };
                 break;
-                
+            case BuildType.Alat:
+                GameData.QuestionDatabaseUrls = new List<string> { "https://devenez-pilote.fr/download_csv.php?file=suites.csv" };
+                // DebugManager.Instance.IsDebugBuild = true;
+                GameData.QuestionCount = new[] { 20 };
+                GameData.TestTimes = new[] { 720f };
+                break;
+
         }
     }
 }

@@ -52,9 +52,7 @@ public class FinishManager : MonoBehaviour
         {
             Debug.Log("Returned Empty");
             return;
-
         }
-
 
         Debug.Log("Calc Score");
         float testScore = (correct[0] + wrong[0] + blank[0]) > 0
@@ -62,7 +60,9 @@ public class FinishManager : MonoBehaviour
             : 0f;
 
         string timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
-        string testName = "Math Test";
+
+        // Get the test name based on the selected BuildType
+        string testName = GetTestNameBasedOnBuildType();
 
         // Safely get elapsedTime
         float elapsed = 0f;
@@ -80,6 +80,32 @@ public class FinishManager : MonoBehaviour
             testScore
         );
         Debug.Log("Made External Call");
+    }
+
+    private string GetTestNameBasedOnBuildType()
+    {
+        // Access the BuildType from BuildManager
+        BuildManager.BuildType buildType = BuildManager.Instance.buildType;
+
+        switch (buildType)
+        {
+            case BuildManager.BuildType.CSO:
+                return "TAMIC -Maths";
+            case BuildManager.BuildType.Tours1:
+                return "EOPN - Maths 1";
+            case BuildManager.BuildType.Tours2:
+                return "EOPN - Maths 3";
+            case BuildManager.BuildType.Eopan:
+                return "EOPAN";
+            case BuildManager.BuildType.Debug:
+                return "DEBUG";
+            case BuildManager.BuildType.Alat:
+                return "ALAT";
+            case BuildManager.BuildType.Suites:
+                return "SUITES";
+            default:
+                return "Math Test";
+        }
     }
 
 }
