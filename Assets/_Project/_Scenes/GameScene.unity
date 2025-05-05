@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugText: {fileID: 951619073}
   debugPanel: {fileID: 257881404}
-  IsDebugBuild: 1
+  IsDebugBuild: 0
   debugSelectionUi: {fileID: 105007376}
   debugQuestionText: {fileID: 568558358}
 --- !u!1 &73761195
@@ -4676,7 +4676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc7c1ad146e09541b513f0ebeef9bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildType: 2
+  buildType: 0
 --- !u!1 &1460489852
 GameObject:
   m_ObjectHideFlags: 0
@@ -8551,13 +8551,13 @@ MonoBehaviour:
   m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 829d39e7a412a7045ba02694cdbeb515, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 9023557195889498669, guid: 829d39e7a412a7045ba02694cdbeb515, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -8597,7 +8597,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
