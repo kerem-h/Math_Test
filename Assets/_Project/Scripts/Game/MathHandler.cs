@@ -144,26 +144,34 @@ public class MathHandler : MonoBehaviour
     {
         for (int i = 0; i < questionsList.Count; i++)
         {
-            var questionCount = GameData.QuestionCount[i];
-            List<QuestionData> randomizedQuestions = new List<QuestionData>();
-            var questions = questionsList[i].ToList();
-
-
-            while (randomizedQuestions.Count < questionCount)
+            if (GameData.IsAlatMathTest)
             {
-                Helper.Shuffle(questions);
-                foreach (var question in questions) {
-                    if (randomizedQuestions.Count >= questionCount) break;
-                    randomizedQuestions.Add(question);
-                }
+                // Special handling for ALAT Math test
+                RandomizeAlatMathQuestions(i);
             }
+            else
+            {
+                // Original logic for other tests
+                var questionCount = GameData.QuestionCount[i];
+                List<QuestionData> randomizedQuestions = new List<QuestionData>();
+                var questions = questionsList[i].ToList();
 
-          
-            questionsList[i] = randomizedQuestions;
-            StartCoroutine(GameData.SetQuestionData(questionsList[i], i));
+                while (randomizedQuestions.Count < questionCount)
+                {
+                    Helper.Shuffle(questions);
+                    foreach (var question in questions)
+                    {
+                        if (randomizedQuestions.Count >= questionCount) break;
+                        randomizedQuestions.Add(question);
+                    }
+                }
+
+                questionsList[i] = randomizedQuestions;
+                StartCoroutine(GameData.SetQuestionData(questionsList[i], i));
+            }
         }
     }
-    
+
     private void CalculateAnswer(QuestionData question)
     {
 
@@ -1225,6 +1233,53 @@ private static string FormatTime(float seconds, bool showSeconds, bool showDays)
             throw;
         }
     }
+
+
+    private void RandomizeAlatMathQuestions(int testIndex)
+    {
+        List<QuestionData> finalQuestions = new List<QuestionData>();
+
+        // Questions 1-16: one random question from each respective database
+        for (int questionIndex = 0; questionIndex < 16; questionIndex++)
+        {
+            if (questionIndex < questionsList.Count && questionsList[questionIndex].Count > 0)
+            {
+                var randomQuestion = questionsList[questionIndex][UnityEngine.Random.Range(0, questionsList[questionIndex].Count)];
+                finalQuestions.Add(randomQuestion);
+            }
+            else
+            {
+                Debug.LogError($"ALAT Math: No questions available in database {questionIndex + 1}");
+            }
+        }
+
+        // Questions 17-20: random questions from the problem database (index 16)
+        if (questionsList.Count > 16 && questionsList[16].Count > 0)
+        {
+            var problemQuestions = questionsList[16];
+            for (int i = 0; i < 4; i++) // Add 4 questions from problem database
+            {
+                var randomProblemQuestion = problemQuestions[UnityEngine.Random.Range(0, problemQuestions.Count)];
+                finalQuestions.Add(randomProblemQuestion);
+            }
+        }
+        else
+        {
+            Debug.LogError("ALAT Math: No questions available in problem database");
+        }
+
+        // Ensure we have exactly 20 questions
+        if (finalQuestions.Count != 20)
+        {
+            Debug.LogError($"ALAT Math: Expected 20 questions, got {finalQuestions.Count}");
+        }
+
+        // Store the final question list
+        questionsList[testIndex] = finalQuestions;
+        StartCoroutine(GameData.SetQuestionData(finalQuestions, testIndex));
+    }
+
+
 }
 
 

@@ -99,7 +99,7 @@ public class FinishManager : MonoBehaviour
                 return "EOPAN";
             case BuildManager.BuildType.Debug:
                 return "DEBUG";
-            case BuildManager.BuildType.Alat:
+            case BuildManager.BuildType.AlatMath:
                 return "ALAT";
             case BuildManager.BuildType.Suites:
                 return "SUITES";
